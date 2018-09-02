@@ -1,0 +1,39 @@
+---
+title: Work
+layout: layouts/base.pug
+gridStyle: true
+work:
+    - title: Samsung WebVR Grand Prize Contest Winner
+      description: In October 2017 I won the Samsung Internet Grand Prize for my WebVR project "CAFF" (Cwervo's A-Frame Funland), a collection of interesting little webVR, usually A-Frame, each experiments showing off an interesting concept or interaction in webVR.
+      link: "http://caff.glitch.me/"
+      giphyVideo: https://media.giphy.com/media/l1J9Q5Z6QWbzm9Eoo/giphy.mp4
+    - title: Fishbowl 360° VR Drawings
+      description: The <i>Fishbowl</i> drawings are a series of videos I'm making using a fishbowl on top of a 360° camera where I draw on tissue paper over the fishbowl to create a hand-drawn 360° video. I plan on doing a few more things with this technique, but for now I've linked to a playlist of the drawings I've made so far!
+      link: https://www.youtube.com/watch?v=iZLaBBYj1u0&list=PLeVLRVkVbp48fA4rEigcKpf5yzv2Y2Yr3
+      giphyVideo: https://media.giphy.com/media/l0CLUUqi4qPsufs3K/giphy.mp4
+    - title: Github Pixel Editor
+      description: I used about 60 lines of Javascript to turn the SVG squares of the GitHub.com commit calendar into a primitive pixel editor - with a few colors to choose from and an option to clear the whole calendar! Made available as a bookmarklet.
+      link: https://github.com/AndresCuervo/bookmarklet-collection#github-calendar-pixel-editor
+      giphyVideo: https://media.giphy.com/media/26u4nJPf0JtQPdStq/giphy.mp4
+    - title: <i>The Ambassadors</i> Painting Optical Illusion Exploration
+      description: This is a concept for exploring optical illusions in VR. This demo shows the painting "The Ambassadors" (1533) by Hans Holbein the Younger, in which an anamorphic skull was painted such that it only appears "normal" when viewed from the correct angle. The scene I created rotates the painting to a -75° angle to reveal the skull, and then repeats the animation continuously. This is an interested techique for possibly building a VR art gallery, making expensive and fragile artwork accessible & pliable in a VR environment!
+      link: https://codepen.io/cwervo/full/yPyLwV/
+      giphyVideo: https://media.giphy.com/media/3ov9k33p8GqPLVPMPe/giphy.mp4
+    - title: "#ARctober"
+      description: In the tradition of October based daily challenges like Inktober or Hacktoberfest I started doing daily web AR experiments. The 'Link to project ↝' below takes you to a Medium post with videos of each of the projects for easier viewing. <a href="http://arexp.glitch.me" target="_blank">This is the main project page </a>.
+      link: https://medium.com/@cwervo/arctober-11da399199be
+      giphyVideo: https://media.giphy.com/media/3ohs7MfcIhfLjW5X32/giphy.mp4
+    - title: 3D Loading Animations
+      description: Loading animations are important for signaling to a user that a system is taking action. I wanted to take a more educational approach to my work in webVR, so I used Glitch to make a few simple loading animations in a webVR scene. My intention is for people to view the code at  <a target="_blank" href="https://glitch.com/~caff">this Glitch link</a>, hit \"\View Source\", & navigate to <code>/public/loaders/index.html</code>  to inspect my code as an example. Using Glitch, you can also \"remix\" the code, so that a student can build off these examples. You'll see it's a simple set of A-Frame VR primitives combined with various delays to achieve sequential animations.
+      link: https://caff.glitch.me/loaders/
+      giphyVideo: https://media.giphy.com/media/xT9Igk37ghGf6mqj4I/giphy.mp4
+---
+
+.grid
+    for item in work
+        div
+            .title !{item.title}
+            .description !{item.description}
+                - if (item.giphyVideo)
+                    video(autoplay loop style="max-width: 100%;")
+                        source(src=item.giphyVideo)
