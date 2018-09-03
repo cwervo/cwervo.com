@@ -12,7 +12,7 @@ a {
 a:visited {
     color: #B10DC9;
 }
-</style></head><!-- Colors from: http://clrs.cc/a11y/--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; background-color: #111; color: #2EAFAC;")--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; color: #111; background-color: #2EAFAC;")--><body style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; color: #234; background-color: white;"><nav style="display: block; width: 100%; font-size: 1.5rem;"><ul style="list-style-type: none; padding-left: 0;"><li><a href="/"><img style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo"></a></li><li><a href="/">Home</a></li><li><a href="/writing">Writing</a></li><li><a href="/speaking">Speaking</a></li><li><a href="/work">Work</a></li><li><a href="https://twitter.com/acwervo" target="_blank">Twitter</a></li><li><a href="/about">About</a></li></ul></nav><style>img {
+</style></head><!-- Colors from: http://clrs.cc/a11y/--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; background-color: #111; color: #2EAFAC;")--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; color: #111; background-color: #2EAFAC;")--><body style="font-family: sans-serif; font-size: 1.25rem; padding: 0 1%; color: #234; background-color: white;"><nav style="display: block; width: 100%; font-size: 1.5rem;"><ul style="list-style-type: none; padding-left: 0;"><li><a href="/"><img style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo"></a></li><li><a href="/">Home</a></li><li><a href="/writing">Writing</a></li><li><a href="/speaking">Speaking</a></li><li><a href="/work">Work</a></li><li><a href="https://twitter.com/acwervo" target="_blank">Twitter</a></li><li><a href="/about">About</a></li></ul></nav><style>img {
     max-width: 100%;
     height: auto;
     display:block;
@@ -22,7 +22,23 @@ figcaption {
     margin-top: 0.5em;
     text-align: center;
 }
-</style><main><h1 style="font-size: 3.5rem; margin-bottom: 0;">first test post</h1><div>September 2, 2018</div><h3>content</h3>
+.blog-post { padding: 0 0%; }
+@media (min-width: 600px) {
+    .blog-post {
+        padding: 0 5%;
+    }
+}
+@media (min-width: 900px) {
+    .blog-post {
+        padding: 0 10%;
+    }
+}
+@media (min-width: 1000px) {
+    .blog-post {
+        padding: 0 25%;
+    }
+}
+</style><main class="blog-post"><h1 style="font-size: 3.5rem; margin-bottom: 0;">first test post</h1><div>September 2, 2018</div><h3>content</h3>
 <pre><code class="language-js">function myFunction() {
   return true;
 }

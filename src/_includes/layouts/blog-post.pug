@@ -13,12 +13,28 @@ style.
         margin-top: 0.5em;
         text-align: center;
     }
+    .blog-post { padding: 0 0%; }
+    @media (min-width: 600px) {
+        .blog-post {
+            padding: 0 5%;
+        }
+    }
+    @media (min-width: 900px) {
+        .blog-post {
+            padding: 0 10%;
+        }
+    }
+    @media (min-width: 1000px) {
+        .blog-post {
+            padding: 0 25%;
+        }
+    }
 
 - let dateObject = new Date(date)
 - let month = dateObject.toLocaleString('en-US', { month: "long" })
 - let dateString = `${month} ${dateObject.getUTCDate()}, ${dateObject.getFullYear()}`
 
-main
+main.blog-post
     h1(style="font-size: 3.5rem; margin-bottom: 0;") #{title}
     div #{dateString}
     | !{content}

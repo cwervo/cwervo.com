@@ -1,0 +1,15 @@
+blockquote {
+    border-left: 5px solid #2EAFAC;
+    padding-left: 1em;
+    font-style: italic;
+}
+blockquote p::before {
+    content: '“';
+    font-size: 2em;
+    margin-right: 0.25em;
+}
+blockquote p::after {
+    content: '”';
+    font-size: 2em;
+    margin-left: 0.25em;
+}
