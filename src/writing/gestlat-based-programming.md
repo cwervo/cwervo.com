@@ -8,7 +8,7 @@ date: "2018-09-02"
 The seed of this all started when I started playing around with [Baku89](https://twitter.com/_baku89)'s lovely [pentool](https://s.baku89.com/pentool/):
 
 <figure>
-    <img src="/assets/images/gestalt-based-programming/baku_pentool.gif" alt="Baku pentool">
+    <img src="../../assets/images/gestalt-based-programming/baku_pentool.gif" alt="Baku pentool">
     <figcaption>Pentool demonstration</figcaption>
 </figure>
 
