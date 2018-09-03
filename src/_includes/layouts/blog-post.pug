@@ -14,9 +14,9 @@ style.
         text-align: center;
     }
 
-- let dateObject = new Date(date.toString())
+- let dateObject = new Date(date)
 - let month = dateObject.toLocaleString('en-US', { month: "long" })
-- let dateString = `${month} ${dateObject.getDay()}, ${dateObject.getFullYear()}`
+- let dateString = `${month} ${dateObject.getUTCDate()}, ${dateObject.getFullYear()}`
 
 main
     h1(style="font-size: 3.5rem; margin-bottom: 0;") #{title}

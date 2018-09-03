@@ -1,16 +1,28 @@
 ---
 title: Gestalt Based Programming
-date: "2018-09-02"
+date: 2018-09-01
 ---
+
+<h1 style="color: red">Make an outline 😬, commit early & often.</h1>
 
 ## Lessons from Lego & Logo
 
-The seed of this all started when I started playing around with [Baku89](https://twitter.com/_baku89)'s lovely [pentool](https://s.baku89.com/pentool/):
+The seed of this all began when I started playing around with [Baku89](https://twitter.com/_baku89)'s lovely [pentool](https://s.baku89.com/pentool/):
 
 <figure>
     <img src="../../assets/images/gestalt-based-programming/baku_pentool.gif" alt="Baku pentool">
     <figcaption>Pentool demonstration</figcaption>
 </figure>
+
+There's a lot going on here:
+
+- you can draw using a selected tool
+- you can see the code the current tool is using (& edit & update it!)
+- you can dynamically update the parameters of tool (e.g. color)
+- (not shown) you can edit the code of the currently running tool
+- (not shown) maybe most exciting, you can make your own tool/brush just by clicking the `+` button!
+
+---
 
 I was reading an email response from [Geoffrey Litt](http://geoffreylitt.com/) when I got the idea after reading this:
 
