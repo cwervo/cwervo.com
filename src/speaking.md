@@ -5,7 +5,7 @@ layout: layouts/base.pug
 
 # Speaking, Andrés Cuervo
 
-See all my [talk slides](https://slides.cwervo.com/), along with videos & write-ups of accompanying some of the talks!
+See all my [talk slides](https://slides.cwervo.com/), along with videos & write-ups accompanying some of the talks!
 
 <style>
 #wrapper { text-align: center; }
