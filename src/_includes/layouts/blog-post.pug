@@ -1,9 +1,29 @@
 ---
 layout: layouts/base.pug
 ---
-h1(style="font-size: 3.5rem;") #{title}
+
+style.
+    img {
+        max-width: 100%;
+        height: auto;
+        display:block;
+        margin:auto;
+    }
+    figcaption {
+        margin-top: 0.5em;
+        text-align: center;
+    }
+
+- let dateObject = new Date(date.toString())
+- let month = dateObject.toLocaleString('en-US', { month: "long" })
+- let dateString = `${month} ${dateObject.getDay()}, ${dateObject.getFullYear()}`
 
 main
+    h1(style="font-size: 3.5rem; margin-bottom: 0;") #{title}
+    div #{dateString}
     | !{content}
+    span
+        span.date ◼️ #{dateString} 
+        a(href="https://twitter.com/acwervo") @acwervo
 p
     a(href="/") ← Home

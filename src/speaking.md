@@ -1,9 +1,25 @@
 ---
-title: Speaking - Andrés Cuervo
+title: Speaking
 layout: layouts/base.pug
 ---
-See all my [slides](https://slides.cwervo.com/), along with videos & write-ups accompanying talks.
 
-Speaker photo:
+# Speaking, Andrés Cuervo
 
-![me with rainbows in my glasses & waterfalls spilling over them](/assets/images/twitter_photo.png)
+See all my [talk slides](https://slides.cwervo.com/), along with videos & write-ups of accompanying some of the talks!
+
+<style>
+#wrapper { text-align: center; }
+figure { display: inline-block; }
+figure img { max-height: 20rem; border-radius: 50%; }
+</style>
+
+<div id="wrapper">
+<figure>
+<img src="/assets/images/twitter_photo.png" alt="me with rainbows in my glasses & waterfalls spilling over them">
+<figcaption>Sometimes my speaker photo.</figcaption>
+</figure>
+<figure>
+<img src="/assets/images/circle_headshot.jpg" alt="Me in a black hoodie with green hair.">
+<figcaption>Sometimes my <i>other</i> speaker photo.</figcaption>
+</figure>
+</div>
