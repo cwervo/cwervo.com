@@ -42,8 +42,8 @@ I was reading an email response from [Geoffrey Litt](http://geoffreylitt.com/) w
 _not_ gestalt-y | gestalt-y
 --- | ---
 Scratch | Logo
-Github |
 Photoshop | Baku89's pentool
+Github | ???
 
 ## Gestalt (noun): _an organized whole that is perceived as more than the sum of its parts._
 

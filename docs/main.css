@@ -13,3 +13,27 @@ blockquote p::after {
     font-size: 2em;
     margin-left: 0.25em;
 }
+
+table {
+    margin: auto;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+table, th, td {
+    padding: 1% 5%;
+    border: 1px solid #111;
+}
+
+#blog-title {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+    table {
+        width: 70%;
+    }
+    #blog-title {
+        font-size: 3.5rem;
+    }
+}
