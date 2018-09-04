@@ -1,6 +1,14 @@
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/assets")
-    // You can return your Config object (optional).
+
+    let markdownIt = require("markdown-it");
+    let markdownItFootnote = require("markdown-it-footnote");
+    let options = {
+        html: true
+    };
+    let markdownLib = markdownIt(options).use(markdownItFootnote);
+    eleventyConfig.setLibrary("md", markdownLib);
+
     return {
         templateFormats: [
             "md",

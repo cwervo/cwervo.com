@@ -5,6 +5,8 @@ date: 2018-09-01
 
 <h1 style="color: red">Make an outline 😬, commit early & often.</h1>
 
+Here is a footnote reference,[^1] and another.[^longnote]
+
 ## Lessons from Lego & Logo
 
 The seed of this all began when I started playing around with [Baku89](https://twitter.com/_baku89)'s lovely [pentool](https://s.baku89.com/pentool/):
@@ -37,6 +39,11 @@ I was reading an email response from [Geoffrey Litt](http://geoffreylitt.com/) w
 > modding an existing program.
 
 
+_not_ gestalt-y | gestalt-y
+--- | ---
+Scratch | Logo
+Github |
+Photoshop | Baku89's pentool
 
 ## Gestalt (noun): _an organized whole that is perceived as more than the sum of its parts._
 
@@ -50,3 +57,6 @@ it to "simplified" small units, like Scratch.
 <!-- <img src="/assets/images/favicon&#45;white.png" alt=""> -->
 <!-- <img src="/assets/images/circles_teal.svg" alt=""> -->
 <!-- </div> -->
+
+[^1]: First footnote, just
+    Testing
