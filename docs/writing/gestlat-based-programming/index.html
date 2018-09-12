@@ -9,7 +9,7 @@ a {
 a:visited {
     color: #B10DC9;
 }
-</style></head><!-- Colors from: http://clrs.cc/a11y/--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; background-color: #111; color: #2EAFAC;")--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; color: #111; background-color: #2EAFAC;")--><body style="font-family: sans-serif; font-size: 1.25rem; padding: 0 1%; color: #234; background-color: white;"><nav style="display: block; width: 100%; font-size: 1.5rem;"><ul style="list-style-type: none; padding-left: 0;"><li><a href="/"><img style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo"></a></li><li><a href="/">Home</a></li><li><a href="/writing">Writing</a></li><li><a href="/speaking">Speaking</a></li><li><a href="/work">Work</a></li><li><a href="https://twitter.com/acwervo" target="_blank">Twitter</a></li><li><a href="/about">About</a></li></ul></nav><style>img {
+</style></head><!-- Colors from: http://clrs.cc/a11y/--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; background-color: #111; color: #2EAFAC;")--><!-- body(style="font-family: sans-serif; font-size: 1.25rem; padding: 0 10%; color: #111; background-color: #2EAFAC;")--><body style="font-family: sans-serif; padding: 0 1%; color: #234; background-color: white;"><nav style="display: block; width: 100%; font-size: 2rem;"><ul style="list-style-type: none; padding-left: 0;"><li><a href="/"><img style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo"></a></li><li><a href="/">Home</a></li><li><a href="/writing">Writing</a></li><li><a href="/speaking">Speaking</a></li><li><a href="/work">Work</a></li><li><a href="https://twitter.com/acwervo" target="_blank">Twitter</a></li><li><a href="/about">About</a></li></ul></nav><style>img {
     max-width: 100%;
     height: auto;
     display:block;
@@ -36,24 +36,23 @@ figcaption {
         padding: 0 25%;
     }
 }
-</style><main class="blog-post"><h1 id="blog-title">Gestalt Based Programming</h1><div>August 1, 2018</div><h1 style="color: red">Make an outline 😬, commit early & often.</h1>
-<p>Here is a footnote reference,<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> and another.[^longnote]</p>
-<h2>Lessons from Lego &amp; Logo</h2>
-<p>The seed of this all began when I started playing around with <a href="https://twitter.com/_baku89">Baku89</a>'s lovely <a href="https://s.baku89.com/pentool/">pentool</a>:</p>
+</style><main class="blog-post"><h1 id="blog-title">Gestalt Based Programming</h1><div>August 1, 2018</div><h2>Lessons from Dynamicland, Lego, Logo, and Photshop.</h2>
+<p>The seed of this idea began when I started playing around with <a href="https://twitter.com/_baku89">Baku89</a>'s lovely <a href="https://s.baku89.com/pentool/">pen tool</a>:</p>
 <figure>
-    <img src="../../assets/images/gestalt-based-programming/baku_pentool.gif" alt="Baku pentool">
-    <figcaption>Pentool demonstration</figcaption>
+    <img src="../../assets/images/gestalt-based-programming/baku_pentool.gif" alt="Baku pen tool">
+    <figcaption>pen tool demonstration</figcaption>
 </figure>
 <p>There's a lot going on here:</p>
 <ul>
 <li>you can draw using a selected tool</li>
 <li>you can see the code the current tool is using (&amp; edit &amp; update it!)</li>
 <li>you can dynamically update the parameters of tool (e.g. color)</li>
-<li>(not shown) you can edit the code of the currently running tool</li>
 <li>(not shown) maybe most exciting, you can make your own tool/brush just by clicking the <code>+</code> button!</li>
 </ul>
-<hr>
-<p>I was reading an email response from <a href="http://geoffreylitt.com/">Geoffrey Litt</a> when I got the idea after reading this:</p>
+<p>I sent this to <a href="http://geoffreylitt.com/">Geoffrey Litt</a>—who also thinks about
+the intersection of programming languages/tools/interface design—and he
+responded with some really interesting observations, the most illuminating one
+for me is quoted below:</p>
 <blockquote>
 <p>The Pen Tool demo is fascinating. It's truly &quot;open source&quot; since it actively
 encourages the user to add new code and remix the software.. feels like
@@ -65,6 +64,65 @@ Github, you can try to read it if you want&quot;...  I've seen kids hit the
 blocks, it would be much better if they could have a nice guided onramp into
 modding an existing program.</p>
 </blockquote>
+<figure>
+<img src="../../assets/images/scratch-programming-interface-gaming.jpg" alt="Scratch example">
+<figcaption> <a href="https://opensource.com/article/18/4/designing-game-scratch-open-jam">Complex Scratch programs</a> can get intimidatingly large.  </figcaption>
+</figure>
+<p>That last bit, about Scratch being intimidating when kids go to remix (also
+known as &quot;fork&quot;) a program and they aren't expecting 100's of blocks, was the
+most profound for me: there's something about the way Scratch's &quot;simple&quot; but
+verbose editing experience exposes all the internals of the system that's
+terrifying, that feels like a bad abstraction. In complete contrast, this pen
+tool seems more inviting—&quot;a nice guided onramp&quot; in Geoffrey's words—exactly
+because it's hiding a bunch of unnecessary complexity. Much like
+<a href="https://processing.org/">Processing</a>/<a href="https://p5js.org/">P5.js</a> and
+<a href="https://openframeworks.cc/">OpenFrameworks</a>—creative coding programming
+tools—this tool starts you off with only <code>press()</code>, <code>drag()</code>, &amp; <code>release()</code>
+functions, it abstracts the rest away into a drawing context; that is, it's a
+programming tool that takes advantage of the concept of <em>gestalt</em>.</p>
+<hr>
+<h2>Gestalt? What's that?</h2>
+<blockquote>
+<p>Gestalt (noun): <em>something that is made of many parts and yet is somehow more than or different from the combination of its parts</em> (<a href="https://www.merriam-webster.com/dictionary/gestalt">Merriam-Webster</a>)</p>
+</blockquote>
+<p>When I use <em>gestalt</em> in this post I mean it with the definition above. &quot;Gestalt
+based programming&quot;<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> is less
+about programming than it is about the interface between
+programming &amp; its environment(s) (the editor, the runtime, the GUI, the OS, the
+VCS, etc.). Specifically, a gestalt based programming system has abstractions
+that expose complexity in a way that treats the complexity of the environment
+as a whole, hidden away until you actually need to deal with it (say, when
+you're building a kernel or writing a low-level graphics engine).</p>
+<p>You might object to my comparison above between the pen tool and Scratch
+because they're different kinds of tools: one's a programming environment, the
+other's explicitly a drawing application with programming <em>functionality</em>. So let's compare it to a different example: Photoshop.</p>
+<p><a href="https://www.adobe.com/devnet/photoshop/scripting.html">You can script
+Photoshop</a> using a
+custom subset/extension of Javascript, AppleScript, or VBScript. You load
+scripts into a special directory in the app &amp; then it creates a button that
+runs that script. So far this sounds like the pen tool experience above!
+Unfortunately, it's not directly analogous: Photoshop scripts run
+synchronously, blocking the app while they run, and you can only interact with
+them via dialog boxes (e.g. &quot;What color should this tint be?&quot;). The pen tool
+above programs brushes, which runs every time a <code>mousepress</code> is registered,
+meaning it's interacted with more naturally &amp; can subsume the function of
+Photoshop scripts: I could, theoretically, detect a double tap and use that to
+kick off a background process like a PS script rather than draw. This all comes
+down to the goal of user-enabled programs between the two drawing tools: in
+Photoshop this is a clunky, expert-user tool, so it's assumed users here will
+be fine grokking the entire Photoshop document &amp; editing model (not gestalt,
+very much needing to think about individual bits &amp; pieces in sequential order
+to perform actions), whereas the pen tool was designed to be an extensible
+programmatic brush so the user interface can be programmed simply as one
+system, allowing for an art-making experience that's infinitely more customizable.</p>
+<hr>
+<h2>Logo, Scratch, Dynamicland</h2>
+<div style="color: red">Todo: explain Logo, Scratch, & Dynamicland in the
+lineage of "extendible programming environments", since the quote above relies on
+knowing this a bit? At least link to Omar's piece about DL & quickly explain
+Logo/Scratch connection & philosophies??</div>
+<hr>
+<h2>Parting thoughts</h2>
 <table>
 <thead>
 <tr>
@@ -79,19 +137,19 @@ modding an existing program.</p>
 </tr>
 <tr>
 <td>Photoshop</td>
-<td>Baku89's pentool</td>
+<td>Baku89's pen tool</td>
 </tr>
 <tr>
 <td>Github</td>
 <td>???</td>
 </tr>
+<tr>
+<td>programming languages with implicit environments (most of them)</td>
+<td>Lisp, Smalltalk (explicit environments)</td>
+</tr>
 </tbody>
 </table>
-<h2>Gestalt (noun): <em>an organized whole that is perceived as more than the sum of its parts.</em></h2>
-<p>There's a lot to unpack here, this but it made me realized, all at once, that
-part of what makes the Pen Tool's extensibility so <em>usable</em> is that it exploits
-the concept of the gestalt to its advantage, rather than attempting too limit
-it to &quot;simplified&quot; small units, like Scratch.</p>
+<p>For a tight feedback loop between interfaces &amp; programming systems take advantage of the gestalt instead of having every abstraction expose its internals &quot;simply&quot; (other way to put it: clarity &gt; transparency when designing a system/language/API).</p>
 <!-- <div style="background&#45;color: #DAD"> -->
 <!-- <img src="/assets/images/favicon.png" alt=""> -->
 <!-- <img src="/assets/images/favicon&#45;white.png" alt=""> -->
@@ -100,8 +158,8 @@ it to &quot;simplified&quot; small units, like Scratch.</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>First footnote, just
-Testing <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+<li id="fn1" class="footnote-item"><p>though I made the term up mostly as a <a href="https://twitter.com/acwervo/status/1036014674754433027">joke on
+Twitter</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
 </li>
 </ol>
 </section>
