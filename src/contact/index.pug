@@ -3,7 +3,20 @@ title: Contact
 layout: layouts/base.pug
 ---
 
-ul(style="font-size: 3em;")
+style(type="text/css").
+    #contact-list {
+        font-size: 2em;
+        text-align: center;
+        list-style-type: none;
+    }
+
+    @media (min-width: 600px) {
+        #contact-list {
+            font-size: 4em;
+        }
+    }
+
+ul#contact-list
     li
         a(href="https://twitter.com/acwervo" target="_blank")
             | Twitter 🐧
