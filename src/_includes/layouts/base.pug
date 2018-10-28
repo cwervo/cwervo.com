@@ -24,8 +24,7 @@ html(lang="en")
             style.
                 .grid {
                     display: grid;
-                    grid-template-columns: auto;
-                    grid-template-rows: 5% auto;
+                    grid-gap: 0;
                 }
 
                 .grid > * {
@@ -40,13 +39,13 @@ html(lang="en")
 
                 @media (min-width: 600px) {
                     .grid {
-                        grid-template-columns: 50% 50%;
+                        grid-template-columns: repeat(2,1fr);
                     }
                 }
 
                 @media (min-width: 900px) {
                     .grid {
-                        grid-template-columns: 33% 33% 33%;
+                        grid-template-columns: repeat(3,1fr);
                     }
                 }
         style.
@@ -77,12 +76,10 @@ html(lang="en")
                     a(href="/writing") Writing
                 li
                     a(href="/speaking") Speaking
-                // li
-                //     a(href="/projects") Projects
                 li
-                    a(href="/portfolio") Portfolio
-                li
-                    a(href="https://twitter.com/acwervo" target="_blank") Twitter
+                    a(href="/projects") Projects
                 li
                     a(href="/about") About
+                li
+                    a(href="/contact") Contact
         |!{content}
