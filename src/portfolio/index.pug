@@ -1,0 +1,10 @@
+---
+title: Portfolio
+layout: layouts/base.pug
+---
+include _includes/portfolio-data.pug
+
+each item in portfolioData
+    div
+        h1= item.heading
+        span(style="margin-left: 10px;")= (item.date ? item.date : 'no date')
