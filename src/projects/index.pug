@@ -7,9 +7,9 @@ include _includes/portfolio-data.pug
 
 .grid
     each item in portfolioData
-        div
-            .title !{item.title}
-            .description !{item.description}
+        a.gridItem(style="display: block;" href=item.link target=(item.linkTarget ? item.linkTarget : ""))
             - if (item.giphyVideo)
                 video(playsinline="true" muted="true" autoplay="true" loop="true" style="max-width: 100%;")
                     source(src=item.giphyVideo)
+            .title !{item.title}
+            .description !{item.description}
