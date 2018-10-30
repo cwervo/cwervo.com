@@ -1,5 +1,5 @@
 ---
-title: Work
+title: Lace
 layout: layouts/base.pug
 padding: true
 ---

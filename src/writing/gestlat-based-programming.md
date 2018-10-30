@@ -1,6 +1,7 @@
 ---
 title: Gestalt Based Programming
 date: 2018-09-01
+draft: true
 ---
 
 ## Lessons from Dynamicland, Lego, Logo, and Photshop.

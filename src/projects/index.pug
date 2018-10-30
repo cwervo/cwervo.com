@@ -2,8 +2,13 @@
 title: Work
 layout: layouts/base.pug
 gridStyle: true
+debug: true
 ---
 include _includes/portfolio-data.pug
+
+if debug
+    h4(style="color: red; background-color: black;") DEBUG MODE STILL ONNNNNNNN
+    span(style="margin-left: 10%; color: red;") You can locally edit the titles & descriptions below :)
 
 .grid
     each item in portfolioData
@@ -13,3 +18,11 @@ include _includes/portfolio-data.pug
                     source(src=item.giphyVideo)
             .title !{item.title}
             .description !{item.description}
+
+if debug
+    script.
+        document.querySelectorAll('.gridItem').forEach(gridItem => {
+            gridItem.removeAttribute("href")
+            gridItem.querySelector('.title').setAttribute('contenteditable', 'true')
+            gridItem.querySelector('.description').setAttribute('contenteditable', 'true')
+        })
