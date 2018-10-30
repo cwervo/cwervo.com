@@ -14,6 +14,10 @@ function myFunction() {
 }
 ```
 
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
 <a-scene embedded>
 <a-box color="blue"></a-box>
 </a-scene>

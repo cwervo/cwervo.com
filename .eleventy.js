@@ -3,10 +3,17 @@ module.exports = function(eleventyConfig) {
 
     let markdownIt = require("markdown-it");
     let markdownItFootnote = require("markdown-it-footnote");
-    let options = {
-        html: true
+    let markdownItAnchor = require("markdown-it-anchor");
+    let markdownItAnchorOptions = {
+        permalink: true,
     };
-    let markdownLib = markdownIt(options).use(markdownItFootnote);
+
+    let markdownItOptions = {
+        html: true,
+        ...markdownItAnchorOptions
+    };
+
+    let markdownLib = markdownIt(markdownItOptions).use(markdownItFootnote).use(markdownItAnchor);
     eleventyConfig.setLibrary("md", markdownLib);
 
     return {
