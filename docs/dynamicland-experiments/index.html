@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Dynamicland -  cwervo.com</title><link rel="stylesheet" href="/main.css"><link rel="icon" type="image/png" href="/assets/images/favicon.png"><style>body {padding: 0 10%;}</style><style>body { font-size: 1.25rem; }
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Dynamicland &amp; me -  cwervo.com</title><link rel="stylesheet" href="/main.css"><link rel="icon" type="image/png" href="/assets/images/favicon.png"><!-- meta(name="viewport" content="width=device-width")--><meta name="viewport" content="initial-scale=1.0"><style>body {padding: 0 5%;} @media (min-width: 600px) { body {padding: 0 15%;} } @media (min-width: 900px) { body {padding: 0 30%;} }</style><style>body { font-size: 1rem; }
 
 nav > ul > li:not(:last-child) {
     margin-right: 1em;
@@ -39,23 +39,138 @@ nav > ul > li:not(:last-child) {
         display: block;
     }
 }
-</style></head><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: #234; background-color: #F8F8F8;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul style="list-style-type: none; padding-left: 0;"><!-- li--><!--     a(href="/" class="navItem")--><!--         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")--><li><a class="navItem" href="/">Home</a></li><li><a class="navItem" href="/writing">Writing</a></li><li><a class="navItem" href="/projects">Projects</a></li><li><a class="navItem" href="/speaking">Speaking</a></li><li><a class="navItem" href="/about">About</a></li><li><a class="navItem" href="/contact">Contact</a></li></ul></nav><br><h1 id="dynamicland-%26-me">Dynamicland &amp; me</h1>
-<p>The work on this page requires a little context. These research &amp; art projects were all made at <a href="https://dynamicland.org/">Dynamicland</a>. The space uses cameras, projectors, and a custom language to facilitate turning the environment (walls, tables, anything you can stick a piece of paper onto) into a programmable space. For more detail I'd encourage you to read <a href="https://rsnous.com/posts/notes-from-dynamicland-geokit/">Omar Rizwan's project-based explanation of the space</a>. He goes a little into Realtalk, the superset of Lua that Dynamicland is built with. It's a research lab started by Bret Victor, an intentional community, a gathering space, a learning space, and someday I'll write more about it. For now, here are some things I've made there in the context of research, education, art, and exploration:</p>
+</style></head><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: #234; background-color: #F8F8F8;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul style="list-style-type: none; padding-left: 0;"><!-- li--><!--     a(href="/" class="navItem")--><!--         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")--><li><a class="navItem" href="/">Home</a></li><li><a class="navItem" href="/writing">Writing</a></li><li><a class="navItem" href="/projects">Projects</a></li><li><a class="navItem" href="/speaking">Speaking</a></li><li><a class="navItem" href="/contact">Contact</a></li></ul></nav><br><style>
+video, img {
+    max-width: 90%;
+}
+
+.image-group {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-group img {
+    width: 50%;
+}
+
+.image-group.three img {
+    display: inline-block;
+    width: 31%;
+}
+.caption {
+    width: 100%;
+    text-align: center;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+#fingersVideo {
+    width: 210px;
+    height: 315px;
+}
+
+@media (min-width: 600px) {
+    #fingersVideo {
+        width: 420px;
+        height: 630px;
+    }
+}
+</style>
+<h1 id="dynamicland-%26-me">Dynamicland &amp; me</h1>
+<p>The work on this page requires a little context. These projects were all made at <a href="https://dynamicland.org/">Dynamicland</a>. The space uses cameras, projectors, and a custom language to facilitate turning the environment (walls, tables, anything you can stick a piece of paper onto) into a programmable space. For more detail I'd encourage you to read <a href="https://rsnous.com/posts/notes-from-dynamicland-geokit/">Omar Rizwan's project-based explanation of the space</a>. He goes a little into Realtalk, the superset of Lua that Dynamicland is built with. It's a research lab started by Bret Victor, an intentional community, a gathering space, a learning space. Here are some things I've made there in the context of research, education, art, and exploration.</p>
+<hr>
+<h2 id="table-of-contents%3A">Table of Contents:</h2>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=PYaZ7dZWEBc">Video of a live scrubbing numbers interface controlled with my nails</a></li>
-<li><a href="https://twitter.com/acwervo/status/990650486779883520"><em>Iambicland</em></a> - a pun that turned into an interesting little experiment using small cubes to specify a number, specifically what <a href="http://shakespeare.mit.edu/Poetry/sonnets.html">Shakespeare sonnet</a> you'd like to see.</li>
+<li><a href="./#spatially-editing-programs-with-my-fingers">Spatially editing programs with my fingers</a></li>
+<li><a href="./#live-patching-numbers-in-realtalk-programs-to-generate-random-variations">Live patching numbers in Realtalk programs to generate random variations</a></li>
+<li><a href="./#3d-red%2Fcyan-stereoscopic-projections!">3D red/cyan stereoscopic projections!</a></li>
+<li><a href="./#iambicland">Iambicland</a></li>
+<li><a href="./#patterns-between-points">Patterns between points</a></li>
+<li><a href="./#dials-as-interfaces-in-dynamicland">Dials as interfaces in Dynamicland</a></li>
+<li><a href="./#3d-tracking-in-dynamicland">3D-Tracking-In-Dynamicland</a></li>
 </ul>
-<p>ADD IMAGES of live patching, give each one in this list its own h2??</p>
+<hr>
+<h2 id="spatially-editing-programs-with-my-fingers">Spatially editing programs with my fingers</h2>
+<iframe id="fingersVideo" src="https://www.youtube-nocookie.com/embed/PYaZ7dZWEBc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>The video above demonstrates how the inherently spatial design of the programming system paired with live editing makes for a powerful combination. First, some context:</p>
 <ul>
-<li>Live patching numbers in Realtalk programs to generate random variations: <a href="https://twitter.com/acwervo/status/1020854349302509574">example 1</a>, <a href="https://twitter.com/acwervo/status/1022342475329884160">example 2</a>.
+<li>There are a few spatial interface primitives built into Realtalk OS, one of which is the concept of &quot;dots&quot;: small solid groups of color. Every program can access the dots Realtalk sees in its quadrilateral, each of which has a <a href="https://en.wikipedia.org/wiki/CIELAB_color_space">LAB color</a> and <code>x</code>, <code>y</code> coordinates.</li>
+<li>I often keep <a href="https://www.target.com/p/sally-hansen-complete-salon-manicure-black-and-blue/-/A-14368647">my nails painted a two-toned blue</a>. As it turns out Realtalk will see my nails as a blue/brown dot, this has been taken advantage of in this experiment using dots as control inputs.
 <ul>
+<li>See <a href="https://twitter.com/acwervo/status/1036142903993618432">this video</a> for a short demonstration of painted fingernails as dots, as well as how we can enlarge the quadrilateral simply by cutting the paper &amp; moving the corners to create a bigger surface.</li>
+</ul>
+</li>
+<li>Each Realtalk program is stored in a shared database, but can be patched (edited) in realtime, &amp; reverted to its cannonical state at any time (erasing the patch).</li>
+</ul>
+<p>So, in the video linked above I used my nails as dot input to a program that can live edit the numbers in a Realtalk program (specifically, whichever number on the page of the program is closest to a given dot). With this powerful chain of simple tools in Realtalk I alter the color, radius &amp; stroke width of the circle (the output of the patched program) using only my fingers.</p>
+<ul>
+<li>Note: this was based off a &quot;number scrubber&quot; program <a href="http://worrydream.com/">Bret Victor</a>—the principal investigator of the lab—originally wrote.</li>
+</ul>
+<p><video src="https://media.giphy.com/media/jUhfjIriaO8MNGlvyy/giphy.mp4" autoplay playsinline muted loop></video></p>
+<h2 id="live-patching-numbers-in-realtalk-programs-to-generate-random-variations">Live patching numbers in Realtalk programs to generate random variations</h2>
+<ul>
+<li><a href="https://twitter.com/acwervo/status/1020854349302509574">example 1</a></li>
+<li><a href="https://twitter.com/acwervo/status/1022342475329884160">example 2</a></li>
 <li>Motivating question: can we spatialize genetic programming?</li>
 <li>Further, could we use a spatial interface &amp; negotiation between steps in the randomization to produce a system for influencing genetic programming in a way that's inaccessible when you cannot be &quot;inside&quot; the computer as with Dynamicland?</li>
 </ul>
+<p>The prototype I created takes a page it's pointing at &amp; randomizes all the numbers in the program. I'm working toward being able to chain or show various branches of randomly chosen numbers for the program, with a hope this this could be:</p>
+<ol>
+<li>an accessible way to explain genetic programming</li>
+<li>as well as present an interface for people familiar with genetic programming to embody the process &amp; be able to literally point to what variation bias they want to reproduce between generations.</li>
+</ol>
+<p><img src="/assets/images/dynamicland/random_program.gif" alt="randomized circle program running"></p>
+<h2 id="iambicland"><em>Iambicland</em></h2>
+<ul>
+<li><a href="https://twitter.com/acwervo/status/990650486779883520">Video link</a></li>
+<li>A pun that turned into an interesting little experiment using small cubes to specify a number, specifically what <a href="http://shakespeare.mit.edu/Poetry/sonnets.html">Shakespeare sonnet</a> you'd like to read (from a limited corpus of 10, but could be extended to the full 154).</li>
+</ul>
+<p><img src="/assets/images/dynamicland/iambicland_video_screenshot.png" alt="Iambicland screenshot"></p>
+<h2 id="3d-red%2Fcyan-stereoscopic-projections!">3D red/cyan stereoscopic projections!</h2>
+<p>Originally I was inspired to work with <a href="https://en.wikipedia.org/wiki/Anaglyph_3D">anaglyph projection</a> in Dynamicland to get a slight 3D effect on the 2D programs. Then, I got distracted by a much more novel concept: can you use just the red &amp; blue glasses to hide UI in Dynamicland? This is interesting because everything in Dynamicland is, on principle, public &amp; thus shared information. This could be a model for a kind of opt-in privacy! First, I started by swapping the blue/red lenses in two pairs of glasses:</p>
+<div class="image-group three">
+<img src="/assets/images/dynamicland/red_blue_glasses.jpg" alt="">
+<img src="/assets/images/dynamicland/resulting_glasses.jpg" alt="">
+</div>
+<div class="caption">Preparing the glasses. (left) Completed single-channel glasses. (right)</div>
+<p>When you put on the single-channel color glasses the opposing color light effectively disappears:</p>
+<div class="image-group three">
+<img src="/assets/images/dynamicland/vision_normal.jpg" alt="">
+<img src="/assets/images/dynamicland/vision_blue.jpg" alt="">
+<img src="/assets/images/dynamicland/vision_red.jpg" alt="">
+</div>
+<div class="caption">Original, red-only, & blue-only versions of dots with their corresponding colors highlighted.</div>
+<div class="image-group three">
+<img src="/assets/images/dynamicland/necker_original.jpg" alt="">
+<img src="/assets/images/dynamicland/necker_blue.jpg" alt="">
+<img src="/assets/images/dynamicland/necker_red.jpg" alt="">
+</div>
+<div class="caption">Original, red-only, & blue-only versions of a pair of necker cubes.</div>
+<p>Note that the necker cubes above disappear almost completely while the blue/red dots, because they're opaque objects &amp; not just projected light, are less well hidden. Designing experiences for a game or private messaging application in this way could be an interesting way to keep all Dynamicland programs public by default but facilitate privacy &amp; privileged information when necessary. Future work in this direction would include using gray-light frequency-shift keying (FSK) to track &amp; encode messages using publicly available projectors. This would build on the technique outlined in <a href="http://johnnylee.net/academic/p104-lee.pdf"><em>Moveable Interactive Projected Displays Using Projector Based Tracking</em></a> (Johnny C. Lee, et al.).</p>
+<p>I wrapped up this experiment &amp; left it to the community with this little illustration:</p>
+<img style="max-width: 33%; text-align: center;" src="/assets/images/dynamicland/cover_for_box.jpg" alt="">
+<h2 id="dials-as-interfaces-in-dynamicland">Dials as interfaces in Dynamicland</h2>
+<p>One of the most powerful consequences of Realtalk having first class concepts of space in the language is that a lot of things we'd normally have to simulate come &quot;for free&quot; in the physical world. A good example of this is rotation: instead of calculating translations to simulate rotation we can stick pages on turntables (&quot;<a href="https://en.wikipedia.org/wiki/Lazy_Susan">lazy susans</a>&quot;) &amp; rotate them for real. <a href="https://mrdoob.com/">Ricardo Cabello</a> used <a href="https://en.wikipedia.org/wiki/Atan2"><code>atan2()</code></a> to calculate the rotation of the paper using a corner of the program's quadrilateral against the center. With this method we get dials that control everything from text spacing, to animations, to music. Some examples I've developed:</p>
+<ul>
+<li><a href="https://twitter.com/acwervo/status/1020740175939350529">Controlling text spacing with a physical dial</a></li>
+</ul>
+<p><video src="https://media.giphy.com/media/lfgyWyL6eTi4RDZ7F6/giphy.mp4" autoplay playsinline muted loop></video></p>
+<ul>
+<li><a href="https://twitter.com/acwervo/status/1020740175939350529">Controlling multiple animations with one dial</a>, demonstrating Realtalk <code>When</code> broadcasting in practice</li>
+<li><a href="https://twitter.com/acwervo/status/983107535312797697">Multiple animations + a description of the communal nature of developing in Dynamicland</a></li>
+</ul>
+<p><video src="https://media.giphy.com/media/3oqgJb4oEpdjjzIWb3/giphy.mp4" autoplay playsinline muted loop></video></p>
+<ul>
+<li><a href="https://twitter.com/acwervo/status/985360740113465345">Height-based &quot;dial&quot;</a>
+<ul>
+<li>This program simply declares itself a <code>dial</code>, but the way it calculates its value is novel. It compares the relative length of the page with the width of the <code>supporter</code> (in general this is the larger surface that's being projected on, in the video it's a table, but can be a wall, the floor, etc.) Normally this length is constant because the paper is resting on the supporter surface (in fact, the project mapping depends on this fact, which is why you'll notice the labelled value (~1.3) appears to drift in the video above - we could calculate the drift based the amount the paper is raised), but when you raise the page off the table, assuming at least one corner of dots its still visible to the camera, this value changes. We can use this as a proxy value for height from the table &amp; normalize this to produce a reliable height-based &quot;dial&quot; (more accurately called a slider perhaps?)</li>
+</ul>
 </li>
 </ul>
-<h2 id="3d-red%2Fcyan-stereoscopic-projections!">3D red/cyan stereoscopic projections!</h2>
-<p>ADD IMAGES, EXPLANATION</p>
-<h2 id="dials-as-physical-ui-in-dynamicland">Dials as physical UI in Dynamicland</h2>
-<p>ADD IMAGES, EXPLANATION</p>
+<p><video src="https://media.giphy.com/media/58FrrF6qsKJdFDVZSw/giphy.mp4" autoplay playsinline muted loop></video></p>
+<h2 id="3d-tracking-in-dynamicland">3D Tracking In Dynamicland</h2>
+<p>All the other experiments above save the height-base dial, and indeed most programs in Dynamicland, are spatial but naturally limited to 2D because it's an easier starting point than 3D (nearly trivial projection mapping, easy spatial input tracking with an RGB camera, etc.) Along with <a href="http://tobyschachman.com/">Toby Schachman</a>, one of the researchers, I've been exploring using ultra-high frequency (UHF) RFID to get low-cost 3D tracking to be accessible in Dynamicland.
+There are no visuals for now but we can get a stream of UHF RFID signals into Realtalk as JSON, the next natural step is to transform that into Lua tables with which to trigger/animate programs.</p>
 </body></html>
