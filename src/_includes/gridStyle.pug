@@ -1,0 +1,46 @@
+style.
+    .grid {
+        display: grid;
+        grid-gap: 10px;
+        /* 1 column by default, below media query sizes */
+    }
+
+    a.gridItem {
+        padding: 4%;
+        text-decoration: none;
+        color: black;
+
+        border: 1px solid #DDD;
+        border-radius: 4px;
+    }
+
+    .gridItem .title {
+        font-weight: bold;
+        text-transform: capitalize;
+        text-decoration: underline;
+        margin-bottom: 5px;
+    }
+
+    a.gridItem:hover {
+        background-color: rgb(46,175,172);
+        background-color: rgba(46,175,172, 0.3);
+    }
+
+    @media (min-width: 600px) {
+        .grid {
+            grid-template-columns: repeat(2,1fr);
+        }
+    }
+
+    @media (min-width: 1000px) {
+        .grid {
+            grid-template-columns: repeat(3,1fr);
+        }
+    }
+
+    @media (min-width: 1150px) {
+        .grid {
+            padding: 0 5%;
+        }
+    }
+
