@@ -3,7 +3,9 @@ title: Volumetric Loaders for XR
 date: "2018-11-01T09:24"
 ---
 
-<video style="width: 100%" src="https://media.giphy.com/media/1wqqwQkizcEwOea9Tr/giphy.mp4" muted playsinline autoplay loop></video>
+<style> video { width: 100%; } </style>
+
+<video src="https://media.giphy.com/media/1wqqwQkizcEwOea9Tr/giphy.mp4" muted playsinline autoplay loop></video>
 
 - [Demo](https://caff.glitch.me/loaders/)
 
