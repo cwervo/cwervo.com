@@ -16,6 +16,8 @@ if debug
             - if (item.giphyVideo)
                 video(playsinline="true" muted="true" autoplay="true" loop="true" style="max-width: 100%;")
                     source(src=item.giphyVideo)
+            - if (item.imageSrc)
+                img(src=item.imageSrc style="max-width: 100%;")
             .title !{item.title}
             .description !{item.description}
 if debug
