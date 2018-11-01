@@ -69,6 +69,8 @@ html(lang="en")
                 margin-right: 1em;
             }
 
+        - if (syntaxHighlighting)
+            link(rel="stylesheet" href="/assets/prism-duotone-light.css")
 
         - if (specialIncludes)
             - if (typeof specialIncludes === "object")
