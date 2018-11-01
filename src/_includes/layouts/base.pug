@@ -4,9 +4,15 @@ html(lang="en")
         meta(charset="UTF-8")
         title #{title ? title+" - " : ""} cwervo.com
         link(rel="stylesheet" href="/main.css")
+
+        meta(name="twitter:card" content="summary")
+        meta(name="twitter:site", content="@acwervo")
+        meta(name="twitter:title", content=(twitterTitle ? twitterTitle : "cwervo.com"))
+        meta(name="twitter:description", content=(twitterDescription ? twitterDescription : "Andrés Cuervo's slice of the web."))
+
         link(rel="icon" type="image/png" href="/assets/images/favicon.png")
-        // meta(name="viewport" content="width=device-width")
         meta(name="viewport" content="initial-scale=1.0")
+
         if (padding)
             style body {padding: 0 5%;} @media (min-width: 600px) { body {padding: 0 15%;} } @media (min-width: 900px) { body {padding: 0 30%;} }
         else
@@ -14,6 +20,10 @@ html(lang="en")
 
         if noIndex
             meta(name="robots" content="noindex, nofollow")
+
+        if (syntaxHighlighting)
+            link(rel="stylesheet" href="/assets/prism-duotone-light.css")
+
         style.
             body { font-size: 1rem; }
 
@@ -36,7 +46,7 @@ html(lang="en")
             }
 
             nav > ul > li:not(:last-child) {
-                    float: left;
+                float: left;
             }
 
             .navItem {
@@ -44,16 +54,18 @@ html(lang="en")
             }
 
             @media (max-width: 450px) {
-                nav li:nth-of-type(2n + 1):not(:last-child) {
-                    float: left;
-                    width: 50%;
-                }
                 .navItem {
                     font-size: 1.75rem;
+                    width: 50%;
+                    float: initial;
                 }
                 nav {
                     width: 100%;
                     display: block;
+                }
+
+                #navList {
+                    columns: 2;
                 }
             }
 
@@ -68,9 +80,9 @@ html(lang="en")
                 display: inline-block;
                 margin-right: 1em;
             }
-
-        - if (syntaxHighlighting)
-            link(rel="stylesheet" href="/assets/prism-duotone-light.css")
+            ::selection {
+                background: #2EAFAC;
+            }
 
         - if (specialIncludes)
             - if (typeof specialIncludes === "object")
@@ -100,12 +112,12 @@ html(lang="en")
     // Colors from: http://clrs.cc/a11y/
     body(style="font-family: sans-serif; color: #234; background-color: #F8F8F8;")
         nav(style="display: block; width: 100%; font-size: 1.25rem;")
-            ul(style="list-style-type: none; padding-left: 0;")
-                // li
-                //     a(href="/" class="navItem")
-                //         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")
+            ul#navList(style="list-style-type: none; padding-left: 0;")
                 each navItem in navObjects
-                    li
-                        a(class="navItem" href=navItem.href) #{navItem.innerText}
+                    li.navItem
+                        a(href=navItem.href) #{navItem.innerText}
+            // span#logo.navItem
+            //     a(href="/")
+            //         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")
         br
         |!{content}
