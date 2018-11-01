@@ -3,7 +3,7 @@ title: Speaking
 layout: layouts/base.pug
 ---
 
-# Speaking, Andrés Cuervo
+# Speaking
 
 See all my [talk slides](https://slides.cwervo.com/), along with videos & write-ups accompanying some of the talks!
 
