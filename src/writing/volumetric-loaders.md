@@ -37,6 +37,6 @@ a-entity(position="0 0 0" rotation="0 90 0" layout=`type: circle; radius: 0.25;`
         - n++
 ```
 
-<video src="https://media.giphy.com/media/xT9Igk37ghGf6mqj4I/giphy.mp4" muted playsinline autoplay loop></video>
-
 - [Experience the full experiment here, works on all platforms!](https://caff.glitch.me/loaders/)
+
+<video src="https://media.giphy.com/media/xT9Igk37ghGf6mqj4I/giphy.mp4" muted playsinline autoplay loop></video>
