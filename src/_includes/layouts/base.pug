@@ -57,6 +57,19 @@ html(lang="en")
                 }
             }
 
+            .caption {
+                width: 100%;
+                text-align: center;
+                color: #444;
+                margin-bottom: 15px;
+            }
+            .caption::before {
+                content: '↳';
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+
         - if (specialIncludes)
             - if (typeof specialIncludes === "object")
                 for thing in specialIncludes

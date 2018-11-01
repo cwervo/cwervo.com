@@ -24,12 +24,6 @@ video, img {
     display: inline-block;
     width: 31%;
 }
-.caption {
-    width: 100%;
-    text-align: center;
-    color: #444;
-    margin-bottom: 15px;
-}
 
 #fingersVideo {
     width: 210px;
