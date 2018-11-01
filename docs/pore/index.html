@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>PORE -  cwervo.com</title><link rel="stylesheet" href="/main.css"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="cwervo.com"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>body {padding: 0 5%;} @media (min-width: 600px) { body {padding: 0 15%;} } @media (min-width: 900px) { body {padding: 0 30%;} }</style><style>body { font-size: 1rem; }
+
+nav > ul > li:not(:last-child) {
+    margin-right: 1em;
+}
+
+a {
+    color: #0074D9;
+    text-decoration-color: #2EAFAC;
+}
+a:visited {
+    color: #B10DC9;
+}
+nav a {
+    color: black;
+}
+nav a:visited {
+    color: #333;
+}
+
+nav > ul > li:not(:last-child) {
+    float: left;
+}
+
+.navItem {
+    margin-right: 10px;
+}
+
+@media (max-width: 450px) {
+    .navItem {
+        font-size: 1.75rem;
+        width: 50%;
+        float: initial;
+    }
+    nav {
+        width: 100%;
+        display: block;
+    }
+
+    #navList {
+        columns: 2;
+    }
+}
+
+.caption {
+    width: 100%;
+    text-align: center;
+    color: #444;
+    margin-bottom: 15px;
+}
+.caption::before {
+    content: '↳';
+    display: inline-block;
+    margin-right: 1em;
+}
+::selection {
+    background: #2EAFAC;
+}
+</style></head><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: #234; background-color: #F8F8F8;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li></ul><!-- span#logo.navItem--><!--     a(href="/")--><!--         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")--></nav><br><style>
+video {
+max-width: 80vw;
+}
+@media (min-width: 700px) { video { max-width: 40vw; } }
+</style>
+<h1 id="pore%3A-a-communal-vr-art-installation">PORE: a communal VR art installation</h1>
+<p>On June 2nd &amp; 3rd of 2018 I was in Berlin, showing people onto an exercise mat &amp; placing them in a VR art experience.</p>
+<p>I was invited to make a VR art piece for the <a href="https://2018.jsconf.eu/">JSConf EU</a> Community Lounge. <a href="https://sagejenson.com/">Sage Jenson</a> created the sound (background music) &amp; photogrammetry (concrete tube surrounding the participant &amp; a scan of the exercise mat that participants were standing on in the venue). I created the webVR installation using A-Frame, as well as a realtime database to allow people not in VR to view the experience being built live as particpants interacted with the piece (this was a convenient side-effect of streaming gaze data to a database for later processing).</p>
+<p>The experience itself consisted of viewers looking at a sequence of neck stretches (slower than shown below), prompted to follow these neck stretches &amp; ruminate on the taxing physical nature of VR. The hope was that we could create an experience in VR—a medium usually associated with escapism, and in fact total erasure of your body, a kind of digital blindfold—that actual caused you to become <em>more</em> aware of your body, not less.</p>
+<p><video src="https://media.giphy.com/media/OPvBZUqbFfK3heQ12u/giphy.mp4" loop playsinline autoplay muted></video></p>
+<p>As they'd look around partipants would draw a line 10 meters away from their head, in the direction of their gaze. In the actual experience this line was colorerd with a blue-to-yellow depth based shader.</p>
+<p><video src="https://media.giphy.com/media/fWghmiy4aoVTd2D86a/giphy.mp4" loop playsinline autoplay muted></video></p>
+<p><video src="https://media.giphy.com/media/kF5P2E2zmZCNFplD0X/giphy.mp4" loop playsinline autoplay muted></video></p>
+<p>The gaze data, collected from ~40 particpants over the two days of the conference, was collected &amp; visualized as a single path using Three.js. The final version is still viewable <a href="https://andrescuervo.github.io/jsconfeu-2018">on the installation website</a>. You can see artifacts from the prompts:</p>
+<ul>
+<li>many people created this cross/plus shape toward the front of the circle as a result of the left/right, up/down neck stretches</li>
+<li>there's exactly one person (corresponding to one line in the visualization) that goes completely around the radius of the sphere—this means <em>most</em> participants only viewed what was right in front of them</li>
+</ul>
+<p>Some day I may 3D print or visualize this data more, but it's interesting enough for now to have a collective physical sculpture created communally  by participants in the installation.</p>
+<p><video src="https://media.giphy.com/media/PMTN6Ewo7Ms4B3O64n/giphy.mp4" loop playsinline autoplay muted></video></p>
+<hr>
+<h2 id="an-initial-prototype-of-the-path-tracing">An initial prototype of the path tracing</h2>
+<p><video src="https://media.giphy.com/media/7IYLBJ47XjMnIEGHHT/giphy.mp4" loop playsinline autoplay muted></video></p>
+</body></html>

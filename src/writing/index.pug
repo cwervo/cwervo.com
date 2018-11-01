@@ -5,11 +5,12 @@ draft: true
 ---
 
 h2 #{title}
-for post in collections.writing
-    if !post.data.draft
-        - let dateObject = new Date(post.date)
-        - let month = dateObject.toLocaleString('en-US', { month: "long" })
-        - let dateString = `${month} ${dateObject.getUTCDate()}, ${dateObject.getFullYear()}`
-        li
-            a(href=post.url) #{post.data.title}
-            span  (#{dateString})
+- // Filter dafts & sort by date ascending (newest first)
+- let sorted = collections.writing.filter(({data}) => !data.draft).sort((a,b) => {return new Date(a.data.date) < new Date(b.data.date)})
+for post in sorted
+    - let dateObject = new Date(post.date)
+    - let month = dateObject.toLocaleString('en-US', { month: "long" })
+    - let dateString = `${month} ${dateObject.getUTCDate()}, ${dateObject.getFullYear()}`
+    li
+        a(href=post.url) #{post.data.title}
+        span  (#{dateString})
