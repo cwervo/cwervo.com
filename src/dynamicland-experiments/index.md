@@ -40,7 +40,7 @@ video, img {
 
 # Dynamicland & me
 
-The work on this page requires a little context. These projects were all made at [Dynamicland](https://dynamicland.org/). The space uses cameras, projectors, and a custom language to facilitate turning the environment (walls, tables, anything you can stick a piece of paper onto) into a programmable space. Really, though, the research is more focused on the space, and the people: what kinds of interactions can you have when computing is easy, accessible, and ubiquitous? It's about democratized control & access, through the lens of computation. For more detail I'd encourage you to read [Omar Rizwan's project-based explanation of the space](https://rsnous.com/posts/notes-from-dynamicland-geokit/). He goes a little into Realtalk, the superset of Lua that Dynamicland is built with. It's a research lab started by Bret Victor, an intentional community, a gathering space, a learning space. Here are some things I've made there in the context of research, education, art, and exploration.
+The work on this page requires a little context. These projects were all made at [Dynamicland](https://dynamicland.org/). The space uses cameras, projectors, and a custom language to facilitate turning the environment (walls, tables, anything you can stick a piece of paper onto) into a programmable space. Really, though, the research is more focused on the space, and the people: what kinds of interactions can you have when computing is easy, accessible, and ubiquitous? It's about democratized control & access, through the lens of computation. For more detail I'd encourage you to read [_The "Next Big Thing" is a Room_](https://phenomenalworld.org/metaresearch/the-next-big-thing-is-a-room) or [Omar Rizwan's project-based explanation of the space](https://rsnous.com/posts/notes-from-dynamicland-geokit/). Omar's piece goes a little into Realtalk, the superset of Lua that Dynamicland is built with. It's a research lab started by Bret Victor, an intentional community, a gathering space, a learning space. Here are some things I've made there in the context of research, education, art, and exploration.
 
 ---
 
@@ -50,7 +50,6 @@ The work on this page requires a little context. These projects were all made at
 - [Live patching numbers in Realtalk programs to generate random variations](./#live-patching-numbers-in-realtalk-programs-to-generate-random-variations)
 - [3D red/cyan stereoscopic projections!](./#3d-red%2Fcyan-stereoscopic-projections!)
 - [Iambicland](./#iambicland)
-- [Patterns between points](./#patterns-between-points)
 - [Dials as interfaces in Dynamicland](./#dials-as-interfaces-in-dynamicland)
 - [3D-Tracking-In-Dynamicland](./#3d-tracking-in-dynamicland)
 
