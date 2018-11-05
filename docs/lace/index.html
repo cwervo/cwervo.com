@@ -26,19 +26,30 @@ nav > ul > li:not(:last-child) {
     margin-right: 10px;
 }
 
+#logoImg {
+    display: inline-block;
+    height: 3em;
+    margin-top: -0.5em;
+    width: auto;
+}
+
 @media (max-width: 450px) {
     .navItem {
         font-size: 1.75rem;
         width: 50%;
         float: initial;
+        margin-top: 0.3em;
     }
     nav {
         width: 100%;
         display: block;
     }
-
     #navList {
         columns: 2;
+    }
+    #logoImg {
+        margin-top: initial;
+        height: 6em;
     }
 }
 
@@ -56,7 +67,7 @@ nav > ul > li:not(:last-child) {
 ::selection {
     background: #2EAFAC;
 }
-</style></head><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: #234; background-color: #F8F8F8;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li></ul><!-- span#logo.navItem--><!--     a(href="/")--><!--         img(style="display: inline-block; height: 1.5em; width: auto;" src="/assets/images/favicon.png" alt="small-logo")--></nav><br><p>This is some documentation about Lace. I'll write more words later, but for now:</p>
+</style></head><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: #234; background-color: #F8F8F8;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li></ul></nav><br><p>This is some documentation about Lace. I'll write more words later, but for now:</p>
 <h2 id="gifs%3A">GIFs:</h2>
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/1xnylCqNk9OdC28Bmp" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/1xnylCqNk9OdC28Bmp">via GIPHY</a></p>
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/9u1kB69890erWprN6V" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/9u1kB69890erWprN6V">via GIPHY</a></p>
