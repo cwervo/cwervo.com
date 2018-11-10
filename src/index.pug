@@ -33,27 +33,34 @@ script.
         camera.position.z = 1;
         scene = new THREE.Scene();
         uniforms = {
-            time: { type: "f", value: 1.0 },
-            resolution: { type: "v2", value: new THREE.Vector2() }
+            u_time: { type: "f", value: 1.0 },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+            u_mouse: { type: "v2", value: new THREE.Vector2() }
         };
         material = new THREE.ShaderMaterial( {
             uniforms: uniforms,
             vertexShader: `
-                uniform float time;
-                uniform vec2 resolution;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                uniform vec2 u_mouse;
                 void main()	{
                     gl_Position = vec4( position, 1.0 );
                 }
             `,
             fragmentShader: `
-                uniform float time;
-                uniform vec2 resolution;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                uniform vec2 u_mouse;
 
                 void main()	{
-                    vec2 uv = gl_FragCoord.xy / resolution.xy;
-                    vec3 col = 0.5 + 0.5*tan(0.5*time+uv.xyx+vec3(0,2,4));
-                    col = 0.5 + 0.5*cos(time*0.8+uv.xyx+vec3(0,2,4));
-                    gl_FragColor = vec4(col * (1.0 + uv.y),0.6);
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    // Shift downward a bit
+                    uv.y -= 0.5;
+                    // Normalize & flip across y-axis
+                    uv += u_mouse/u_resolution * vec2(-1.0, 1.0);
+                    vec3 col = 0.5 + 0.5*tan(0.1*u_time+uv.xyx+vec3(0,2,4));
+                    col = 0.5 + 0.5*cos(u_time*0.1+uv.xyx+vec3(0,2,4));
+                    gl_FragColor = vec4(col * (0.3 + uv.y),0.6);
                 }`
         });
         mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2, 2 ), material );
@@ -68,13 +75,18 @@ script.
     }
     function render() {
         var elapsedMilliseconds = Date.now() - startTime;
-        uniforms.time.value = elapsedMilliseconds / 1000;
+        uniforms.u_time.value = elapsedMilliseconds / 1000;
         renderer.render( scene, camera );
     }
 
+    document.onmousemove = function(e){
+        uniforms.u_mouse.value.x = e.pageX
+        uniforms.u_mouse.value.y = e.pageY
+    }
+
     function setContainerSize() {
-        uniforms.resolution.value.x = window.innerWidth;
-        uniforms.resolution.value.y = window.innerHeight;
+        uniforms.u_resolution.value.x = window.innerWidth;
+        uniforms.u_resolution.value.y = window.innerHeight;
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
