@@ -149,6 +149,22 @@ function setContainerSize() {
 
 window.addEventListener( 'resize', onWindowResize, false );
 
+let hello = document.querySelector('#hello');
+function handleOrientation(event) {
+    let {absolute, alpha, beta, gamma} = event;
+    // hello.innerText = `
+    //     abs: ${absolute}\n
+    //     alpha: ${alpha}\n
+    //     beta: ${beta}\n
+    //     gamma: ${gamma}
+    // `
+    // Smoother transitions w/ sin:
+    uniforms.u_mouse.value.x = uniforms.u_resolution.value.x * Math.sin(alpha * 0.025); // 0.00277 ≅ 1 / 360
+    uniforms.u_mouse.value.y = uniforms.u_resolution.value.y * Math.sin(beta * 0.025); // 0.00277 ≅ 1 / 360
+}
+
+window.addEventListener("deviceorientation", handleOrientation, true);
+
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     setContainerSize();
