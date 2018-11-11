@@ -5,7 +5,10 @@ padding: true
 ---
 This is some documentation about Lace. I'll write more words later, but for now:
 
-## GIFs:
+---
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Okay, spent tonight working on my shader (added color tint &amp; <a href="https://twitter.com/LeapMotion?ref_src=twsrc%5Etfw">@LeapMotion</a> xz-movement affects the uv coords of the texture) &amp; tried it out with my projector setup! A thread of experiments:<br><br>First test: stress testing hand motions before moving on to actual gesture tests. <a href="https://t.co/rjmJzdjFjR">pic.twitter.com/rjmJzdjFjR</a></p>&mdash; Cwervo (@acwervo) <a href="https://twitter.com/acwervo/status/1060056282416087040?ref_src=twsrc%5Etfw">November 7, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/1xnylCqNk9OdC28Bmp" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/1xnylCqNk9OdC28Bmp">via GIPHY</a></p>
 
