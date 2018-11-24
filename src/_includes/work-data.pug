@@ -1,0 +1,47 @@
+-
+    function getDayAndMonth(date) {
+        let month = date.toLocaleString(locale, {
+            month: "long"
+        });
+        return ('current' === date ? 'current' : `${month} ${date.getFullYear()}`)
+    }
+-
+    let workData = {
+        'Google' : {
+            jobTitle: 'AR Prototyper, Adecco On-site',
+            startDate: new Date('February 2018'),
+            endDate: 'current',
+            description: [
+                'Working with designers, art directors, and other UX engineers I am responsible for converting designs for augmented reality effects into production-ready prototypes',
+                'Prototyped new effects and tools for the creation of AR experiences (3D typography, 3D sprite mapping, & cheap facial recognition) using C++, ARKit, and web-based tools'
+            ]
+        },
+        'CircleCI' : {
+            jobTitle: 'Software Engineer',
+            startDate: new Date('June 2016'),
+            endDate: new Date('February 2018'),
+            description : [
+                'Completely rewrote email templating engine & overhauled design',
+                'Worked with lead designer to implement new website UI & suggest/build UX improvements (web notifications, new site navigation hierarchy, proto-style guide)',
+                'Worked on frontend migration from ClojureScript to React while building new pricing UI'
+            ]
+        },
+        'Brightlite Interactive' : {
+            jobTitle: 'WebAR UX Consultant',
+            startDate: new Date('November 2017'),
+            endDate: new Date('January 2018'),
+            description : [
+                'Made recommendations about physical layout, lighting conditions, and UX tradeoffs of AR markers',
+                'Provided feedback on structuring & editing the internals of Three & AR.js project for optimal tracking'
+            ]
+        },
+        'Homies.io' : {
+            jobTitle: 'WebVR Programmer',
+            startDate: new Date('August 2017'),
+            endDate: new Date('November 2017'),
+            description: [
+                'Built an A-Frame VR prototype of a webVR art gallery',
+                'Loaded 360° videos & metadata from a database & created a cross-platform gallery to browse & view the content'
+            ]
+        }
+    }
