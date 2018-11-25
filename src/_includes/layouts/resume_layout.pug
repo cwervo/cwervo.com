@@ -2,7 +2,6 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        title #{title ? title+" - " : ""} cwervo.com
         link(rel="stylesheet" href="/main.css")
 
         meta(name="twitter:card" content="summary")
@@ -12,5 +11,42 @@ html(lang="en")
 
         link(rel="icon" type="image/png" href="/assets/images/favicon.png")
         meta(name="viewport" content="initial-scale=1.0")
-    !{content}
+        style.
+            @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
+            body {
+                font-family: 'Work Sans', sans-serif;
+                font-size: 15px;
+                margin: 1in;
+                max-height: 11.5in;
+                max-width: 8in;
+            }
+            a { color: black; }
+            .name, .header {
+                margin-bottom: 0;
+            }
+            .jobHeader {
+                margin-top: 0.5em;
+                margin-bottom: 0;
+            }
+            .jobTitle {
+                margin-top: 0.25%;
+                margin-bottom: 0.5%;
+            }
+            .description {
+                list-style-type: circle;
+                border-left: 5px solid #2EAFAC;
+                padding-left: 35px;
+            }
+            @media print {
+                @page {
+                    size: auto;
+                    margin: 0mm;
+                }
+                /*Remove bottom margin so everything fits on one page!*/
+                body {
+                    margin-bottom: 0;
+                }
+            }
+    body
+        | !{content}

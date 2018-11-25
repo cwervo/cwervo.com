@@ -1,0 +1,80 @@
+---
+title: Work
+debug: false
+draft: true
+layout: layouts/resume_layout.pug
+// layout: layouts/base.pug
+---
+include _includes/work-data.pug
+
+style.
+    @import url('https://fonts.googleapis.com/css?family=Work+Sans');
+
+    body {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 15px;
+        margin: 1in;
+        max-height: 11.5in;
+        max-width: 8in;
+    }
+    a { color: black; }
+    .name, .header {
+        margin-bottom: 0;
+    }
+    .jobHeader {
+        margin-top: 0.5em;
+        margin-bottom: 0;
+    }
+    .jobTitle {
+        margin-top: 0.25%;
+        margin-bottom: 0.5%;
+    }
+    .description {
+        list-style-type: circle;
+        border-left: 5px solid #2EAFAC;
+        padding-left: 35px;
+    }
+    @media print {
+        @page {
+            size: auto;
+            margin: 0mm;
+        }
+        /*Remove bottom margin so everything fits on one page!*/
+        body {
+            margin-bottom: 0;
+        }
+    }
+
+h1.name Andrés Cuervo
+
+span
+    | <a href="mailto:acwervo@gmail.com">acwervo@gmail.com</a> | <a href="https://cwervo.com">cwervo.com</a>
+
+h2.header Education
+div Bachelor of Arts, Oberlin College '17
+div Creative Writing, Computer Science double major
+
+h2.header Experience
+each key in Object.keys(workData)
+    - var data = workData[key]
+    h3.jobHeader #{key}
+    div.jobTitle #{data.jobTitle} (#{getDayAndMonth(data.startDate)}—#{getDayAndMonth(data.endDate)})
+    ul.description
+        each sentence in data.description
+            li #{sentence}
+
+h2.header Skills
+<span style="text-decoration: underline;">Languages & frameworks</span> : C++ (OpenFrameworks), Javascript (ES6, React, Three.js, A-FrameVR, ReactVR), Clojure & ClojureScript (Om, Om.Next, Reagent, Rum), Rust (nannou), C# (Unity), Python, Ruby, C, Java
+
+// Contact information
+// Academic history
+// Professional experience
+// Qualifications and skills
+// Awards and honors
+// Publications
+// Professional associations
+// Grants and fellowships
+// Licenses and certificates
+// Volunteer work
+// Personal information (Optional)
+// Hobbies and interests (Optional)
