@@ -2,6 +2,9 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
+        // Disallow search engine indexing
+        meta(name="robots" content="noindex, nofollow")
+
         link(rel="stylesheet" href="/main.css")
 
         meta(name="twitter:card" content="summary")
@@ -18,7 +21,6 @@ html(lang="en")
                 font-family: 'Work Sans', sans-serif;
                 font-size: 15px;
                 margin: 1in;
-                max-height: 11.5in;
                 max-width: 8in;
             }
             a { color: black; }
@@ -33,20 +35,30 @@ html(lang="en")
                 margin-top: 0.25%;
                 margin-bottom: 0.5%;
             }
-            .description {
+            ul {
                 list-style-type: circle;
                 border-left: 5px solid #2EAFAC;
                 padding-left: 35px;
             }
+            @media all {
+                .page-break { display: none; }
+            }
             @media print {
                 @page {
                     size: auto;
-                    margin: 0mm;
+                    margin: 0;
                 }
-                /*Remove bottom margin so everything fits on one page!*/
-                body {
-                    margin-bottom: 0;
+                .page-break { display: block; page-break-before: always; }
+                html {
+                    background-color: #FFFFFF;
+                    /*
+                    Need to manually increase this to get more pages to print
+                    without the bottom footer (site & page count)
+                    */
+                    height: 200vh;
                 }
             }
+            .bold { font-weight: bold; }
+            .after-page-break { padding-top: 1in; }
     body
         | !{content}

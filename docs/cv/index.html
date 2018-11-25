@@ -1,10 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="stylesheet" href="/main.css"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="cwervo.com"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!-- Disallow search engine indexing--><meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/main.css"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="cwervo.com"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>@import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
 body {
     font-family: 'Work Sans', sans-serif;
     font-size: 15px;
     margin: 1in;
-    max-height: 11.5in;
     max-width: 8in;
 }
 a { color: black; }
@@ -19,54 +18,28 @@ a { color: black; }
     margin-top: 0.25%;
     margin-bottom: 0.5%;
 }
-.description {
+ul {
     list-style-type: circle;
     border-left: 5px solid #2EAFAC;
     padding-left: 35px;
 }
-@media print {
-    @page {
-        size: auto;
-        margin: 0mm;
-    }
-    /*Remove bottom margin so everything fits on one page!*/
-    body {
-        margin-bottom: 0;
-    }
-}</style></head><body><style>@import url('https://fonts.googleapis.com/css?family=Work+Sans');
-
-body {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 15px;
-    margin: 1in;
-    max-height: 11.5in;
-    max-width: 8in;
-}
-a { color: black; }
-.name, .header {
-    margin-bottom: 0;
-}
-.jobHeader {
-    margin-top: 0.5em;
-    margin-bottom: 0;
-}
-.jobTitle {
-    margin-top: 0.25%;
-    margin-bottom: 0.5%;
-}
-.description {
-    list-style-type: circle;
-    border-left: 5px solid #2EAFAC;
-    padding-left: 35px;
+@media all {
+    .page-break { display: none; }
 }
 @media print {
     @page {
         size: auto;
-        margin: 0mm;
+        margin: 0;
     }
-    /*Remove bottom margin so everything fits on one page!*/
-    body {
-        margin-bottom: 0;
+    .page-break { display: block; page-break-before: always; }
+    html {
+        background-color: #FFFFFF;
+        /*
+        Need to manually increase this to get more pages to print
+        without the bottom footer (site & page count)
+        */
+        height: 200vh;
     }
 }
-</style><h1 class="name">Andrés Cuervo</h1><span><a href="mailto:acwervo@gmail.com">acwervo@gmail.com</a> | <a href="https://cwervo.com">cwervo.com</a></span><h2 class="header">Education</h2><div>Bachelor of Arts, Oberlin College '17</div><div>Creative Writing, Computer Science double major</div><h2 class="header">Experience</h2><h3 class="jobHeader">Google</h3><div class="jobTitle">AR Prototyper, Adecco On-site (February 2018—current)</div><ul class="description"><li>Working with designers, art directors, and other UX engineers I am responsible for converting designs for augmented reality effects into production-ready prototypes</li><li>Prototyped new effects and tools for the creation of AR experiences (3D typography, 3D sprite mapping, &amp; cheap facial recognition) using C++, ARKit, and web-based tools</li></ul><h3 class="jobHeader">CircleCI</h3><div class="jobTitle">Software Engineer (June 2016—February 2018)</div><ul class="description"><li>Completely rewrote email templating engine &amp; overhauled design</li><li>Worked with lead designer to implement new website UI &amp; suggest/build UX improvements (web notifications, new site navigation hierarchy, proto-style guide)</li><li>Worked on frontend migration from ClojureScript to React while building new pricing UI</li></ul><h3 class="jobHeader">Brightlite Interactive</h3><div class="jobTitle">WebAR UX Consultant (November 2017—January 2018)</div><ul class="description"><li>Made recommendations about physical layout, lighting conditions, and UX tradeoffs of AR markers</li><li>Provided feedback on structuring &amp; editing the internals of Three &amp; AR.js project for optimal tracking</li></ul><h3 class="jobHeader">Homies.io</h3><div class="jobTitle">WebVR Programmer (August 2017—November 2017)</div><ul class="description"><li>Built an A-Frame VR prototype of a webVR art gallery</li><li>Loaded 360° videos &amp; metadata from a database &amp; created a cross-platform gallery to browse &amp; view the content</li></ul><h2 class="header">Skills</h2><span style="text-decoration: underline;">Languages & frameworks</span> : C++ (OpenFrameworks), Javascript (ES6, React, Three.js, A-FrameVR, ReactVR), Clojure & ClojureScript (Om, Om.Next, Reagent, Rum), Rust (nannou), C# (Unity), Python, Ruby, C, Java<!-- Contact information--><!-- Academic history--><!-- Professional experience--><!-- Qualifications and skills--><!-- Awards and honors--><!-- Publications--><!-- Professional associations--><!-- Grants and fellowships--><!-- Licenses and certificates--><!-- Volunteer work--><!-- Personal information (Optional)--><!-- Hobbies and interests (Optional)--></body></html>
+.bold { font-weight: bold; }
+.after-page-break { padding-top: 1in; }</style></head><body><h1 class="name">Andrés Cuervo</h1><span><a href="mailto:acwervo@gmail.com">acwervo@gmail.com</a> | <a href="https://cwervo.com">cwervo.com</a></span><h2 class="header">Education</h2><div>Bachelor of Arts, Oberlin College '17</div><div>Creative Writing & Computer Science, double major</div><h2 class="header">Experience</h2><h3 class="jobHeader">Google</h3><div class="jobTitle">AR Prototyper, Adecco On-site (February 2018—current)</div><ul class="description"><li>Working with designers, art directors, and other UX engineers I am responsible for converting designs for augmented reality effects into production-ready prototypes</li><li>Prototyped new effects and tools for the creation of AR experiences (3D typography, 3D sprite mapping, &amp; fast facial recognition) using C++, ARKit, and web-based tools</li></ul><h3 class="jobHeader">CircleCI</h3><div class="jobTitle">Software Engineer (June 2016—February 2018)</div><ul class="description"><li>Completely rewrote email templating engine &amp; overhauled design</li><li>Worked with lead designer to implement new website UI &amp; suggest/build UX improvements (web notifications, new site navigation hierarchy, proto-style guide)</li><li>Worked on frontend migration from ClojureScript to React while building new pricing UI</li></ul><h3 class="jobHeader">Brightlite Interactive</h3><div class="jobTitle">WebAR UX Consultant (November 2017—January 2018)</div><ul class="description"><li>Made recommendations about physical layout, lighting conditions, and UX tradeoffs of AR markers</li><li>Provided feedback on structuring &amp; editing the internals of Three &amp; AR.js project for optimal tracking</li></ul><h3 class="jobHeader">Homies.io</h3><div class="jobTitle">WebVR Programmer (August 2017—November 2017)</div><ul class="description"><li>Built an A-Frame VR prototype of a webVR art gallery</li><li>Loaded 360° videos &amp; metadata from a database &amp; created a cross-platform gallery to browse &amp; view the content</li></ul><h2 class="header">Skills</h2><div><span class="bold">Programming languages & frameworks: </span>C++ (OpenFrameworks), Javascript (ES6, React, Three.js, A-FrameVR, ReactVR), Clojure & ClojureScript (Om, Om.Next, Reagent, Rum), Rust (nannou), C# (Unity), Python, Ruby, C, Java</div><div class="page-break"></div><div class="after-page-break"><span class="bold">Teaching: </span>Have taught middle & high school math & programming. Led & created curriculum for workshops teaching programmers, interface designers, & new media artists.</div><h2 class="header">Teaching</h2><ul><li>Code Now (Summer of 2015) — Revamped the curriculum website & assisted with workshops for high schoolers teaching Ruby & Swift</li><li>Mozilla Berlin A-Frame Workshop (August 10, 2017) — Co-wrote & co-taught <a href="https://www.meetup.com/WebXRBerlin/events/242057709/">a workshop</a> to programmers on the web VR framework A-Frame</li><li><a href="https://www.eventbrite.com/e/creating-augmented-narratives-workshop-tickets-42472075120#">Creating Augmented Narratives Workshop</a> (February 19, 2018) — Created a 6-hour long class for 12 professionals (artists, educators, and programmers of varying skill level) on using web-based augmented reality to create narratives, art, and games.</li></ul><h2 class="header">Art Installations</h2><ul><li>Co-created <a href="http://cwervo.com/pore/index.html">Pore</a> with Sage Jenson (a new media artist in Berlin) for JSConf EU 2018. Using photogrammetry and generative painting I programmed & designed a web VR piece for participants to stretch in VR that would create a communal sculpture using the direction of their gaze</li><li><a href="http://cwervo.com/lace/index.html">Lace</a> is a mock operating system using natural hand input via Leap Motion & a projector to prototype a future of computation without screens. Created during the Gray Area Incubator in the last half of 2018</li></ul><h2>Awards</h2><ul><li>Samsung WebVR Grand Prize (2017)</li></ul><h2 class="header">Grants & Fellowships</h2><ul><li>Oberlin College Grant ('13 — '17)</li><li><a href="https://www.oberlin.edu/bcsl/programs/bonner-scholars">Bonner Scholars</a> Fellow ('13 - '17)</li><li><a href="http://www.code2040.org">Code2040 </a> Fellow ('16)</li><li><a href="https://grayarea.org/incubator/">Gray Area Incubator</a> member (July - December '18)</li><li><a href="https://dynamicland.org/">Dynamicland</a> core volunteer (October '17 — current)</li></ul></body></html>
