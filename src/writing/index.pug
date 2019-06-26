@@ -5,8 +5,8 @@ draft: true
 ---
 
 h2 #{title}
-- // Filter dafts & sort by date ascending (newest first)
-- let sorted = collections.writing.filter(({data}) => !data.draft).sort((a,b) => {return new Date(a.data.date) < new Date(b.data.date)})
+// Filter dafts & sort by date ascending (newest first)
+- let sorted = collections.writing.filter(({data}) => !data.draft).reverse()
 for post in sorted
     - let dateObject = new Date(post.date)
     - let month = dateObject.toLocaleString('en-US', { month: "long" })
