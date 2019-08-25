@@ -56,12 +56,12 @@ script.
                 void main()	{
                     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
                     // Shift downward a bit
-                    uv.y -= 0.5;
+                    uv.y += 0.3;
                     // Normalize & flip across y-axis
                     uv += u_mouse/u_resolution * vec2(-1.0, 1.0);
                     vec3 col = 0.5 + 0.5*tan(0.5*u_time+uv.xyx+vec3(0,2,4));
                     col = 0.5 + 0.5*cos(u_time*0.1+uv.xyx+vec3(0,2,4));
-                    gl_FragColor = vec4(vec3(0.55) + col * (0.4 + uv.y), 1.0);
+                    gl_FragColor = vec4(col * (0.4 + uv.y), 1.0);
                 }`
         });
         mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2, 2 ), material );
