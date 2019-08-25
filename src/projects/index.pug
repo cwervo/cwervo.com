@@ -12,14 +12,15 @@ if debug
 
 .grid
     each item in portfolioData
-        a.gridItem(style="display: block;" href=item.link target=(item.linkTarget ? item.linkTarget : ""))
-            - if (item.giphyVideo)
-                video(playsinline="true" muted="true" autoplay="true" loop="true" style="max-width: 100%;")
-                    source(src=item.giphyVideo)
-            - if (item.imageSrc)
-                img(src=item.imageSrc style="max-width: 100%;")
-            .title !{item.title}
-            .description !{item.description}
+        unless item.draft
+            a.gridItem(style="display: block;" href=item.link target=(item.linkTarget ? item.linkTarget : ""))
+                - if (item.giphyVideo)
+                    video(playsinline="true" muted="true" autoplay="true" loop="true" style="max-width: 100%;")
+                        source(src=item.giphyVideo)
+                - if (item.imageSrc)
+                    img(src=item.imageSrc style="max-width: 100%;")
+                .title !{item.title + item.padding}
+                .description !{item.description}
 if debug
     script.
         document.querySelectorAll('.gridItem').forEach(gridItem => {

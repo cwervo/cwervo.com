@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         title #{title ? title+" - " : ""} cwervo.com
-        link(rel="stylesheet" href="/main.css")
+        meta(name="Description" content="Andrés Cuervo's corner of the word wide web!")
 
         meta(name="twitter:card" content="summary")
         meta(name="twitter:site", content="@acwervo")
@@ -120,6 +120,8 @@ html(lang="en")
             {href: "/speaking", innerText: "Speaking"},
             {href: "/contact", innerText: "Contact"}
             ]
+
+    link(rel="stylesheet" href="/main.css")
 
     // Colors from: http://clrs.cc/a11y/
     body(style="font-family: sans-serif; color: #234; background-color: #FFFFFF;")
