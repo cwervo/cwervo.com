@@ -27,10 +27,10 @@ On iOS it even launches a proprietary feature called AR QuickLook:
 ![AR QuickLook screenshot, previewing 3D personal logo](/assets/images/arquicklook-blog-post/logo-quicklock-screencap.jpg)
 
 
-Okay, that's cool! How does it work? Well under the hood this web component — [`<model-viewer>`](https://github.com/GoogleWebComponents/model-viewer) — is using browser-specific attributes to launch proprietary AR features (translation: this will only work in specific browsers & is not standard HTML!). On iOS devices it's using  [iOS QuickLook](https://developer.apple.com/augmented-reality/quick-look/) & on Android it's using [Android's AR Scene Viewer](https://developers.google.com/ar/develop/java/scene-viewer). While Google documents exactly how Scene Viewer should be launched from HTML, Apple's HTML QuickLook documentation is super sparse. It's not on [their documentation website](https://developer.apple.com/documentation/) & all I could find officially documenting it is:
+Okay, that's cool! How does it work? Well under the hood this web component — [`<model-viewer>`](https://github.com/GoogleWebComponents/model-viewer) — is using browser-specific attributes to launch proprietary AR features (translation: this will only work in specific browsers & is not standard HTML!) On iOS devices it's using  [iOS QuickLook](https://developer.apple.com/augmented-reality/quick-look/) & on Android it's using [Android's AR Scene Viewer](https://developers.google.com/ar/develop/java/scene-viewer). While Google documents exactly how Scene Viewer should be launched from HTML, Apple's HTML QuickLook documentation is super sparse. It's not on [their documentation website](https://developer.apple.com/documentation/) & all I could find officially documenting it is:
 
-- A talk from 2018 — [Integrating Apps and Content with AR Quick Look](https://developer.apple.com/videos/play/wwdc2018/603/)
-- A talk from 2019 — [Advances in AR Quick Look](https://developer.apple.com/videos/play/wwdc2019/612)
+- A few minutes in a WWDC talk from 2018 — [Integrating Apps and Content with AR Quick Look](https://developer.apple.com/videos/play/wwdc2018/603/)
+- A few minutes in a follow up WWDC talk from 2019 — [Advances in AR Quick Look](https://developer.apple.com/videos/play/wwdc2019/612)
 - [Four slides in this PDF](https://devstreaming-cdn.apple.com/videos/wwdc/2018/603augiuv41xoowslk8/603/603_integrating_apps_and_content_with_ar_quick_look.pdf) (21 through 25, if you're curious)
 
 ... and that's it! There's a [wealth](https://developer.apple.com/design/human-interface-guidelines/ios/system-capabilities/quick-look/). [of](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/DocumentInteraction_TopicsForIOS/Introduction/Introduction.html). [information](https://developer.apple.com/documentation/quicklook). on the app-based way to launch QuickLook, but surprisingly little on how to launch it from the web. This post exists because I've learned a bunch about launching iOS QuickLook from the browser while using it <a href="http://movableink.com/" target="blank_">at work</a> & I want to save others time!
@@ -68,14 +68,14 @@ If you're on iOS 13 right now try <a href="https://cwervo-assets.netlify.com/mod
 ## Launching QuickLook From JavaScript
 
 
-On my [Test iOS QuickLook page](https://glitch.com/~test-ios-quicklook-js) I have a function called `launchIOSQuickLookAR` that's the minimal JavaScript you need to launch iOS AR QuickLook
+On my [Test iOS QuickLook page](https://glitch.com/~test-ios-quicklook-js) I have a function called `launchIOSQuickLookAR` that's the minimum JavaScript you need to launch iOS AR QuickLook
 
 ```javascript
-function launchIOSQuickLookAR() {
+// `usdzSrc` is expected to be a string path to a `.usdz` file
+function launchIOSQuickLookAR(usdzSrc) {
   const anchor = document.createElement('a');
   anchor.setAttribute('rel', 'ar');
   anchor.appendChild(document.createElement('img'));
-  // Here, `usdzSrc` is expected to be a path to a `.usdz` file
   anchor.setAttribute('href', usdzSrc);
   anchor.click();
 }
@@ -101,3 +101,6 @@ Yep! There's not API for it — all we can do for now is create offscreen HTML e
 
 I'm posting this because I'd like there to be a single reference for all this information — if I missed anything, feel free to email me at
 <a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a> &amp; I'll add it here!
+
+## Acknowledgments
+Thanks to [Chris Joel](https://twitter.com/0xcda7a) & [Jordan Santell](https://twitter.com/jsantell) for chatting about USDZ's on the web & reviewing the first couple drafts of this post!
