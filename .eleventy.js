@@ -6,7 +6,8 @@ module.exports = function(eleventyConfig) {
     let markdownIt = require("markdown-it");
     // let markdownIt = require("markdown-it")({
     // });
-    eleventyConfig.addPlugin(syntaxHighlight);
+
+    eleventyConfig.addPlugin(syntaxHighlight.configFunction);
 
     let markdownItFootnote = require("markdown-it-footnote");
     let markdownItAnchor = require("markdown-it-anchor");

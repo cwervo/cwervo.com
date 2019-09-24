@@ -115,11 +115,14 @@ figcaption {
         padding: 0 25%;
     }
 }
-</style><main class="blog-post"><h1 id="blog-title">Everything I Know About Launching iOS QuickLook From HTML</h1><div>September 23, 2019</div><p>Did you know you can launch 3D models from a web page? Like this:</p>
-<pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token comment">&lt;!-- use a 3D model of a Poly extruded version of your logo 😍 --></span></span><br><span class="highlight-line">&lt;model-viewer ar ios-src="https://cwervo-assets.netlify.com/models/cwervo/logo.usdz""></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>model-viewer</span><span class="token punctuation">></span></span></span></code></pre>
+</style><main class="blog-post"><h1 id="blog-title">Everything I Know About Launching iOS QuickLook From HTML</h1><div>September 24, 2019</div><p>Did you know you can launch 3D models from a web page? Like this:</p>
 <p><model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC"></model-viewer></p>
 <div class="caption">A 3D version of my personal logo made using <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a>
 </div>
+<p>... &amp; the source code looks like this:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>model-viewer</span><br><span class="highlight-line">    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/assets/3D-models/logo.glb<span class="token punctuation">"</span></span></span><br><span class="highlight-line">    <span class="token attr-name">ios-src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/assets/3D-models/logo-3m-scaled.usdz<span class="token punctuation">"</span></span></span><br>    <span class="token attr-name">ar</span> <span class="token attr-name">auto-rotate</span> <span class="token attr-name">camera-controls</span> <span class="token attr-name">background-color</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#2EAFAC<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>model-viewer</span><span class="token punctuation">></span></span></span></code></pre>
+<p>On iOS it even launches a proprietary feature called AR QuickLook:</p>
+<p><img src="/assets/images/arquicklook-blog-post/directness-test-screenshot.png" alt="AR QuickLook Preview"></p>
 <p>Okay, that's cool! How does it work? Well under the hood this web component — <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a> — is using browser-specific attributes to launch proprietary AR features (translation: this will only work in specific browsers &amp; is not standard HTML!). On iOS devices it's using  <a href="https://developer.apple.com/augmented-reality/quick-look/">iOS QuickLook</a> &amp; on Android it's using <a href="https://developers.google.com/ar/develop/java/scene-viewer">Android's AR Scene Viewer</a>. While Google documents exactly how Scene Viewer should be launched from HTML, Apple's HTML QuickLook documentation is super sparse. It's not on <a href="https://developer.apple.com/documentation/">their documentation website</a> &amp; all I could find officially documenting it is:</p>
 <ul>
 <li>A talk from 2018 — <a href="https://developer.apple.com/videos/play/wwdc2018/603/">Integrating Apps and Content with AR Quick Look</a></li>
@@ -127,23 +130,27 @@ figcaption {
 <li><a href="https://devstreaming-cdn.apple.com/videos/wwdc/2018/603augiuv41xoowslk8/603/603_integrating_apps_and_content_with_ar_quick_look.pdf">Four slides in this PDF</a> (21 through 25, if you're curious)</li>
 </ul>
 <p>... and that's it! There's a <a href="https://developer.apple.com/design/human-interface-guidelines/ios/system-capabilities/quick-look/">wealth</a>. <a href="https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/DocumentInteraction_TopicsForIOS/Introduction/Introduction.html">of</a>. <a href="https://developer.apple.com/documentation/quicklook">information</a>. on the app-based way to launch QuickLook, but surprisingly little on how to launch it from the web.</p>
-<h1 id="everything-i-know">Everything I know</h1>
-<h2 id="the-image-tag-is-required">The Image Tag Is Required</h2>
+<h2 id="everything-i-know">Everything I know</h2>
+<h3 id="the-image-tag-is-required">The Image Tag Is Required</h3>
 <p>One thing they don't <em>explicitly</em> say is that the image tag is <strong>required</strong>. You can't just make a link with <code>href=&quot;eg.usdz&quot;</code> &amp; <code>rel=ar</code> — it needs to have a direct child that's an image.That is, in HTML, you <em>need</em> this structure:</p>
 <pre><code>&lt;a href=&quot;example.usdz&quot; rel=&quot;ar&quot;&gt;
   &lt;img href=&quot;example-poster&quot; /&gt;
 &lt;/a&gt;
 </code></pre>
-<p><a href="//omg">//</a> image of what this renders on iOS goes here, so that people on non-iOS devices can use this as documentation</p>
+<h3 id="the-image-tag-must-be-the-first-child">The Image Tag <em>Must</em> Be The First Child</h3>
+<p>I ran a <a href="">little test</a> &amp; as of 2019-09-24, on iOS 13, it appears</p>
+<p><img src="/assets/images/arquicklook-blog-post/directness-test-screenshot.png" alt="AR QuickLook Preview"></p>
+<div class="caption">A screenshot from <a href="https://test-ios-quicklook-js.glitch.me/">test-ios-quicklook-js.glitch.me</a> showing that from HTML the only way to activate AR QuickLook on iOS is to have the direct, first child of a <code>rel=ar</code> element be an <code>img</code></div>
+<h2 id="launching-quicklook-from-javascript">Launching QuickLook From JavaScript</h2>
 <p>What if you don't want to use a preview image? You can use the link standalone in HTML like this:</p>
 <pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>example.usdz<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span><br><span class="highlight-line">    <span class="token comment">&lt;!-- Put whatever else you want in here --></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></span></code></pre>
-<h1 id="os-differences">OS Differences</h1>
-<h2 id="ios-12">iOS 12</h2>
+<h2 id="os-differences">OS Differences</h2>
+<h3 id="ios-12">iOS 12</h3>
 <ul>
 <li>Works in Safari &amp; PWA's (e.g. pages saved to the Home Screen from Safari)</li>
 <li>Doesn't work in WKWebViews</li>
 </ul>
-<h2 id="ios-13">iOS 13</h2>
+<h3 id="ios-13">iOS 13</h3>
 <ul>
 <li>Works in all of the above</li>
 <li>Big exception: as of 2019-09-23 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser &amp; using their own WKWebView ¯_(ツ)_/¯</li>
@@ -151,7 +158,7 @@ figcaption {
 <p>Include that this works in in-app browsers as of iOS 13 (e.g. Twitter's link preview or Notion's preview. Not Facebooks's though because they're using a custom WKWebView) &amp; in PWA'S. Doesn't in iOS 12.</p>
 <p>/// try <a href="https://twitter.com/hvhbinc/status/1176277202985467906?s=21">this</a> on old iPhone !! See if it works in Notion's webview &amp; Twitter's Webview!</p>
 <p>// test this in a Glitch project that sets itself as a minimal iOS PWA</p>
-<h1 id="did-i-miss-anything%3F">Did I miss anything?</h1>
+<h2 id="did-i-miss-anything%3F">Did I miss anything?</h2>
 <p>I'm posting this because I'd like there to be a single reference for all this information — if I missed anything, feel free to email me at hi+usdz@cwe.wtf</p>
 <p>// note: this means you have to set up mail forwarding from <a href="http://cwe.wtf">cwe.wtf</a> ... See if Cloudflare can do this? Otherwise just use namecheap mail service 🙃</p>
-<span><span class="date">◼️ September 23, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>
+<span><span class="date">◼️ September 24, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>
