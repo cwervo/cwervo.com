@@ -1,4 +1,15 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>first test post -  cwervo.com</title><meta name="Description" content="Andrés Cuervo's corner of the word wide web!"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="first test post"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><meta name="twitter:image" content="http://cwervo.com/assets/images/favicon.png"><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>body {padding: 0 3%;}</style><style>body { font-size: 1rem; }
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Everything I Know About Launching iOS QuickLook From HTML -  cwervo.com</title><meta name="Description" content="Andrés Cuervo's corner of the word wide web!"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="Everything I Know About Launching iOS QuickLook From HTML"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><meta name="twitter:image" content="http://cwervo.com/assets/images/favicon.png"><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>body {padding: 0 3%;}</style><link rel="stylesheet" href="/assets/prism-duotone-light.css"><style>/*Include auto-wrapping 2019-09-23
+* from this tutorial: https://www.tutorialspoint.com/How-do-I-wrap-text-in-a-pre-tag-in-HTML
+* */
+pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+</style><style>body { font-size: 1rem; }
 
 nav > ul > li:not(:last-child) {
     margin-right: 1em;
@@ -72,7 +83,12 @@ nav > ul > li:not(:last-child) {
 ::selection {
     background: #2EAFAC;
 }
-</style><!-- Loads <model-viewer> for modern browsers:--><script type="module" src="https://unpkg.com/@google/model-viewer@0.6.0/dist/model-viewer.js"></script><!-- Loads <model-viewer> for old browsers like IE11:--><script nomodule="" src="https://unpkg.com/@google/model-viewer@0.6.0/dist/model-viewer-legacy.js"></script></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><style>img {
+</style><!-- Loads <model-viewer> for modern browsers:--><script type="module" src="https://unpkg.com/@google/model-viewer@0.6.0/dist/model-viewer.js"></script><!-- Loads <model-viewer> for old browsers like IE11:--><script nomodule="" src="https://unpkg.com/@google/model-viewer@0.6.0/dist/model-viewer-legacy.js"></script><style>model-viewer {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 40vh;
+}</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><style>img {
     max-width: 100%;
     height: auto;
     display:block;
@@ -99,6 +115,43 @@ figcaption {
         padding: 0 25%;
     }
 }
-</style><main class="blog-post"><h1 id="blog-title">first test post</h1><div>September 23, 2019</div><model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC">
-        </model-viewer>
+</style><main class="blog-post"><h1 id="blog-title">Everything I Know About Launching iOS QuickLook From HTML</h1><div>September 23, 2019</div><p>Did you know you can launch 3D models from a web page? Like this:</p>
+<pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token comment">&lt;!-- use a 3D model of a Poly extruded version of your logo 😍 --></span></span><br><span class="highlight-line">&lt;model-viewer ar ios-src="https://cwervo-assets.netlify.com/models/cwervo/logo.usdz""></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>model-viewer</span><span class="token punctuation">></span></span></span></code></pre>
+<p><model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC"></model-viewer></p>
+<div class="caption">A 3D version of my personal logo made using <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a>
+</div>
+<p>Okay, that's cool! How does it work? Well under the hood this web component — <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a> — is using browser-specific attributes to launch proprietary AR features (translation: this will only work in specific browsers &amp; is not standard HTML!). On iOS devices it's using  <a href="https://developer.apple.com/augmented-reality/quick-look/">iOS QuickLook</a> &amp; on Android it's using <a href="https://developers.google.com/ar/develop/java/scene-viewer">Android's AR Scene Viewer</a>. While Google documents exactly how Scene Viewer should be launched from HTML, Apple's HTML QuickLook documentation is super sparse. It's not on <a href="https://developer.apple.com/documentation/">their documentation website</a> &amp; all I could find officially documenting it is:</p>
+<ul>
+<li>A talk from 2018 — <a href="https://developer.apple.com/videos/play/wwdc2018/603/">Integrating Apps and Content with AR Quick Look</a></li>
+<li>A talk from 2019 — <a href="https://developer.apple.com/videos/play/wwdc2019/612">Advances in AR Quick Look</a></li>
+<li><a href="https://devstreaming-cdn.apple.com/videos/wwdc/2018/603augiuv41xoowslk8/603/603_integrating_apps_and_content_with_ar_quick_look.pdf">Four slides in this PDF</a> (21 through 25, if you're curious)</li>
+</ul>
+<p>... and that's it! There's a <a href="https://developer.apple.com/design/human-interface-guidelines/ios/system-capabilities/quick-look/">wealth</a>. <a href="https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/DocumentInteraction_TopicsForIOS/Introduction/Introduction.html">of</a>. <a href="https://developer.apple.com/documentation/quicklook">information</a>. on the app-based way to launch QuickLook, but surprisingly little on how to launch it from the web.</p>
+<h1 id="everything-i-know">Everything I know</h1>
+<h2 id="the-image-tag-is-required">The Image Tag Is Required</h2>
+<p>One thing they don't <em>explicitly</em> say is that the image tag is <strong>required</strong>. You can't just make a link with <code>href=&quot;eg.usdz&quot;</code> &amp; <code>rel=ar</code> — it needs to have a direct child that's an image.That is, in HTML, you <em>need</em> this structure:</p>
+<pre><code>&lt;a href=&quot;example.usdz&quot; rel=&quot;ar&quot;&gt;
+  &lt;img href=&quot;example-poster&quot; /&gt;
+&lt;/a&gt;
+</code></pre>
+<p><a href="//omg">//</a> image of what this renders on iOS goes here, so that people on non-iOS devices can use this as documentation</p>
+<p>What if you don't want to use a preview image? You can use the link standalone in HTML like this:</p>
+<pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>example.usdz<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span><br><span class="highlight-line">    <span class="token comment">&lt;!-- Put whatever else you want in here --></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></span></code></pre>
+<h1 id="os-differences">OS Differences</h1>
+<h2 id="ios-12">iOS 12</h2>
+<ul>
+<li>Works in Safari &amp; PWA's (e.g. pages saved to the Home Screen from Safari)</li>
+<li>Doesn't work in WKWebViews</li>
+</ul>
+<h2 id="ios-13">iOS 13</h2>
+<ul>
+<li>Works in all of the above</li>
+<li>Big exception: as of 2019-09-23 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser &amp; using their own WKWebView ¯_(ツ)_/¯</li>
+</ul>
+<p>Include that this works in in-app browsers as of iOS 13 (e.g. Twitter's link preview or Notion's preview. Not Facebooks's though because they're using a custom WKWebView) &amp; in PWA'S. Doesn't in iOS 12.</p>
+<p>/// try <a href="https://twitter.com/hvhbinc/status/1176277202985467906?s=21">this</a> on old iPhone !! See if it works in Notion's webview &amp; Twitter's Webview!</p>
+<p>// test this in a Glitch project that sets itself as a minimal iOS PWA</p>
+<h1 id="did-i-miss-anything%3F">Did I miss anything?</h1>
+<p>I'm posting this because I'd like there to be a single reference for all this information — if I missed anything, feel free to email me at hi+usdz@cwe.wtf</p>
+<p>// note: this means you have to set up mail forwarding from <a href="http://cwe.wtf">cwe.wtf</a> ... See if Cloudflare can do this? Otherwise just use namecheap mail service 🙃</p>
 <span><span class="date">◼️ September 23, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>

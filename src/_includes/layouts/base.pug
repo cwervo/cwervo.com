@@ -24,6 +24,18 @@ html(lang="en")
 
         if (syntaxHighlighting)
             link(rel="stylesheet" href="/assets/prism-duotone-light.css")
+            style.
+                /*Include auto-wrapping 2019-09-23
+                * from this tutorial: https://www.tutorialspoint.com/How-do-I-wrap-text-in-a-pre-tag-in-HTML
+                * */
+                pre {
+                    overflow-x: auto;
+                    white-space: pre-wrap;
+                    white-space: -moz-pre-wrap;
+                    white-space: -pre-wrap;
+                    white-space: -o-pre-wrap;
+                    word-wrap: break-word;
+                }
 
         style.
             body { font-size: 1rem; }
