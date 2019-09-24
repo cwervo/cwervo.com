@@ -142,16 +142,20 @@ figcaption {
 <pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>example.usdz<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token punctuation">/></span></span> <span class="token comment">&lt;!-- remember, this has to be first! --></span></span><br><span class="highlight-line">    <span class="token comment">&lt;!-- Put whatever else you want in here --></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></span></code></pre>
 <p>If you're on iOS 13 right now try <a href="https://cwervo-assets.netlify.com/models/cwervo/logo.usdz" rel="ar"> <img> <span>hitting this piece of text</span> </a> &amp; you should see AR QuickLook pop up with the model from the beginning of the post!</p>
 <h2 id="launching-quicklook-from-javascript">Launching QuickLook From JavaScript</h2>
-<h3 id="os-differences">OS Differences</h3>
-<h4 id="ios-12">iOS 12</h4>
+<p>On my <a href="https://glitch.com/~test-ios-quicklook-js">Test iOS QuickLook page</a> I have a function called <code>launchIOSQuickLookAR</code> that's the minimal JavaScript you need to launch iOS AR QuickLook</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="highlight-line"><span class="token keyword">function</span> <span class="token function">launchIOSQuickLookAR</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span><br><span class="highlight-line">  <span class="token keyword">const</span> anchor <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">  anchor<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'rel'</span><span class="token punctuation">,</span> <span class="token string">'ar'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">  anchor<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">  <span class="token comment">// Here, `usdzSrc` is expected to be a path to a `.usdz` file</span></span><br><span class="highlight-line">  anchor<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'href'</span><span class="token punctuation">,</span> usdzSrc<span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">  anchor<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
+<div class="caption">Note: this code is basically a modified version of the <a href="https://github.com/GoogleWebComponents/model-viewer/blob/master/src/features/ar.ts#L27-L36"> <code>openIOSARQuickLook</code></a> in <code>&lt;model-viewer&gt;</code></div>
+<p>Yep! There's not API for it — all we can do for now is create offscreen HTML elements replicating the structure iOS expects &amp; programmatically click.</p>
+<h2 id="os-differences">OS Differences</h2>
+<h3 id="ios-12">iOS 12</h3>
 <ul>
 <li>Works in Safari &amp; PWA's (e.g. pages saved to the Home Screen from Safari)</li>
 <li>Doesn't work in in-app browsers</li>
 </ul>
-<h4 id="ios-13">iOS 13</h4>
+<h3 id="ios-13">iOS 13</h3>
 <ul>
 <li>Works in all of the above</li>
-<li>Now works in in-app browsers!
+<li>Now works in in-app browsers! 🎉
 <ul>
 <li>Big exception: as of 2019-09-23 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser &amp; using their own WKWebView ¯_(ツ)_/¯</li>
 </ul>
@@ -159,5 +163,5 @@ figcaption {
 </ul>
 <h2 id="did-i-miss-anything%3F">Did I miss anything?</h2>
 <p>I'm posting this because I'd like there to be a single reference for all this information — if I missed anything, feel free to email me at
-<a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a></p>
+<a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a> &amp; I'll add it here!</p>
 <span><span class="date">◼️ September 24, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>

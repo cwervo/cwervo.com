@@ -67,20 +67,37 @@ If you're on iOS 13 right now try <a href="https://cwervo-assets.netlify.com/mod
 
 ## Launching QuickLook From JavaScript
 
-### OS Differences
 
-#### iOS 12
+On my [Test iOS QuickLook page](https://glitch.com/~test-ios-quicklook-js) I have a function called `launchIOSQuickLookAR` that's the minimal JavaScript you need to launch iOS AR QuickLook
+
+```javascript
+function launchIOSQuickLookAR() {
+  const anchor = document.createElement('a');
+  anchor.setAttribute('rel', 'ar');
+  anchor.appendChild(document.createElement('img'));
+  // Here, `usdzSrc` is expected to be a path to a `.usdz` file
+  anchor.setAttribute('href', usdzSrc);
+  anchor.click();
+}
+```
+<div class="caption">Note: this code is basically a modified version of the <a href="https://github.com/GoogleWebComponents/model-viewer/blob/master/src/features/ar.ts#L27-L36"> <code>openIOSARQuickLook</code></a> in <code>&lt;model-viewer&gt;</code></div>
+
+Yep! There's not API for it — all we can do for now is create offscreen HTML elements replicating the structure iOS expects & programmatically click.
+
+## OS Differences
+
+### iOS 12
 
 - Works in Safari & PWA's (e.g. pages saved to the Home Screen from Safari)
 - Doesn't work in in-app browsers
 
-#### iOS 13
+### iOS 13
 
 - Works in all of the above
-- Now works in in-app browsers!
+- Now works in in-app browsers! 🎉
     - Big exception: as of 2019-09-23 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser & using their own WKWebView ¯\_(ツ)_/¯
 
 ## Did I miss anything?
 
 I'm posting this because I'd like there to be a single reference for all this information — if I missed anything, feel free to email me at
-<a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a>
+<a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a> &amp; I'll add it here!
