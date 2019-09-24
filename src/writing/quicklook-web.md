@@ -49,7 +49,7 @@ One thing they don't *explicitly* say is that the image tag is **required**. You
 
 ### The Image Tag _Must_ Be The First Child
 
-I ran a [little test]() & as of 2019-09-24, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the first nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR QuickLook element & instead will link to the USDZ directly. You can see this because the special QuickLook box icon doesn't appear in the top right of any elements after the first:
+I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-09-24, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the first nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR QuickLook element & instead will link to the USDZ directly. You can see this because the special QuickLook box icon doesn't appear in the top right of any elements after the first:
 
 ![AR QuickLook Preview](/assets/images/arquicklook-blog-post/directness-test-screenshot.png)
 <div class="caption">A screenshot from <a href="https://test-ios-quicklook-js.glitch.me/">test-ios-quicklook-js.glitch.me</a> showing that from HTML the only way to activate AR QuickLook on iOS is to have the direct, first child of a <code>rel=ar</code> element be an <code>img</code></div>
@@ -63,7 +63,7 @@ What if you don't want to use a preview image? You can actually get away with so
 </a>
 ```
 
-If you're on iOS 13 right now try <a href="https://cwervo-assets.netlify.com/models/cwervo/logo.usdz" rel="ar"> <img> <span>hitting this piece of text</span> </a> & you should see AR QuickLook pop up with the model from the beginning of the post!
+If you're on iOS 13 right now try <a href="/assets/3D-models/logo-3m-scaled.usdz" rel="ar"> <img> <span>hitting this piece of text</span> </a> & you should see AR QuickLook pop up with the model from the beginning of the post!
 
 ## Launching QuickLook From JavaScript
 
@@ -103,4 +103,4 @@ I'm posting this because I'd like there to be a single reference for all this in
 <a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a> &amp; I'll add it here!
 
 ## Acknowledgments
-Thanks to [Chris Joel](https://twitter.com/0xcda7a) & [Jordan Santell](https://twitter.com/jsantell) for chatting about USDZ's on the web & reviewing the first couple drafts of this post!
+Thanks to [Chris Joel](https://twitter.com/0xcda7a) & [Jordan Santell](https://twitter.com/jsantell) for chatting with me about USDZ's on the web & reviewing the first couple drafts of this post!
