@@ -117,6 +117,9 @@ html(lang="en")
         - if (gridStyle)
             include _includes/gridStyle.pug
 
+        - if (includeModelViewer0dot6)
+            include _includes/model-viewer-0.6.pug
+
     -
         let navObjects = [
             {href: "/", innerText: "Home"},
