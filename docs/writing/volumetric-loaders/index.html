@@ -75,10 +75,14 @@ nav > ul > li:not(:last-child) {
     color: #444;
     margin-bottom: 15px;
 }
-.caption::before {
+.caption:not(.credit)::before {
     content: '↳';
     display: inline-block;
     margin-right: 1em;
+}
+.caption.credit {
+    font-size: 0.5em;
+    font-color: gray;
 }
 ::selection {
     background: #2EAFAC;

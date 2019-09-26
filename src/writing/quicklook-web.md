@@ -8,7 +8,7 @@ syntaxHighlighting: true
 
 Did you know you can launch 3D models from a web page? There's a helpful web component called <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a> that will handle this for you. It'll look something like this:
 
-<model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC" alt="Spinning AC logo"></model-viewer>
+<model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC" alt="Spinning AC logo" quick-look-browsers="safari chrome"></model-viewer>
 <div class="caption">A 3D version of my personal logo displayed using <code>&lt;model-viewer&gt;</code>
 </div>
 
@@ -22,7 +22,13 @@ Did you know you can launch 3D models from a web page? There's a helpful web com
 </model-viewer>
 ```
 
-On iOS it even launches a proprietary feature called AR QuickLook:
+On Android devices this enables an AR feature called Scene Viewer:
+
+![A screencapture of what this example looks like in Android Scene Viewer](/assets/images/arquicklook-blog-post/3D-logo-scene-viewer.jpg)
+
+<div class="caption credit">(Thanks to Jordan Santell for this screencap of Scene Viewer on an Android device!)</div>
+
+& on iOS it launches a feature called AR QuickLook:
 
 ![AR QuickLook screenshot, previewing 3D personal logo](/assets/images/arquicklook-blog-post/logo-quicklock-screencap.jpg)
 
@@ -51,7 +57,8 @@ One thing they don't *explicitly* say is that the image tag is **required**. You
 
 I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-09-24, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the first nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR QuickLook element & instead will link to the USDZ directly. You can see this because the special QuickLook box icon doesn't appear in the top right of any elements after the first:
 
-![AR QuickLook Preview](/assets/images/arquicklook-blog-post/directness-test-screenshot.png)
+![AR QuickLook Preview](/assets/images/arquicklook-blog-post/directness-test-screenshot.jpg)
+
 <div class="caption">A screenshot from <a href="https://test-ios-quicklook-js.glitch.me/">test-ios-quicklook-js.glitch.me</a> showing that from HTML the only way to activate AR QuickLook on iOS is to have the direct, first child of a <code>rel=ar</code> element be an <code>img</code></div>
 
 What if you don't want to use a preview image? You can actually get away with something like this:
