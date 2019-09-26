@@ -45,15 +45,23 @@ Okay, that's cool! How does it work? Well under the hood this web component — 
 
 ### The Image Tag Is Required
 
-One thing they don't *explicitly* say is that the image tag is **required**. You can't just make a link with `href="eg.usdz"` & `rel=ar` — it needs to have a direct child that's an image.That is, in HTML, you *need* this structure:
+One thing they don't *explicitly* say is that the image tag is **required**. You can't just make a link with `href="eg.usdz"` & `rel=ar` — it needs to have a direct child that's an image (e.g. an `img` or `picture` tag). That is, in HTML, you *need* this structure:
 
 ```html
 <a href="example.usdz" rel="ar">
     <img href="eg.jpg>" />
 </a>
+<!-- or -->
+<a rel="ar" href="example.usdz">
+    <picture>
+        <source srcset="wide-eg.png"
+                media="(min-width: 600px)">
+        <img src="eg.png">
+    </picture>
+</a>
 ```
 
-### The Image Tag _Must_ Be The First Child
+### The Image Tag Must Be The _First_ Child
 
 I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-09-24, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the first nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR QuickLook element & instead will link to the USDZ directly. You can see this because the special QuickLook box icon doesn't appear in the top right of any elements after the first:
 
