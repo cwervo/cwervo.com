@@ -1,5 +1,5 @@
 ---
-title: Everything I Know About Launching iOS QuickLook From The Web
+title: Everything I Know About Launching iOS AR QuickLook From The Web
 date: "2019-09-24"
 draft: true
 includeModelViewer0dot6: true
