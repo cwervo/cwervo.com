@@ -190,7 +190,7 @@ AddType model/vnd.reality .reality
 
 ## iOS AR QuickLook & JavaScript
 
-### Detecting HTML AR QuickLook Support
+### Detecting Web AR QuickLook Support
 
 The **Feature Detection** section in Webkit's ["Viewing Augmented Reality Assets in Safari for iOS"](https://webkit.org/blog/8421/viewing-augmented-reality-assets-in-safari-for-ios/) post shows us how to detect if `ar` is a valid attribute in the browser we're in:
 
@@ -200,6 +200,12 @@ if (a.relList.supports("ar")) {
   // AR is available.
 }
 ```
+
+<div class="notice">
+
+If you want to test if your device can run iOS' AR QuickLook feature I <a href="https://test-ios-quicklook-js.glitch.me/quicklook-available.html">made a website that will tell you!</a> All it does is run the above snippet of Javascript & then print Yes/No.
+
+</div>
 
 ### Launching without a preview image using JavaScript
 
@@ -217,7 +223,7 @@ function launchIOSQuickLookAR(usdzSrc) {
 ```
 <div class="caption">Note: this code is basically a modified version of the <a href="https://github.com/GoogleWebComponents/model-viewer/blob/master/src/features/ar.ts#L27-L36"> <code>openIOSARQuickLook</code></a> in <code>&lt;model-viewer&gt;</code></div>
 
-Yep! There's not API for it — all we can do for now is create offscreen HTML elements replicating the structure iOS expects & programmatically click.
+Yep! There's no API for it — all we can do for now is create offscreen HTML elements replicating the structure iOS expects & programmatically click.
 
 ## OS Differences
 
