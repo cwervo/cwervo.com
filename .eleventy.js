@@ -10,6 +10,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(syntaxHighlight.configFunction);
 
     let markdownItFootnote = require("markdown-it-footnote");
+    let markdownItTOC = require("markdown-it-table-of-contents");
     let markdownItAnchor = require("markdown-it-anchor");
     let markdownItAnchorOptions = {
         permalink: true,
@@ -19,8 +20,11 @@ module.exports = function(eleventyConfig) {
         html: true,
         ...markdownItAnchorOptions,
     };
+    let markdownItTOCOptions = {
+        includeLevel : [1, 2, 3]
+    }
 
-    let markdownLib = markdownIt(markdownItOptions).use(markdownItFootnote).use(markdownItAnchor);
+    let markdownLib = markdownIt(markdownItOptions).use(markdownItFootnote).use(markdownItAnchor).use(markdownItTOC, markdownItTOCOptions);
     eleventyConfig.setLibrary("md", markdownLib);
 
     return {

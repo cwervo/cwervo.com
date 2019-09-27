@@ -6,6 +6,20 @@ includeModelViewer0dot6: true
 syntaxHighlighting: true
 ---
 
+_TL;DR_: There's a dope feautre called AR QuickLook on iOS that allows you
+to preview 3D models. There's a bunch of info on how to do this from inside
+native apps but not a lot of specifics (outside of WWDC talks) on how to use
+this feature from inside HTML/JavaScript. This page is an attempt to rememdy that!
+There's a lot of info here, so here's a table of contents to get you started:
+
+---
+
+[[toc]]
+
+---
+
+## 👋🏼
+
 Did you know you can launch 3D models from a web page? There's a helpful web component called <a href="https://github.com/GoogleWebComponents/model-viewer"><code>&lt;model-viewer&gt;</code></a> that will handle this for you. It'll look something like this:
 
 <model-viewer ar src="/assets/3D-models/logo.glb" ios-src="/assets/3D-models/logo-3m-scaled.usdz" auto-rotate camera-controls background-color="#2EAFAC" alt="Spinning AC logo" quick-look-browsers="safari chrome"></model-viewer>
@@ -36,9 +50,9 @@ On Android devices this enables an AR feature called Scene Viewer:
 Okay, that's cool! How does it work? Well under the hood this web component — [`<model-viewer>`](https://github.com/GoogleWebComponents/model-viewer) — is using browser-specific attributes to launch proprietary AR features (translation: this will only work in specific browsers & is not standard HTML!) On iOS devices it's using  [iOS QuickLook](https://developer.apple.com/augmented-reality/quick-look/) & on Android it's using [Android's AR Scene Viewer](https://developers.google.com/ar/develop/java/scene-viewer). While Google documents exactly how Scene Viewer should be launched from HTML, Apple's HTML QuickLook documentation is super sparse. It's not on [their documentation website](https://developer.apple.com/documentation/) & all I could find officially documenting it is:
 
 - Three minutes (16:30 — 19:50) in a WWDC talk from 2018 — [Integrating Apps and Content with AR Quick Look](https://developer.apple.com/videos/play/wwdc2018/603/)
+    - [Four slides in the accompanying PDF deck](https://devstreaming-cdn.apple.com/videos/wwdc/2018/603augiuv41xoowslk8/603/603_integrating_apps_and_content_with_ar_quick_look.pdf) (21 through 25, if you're curious)
 - A few minutes in a follow up WWDC talk from 2019 — [Advances in AR Quick Look](https://developer.apple.com/videos/play/wwdc2019/612)
-    - In [the accompanying deck PDF](https://devstreaming-cdn.apple.com/videos/wwdc/2019/612umedd7bboc1/612/612_advances_in_ar_quick_look.pdf) we have 38 slides (126 - 164).
-- [Four slides in this PDF](https://devstreaming-cdn.apple.com/videos/wwdc/2018/603augiuv41xoowslk8/603/603_integrating_apps_and_content_with_ar_quick_look.pdf) (21 through 25, if you're curious)
+    - In [the accompanying PDF deck](https://devstreaming-cdn.apple.com/videos/wwdc/2019/612umedd7bboc1/612/612_advances_in_ar_quick_look.pdf) we have 38 slides (126 - 164).
 - [This section in](https://developer.apple.com/documentation/arkit/previewing_a_model_with_ar_quick_look#3263412) an article on 'Previewing a Model with AR Quick Look'
 - [This post](https://webkit.org/blog/8421/viewing-augmented-reality-assets-in-safari-for-ios/) from the WebKit engineering blog from 2018
 
@@ -65,7 +79,7 @@ One thing they don't note in PDF's is that the image tag is **required**. You ca
 </a>
 ```
 
-### The Image Tag Must Be The _First_ Child
+### The Image Tag Must Be The First Child
 
 I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-09-24, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the first nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR QuickLook element & instead will link to the USDZ directly. You can see this because the special QuickLook box icon doesn't appear in the top right of any elements after the first:
 
@@ -84,7 +98,7 @@ What if you don't want to use a preview image? You can actually get away with so
 
 If you're on iOS 13 right now try <a href="/assets/3D-models/logo-3m-scaled.usdz" rel="ar"> <img> <span>hitting this piece of text</span> </a> & you should see AR QuickLook pop up with the model from the beginning of the post!
 
-### You can link to Data URI's & `blob`s as well
+### You can link to Data URI's & blobs as well
 
 As of 2019 you can now use [data URI's](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or [blobs](https://developer.mozilla.org/en-US/docs/Web/API/Blob) instead of linking to the `.usdz` directly.
 
@@ -118,15 +132,53 @@ bounces back to `100%` to show that it cannot be re-sized:
 
 <video playsinline autoplay=true muted=true loop=true  width="50%" src="/assets/arquicklook-blog-post/allowsContentScaling-demo_handbrake.mp4"></video>
 
-<div class="notice">While you can <a
+<div class="notice">
+
+While you can <a
 href="./#launching-without-a-preview-image-using-javascript">launch QuickLook
-from a browser that's not Safari</a>, as of 2019-09-26 this won't be respected in other browsers.</div>
+from a browser that's not Safari</a>, as of 2019-09-26 this won't be respected
+in other browsers.
+
+</div>
+
+### Setting the Share Link
+
+In QuickLook you get a 'Share' icon:
+
+![Image showing what the share icon in QuickLook looks like](/assets/arquicklook-blog-post/highlight-share-sheet-icon.jpg)
+
+By default this will share a link to the model itself:
+
+```html
+<a href="http://cwervo.com/assets/3D-models/logo-3m-scaled.usdz" rel="ar">
+```
+
+![Image showing what the default share sheet looks like](/assets/arquicklook-blog-post/default-share.jpg)
+
+
+But if you add `#canonicalWebPageURL=http://example.com` to the end of that you
+can send people to a more useful URL. In the example below I've set `#canonicalWebPageURL=http://cwervo.com`:
+
+![Image highlighting how with the canonicalWebPageURL](/assets/arquicklook-blog-post/custom-share-sheet.jpg)
+
+If you'd like to set both the scaling option & the canonical share URL you can use:
+
+```html
+#allowsContentScaling=0&canonicalWebPageURL=https://example.com
+```
+
+<div class="notice">
+
+As with <code>allowsContentScaling</code>, the <code>canonicalWebPageURL</code>
+fragment only seems to work in Safari as of 2019-09-26.
+
+</div>
 
 ## You need to have the right MIME type
 
-Before iOS 12.2 the MIME type for USDZ's was `model/vnd.pixar.usd` or `model/usd usdz`
-
-In the 2019 the official MIME types we got are:
+Before iOS 12.2 the MIME type for USDZ's was `model/vnd.pixar.usd` or
+`model/usd usdz`. These are no longer the official MIME types — as of 2019 you
+want to use `model/vnd.usdz+zip` for USDZ's & `model/vnd.reality`
 
 ```bash
 # If you're using Apache, this is how you'd add the MIME types
@@ -138,11 +190,11 @@ AddType model/vnd.reality .reality
 
 ## iOS AR QuickLook & JavaScript
 
-### Detecting AR
+### Detecting HTML AR QuickLook Support
 
 The **Feature Detection** section in Webkit's ["Viewing Augmented Reality Assets in Safari for iOS"](https://webkit.org/blog/8421/viewing-augmented-reality-assets-in-safari-for-ios/) post shows us how to detect if `ar` is a valid attribute in the browser we're in:
 
-```
+```javascript
 const a = document.createElement("a");
 if (a.relList.supports("ar")) {
   // AR is available.

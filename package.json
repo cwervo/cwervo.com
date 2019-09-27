@@ -11,6 +11,7 @@
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-footnote": "^3.0.1",
+    "markdown-it-table-of-contents": "^0.4.4",
     "pug": "^2.0.4"
   },
   "devDependencies": {
