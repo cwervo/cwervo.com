@@ -122,7 +122,7 @@ figcaption {
         padding: 0 25%;
     }
 }
-</style><main class="blog-post"><h1 id="blog-title">Everything I Know About Launching iOS AR Quick Look From The Web</h1><div>September 30, 2019</div><p><em>TL;DR</em>: There's an amazing feature called AR Quick Look on iOS that allows you
+</style><main class="blog-post"><h1 id="blog-title">Everything I Know About Launching iOS AR Quick Look From The Web</h1><div>October 2, 2019</div><p><em>TL;DR</em>: There's an amazing feature called AR Quick Look on iOS that allows you
 to preview 3D models. There's a bunch of info on how to do this from inside
 native apps but not a lot of specifics (outside of WWDC talks) on how to use
 this feature from inside HTML/JavaScript. This page is an attempt to remedy that!
@@ -165,7 +165,7 @@ There's a lot of info here, so here's a table of contents to get you started:</p
 <p>One thing they don't note in PDF's is that the image tag is <strong>required</strong>. You can't just make a link with <code>href=&quot;eg.usdz&quot;</code> &amp; <code>rel=ar</code> — it needs to have a direct child that's an image (e.g. an <code>img</code> or <code>picture</code> tag). That is, in HTML, you <em>need</em> this structure:</p>
 <pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>example.usdz<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>eg.jpg><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></span><br><span class="highlight-line"><span class="token comment">&lt;!-- or --></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ar<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>example.usdz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>picture</span><span class="token punctuation">></span></span></span><br>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">srcset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wide-eg.png<span class="token punctuation">"</span></span><br>                <span class="token attr-name">media</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>(min-width: 600px)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br><span class="highlight-line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>eg.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span><br><span class="highlight-line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>picture</span><span class="token punctuation">></span></span></span><br><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></span></code></pre>
 <h3 id="the-image-tag-must-be-the-first-child">The Image Tag Must Be The First Child</h3>
-<p>I ran a <a href="https://test-ios-quicklook-js.glitch.me#testing-directness-of-image">little test</a> &amp; as of 2019-09-30, on iOS 13, it appears that it's a strict requirement for the <code>img</code> tag to be the <em>first</em> nested child of the <code>rel=ar</code> link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR Quick Look element &amp; instead will link to the USDZ directly. You can see this because the special Quick Look box icon doesn't appear in the top right of any elements after the first:</p>
+<p>I ran a <a href="https://test-ios-quicklook-js.glitch.me#testing-directness-of-image">little test</a> &amp; as of 2019-10-02, on iOS 13, it appears that it's a strict requirement for the <code>img</code> tag to be the <em>first</em> nested child of the <code>rel=ar</code> link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR Quick Look element &amp; instead will link to the USDZ directly. You can see this because the special Quick Look box icon doesn't appear in the top right of any elements after the first:</p>
 <p><img src="/assets/arquicklook-blog-post/directness-test-screenshot.jpg" alt="AR Quick Look Preview"></p>
 <div class="caption">A screenshot from <a href="https://test-ios-quicklook-js.glitch.me/">test-ios-quicklook-js.glitch.me</a> showing that from HTML the only way to activate AR Quick Look on iOS is to have the direct, first child of a <code>rel=ar</code> element be an <code>img</code></div>
 <p>What if you don't want to use a preview image? You can actually get away with something like this:</p>
@@ -183,7 +183,7 @@ bounces back to <code>100%</code> to show that it cannot be re-sized:</p>
 <div class="notice">
 <p>While you can <a
 href="./#launching-without-a-preview-image-using-javascript">launch Quick Look
-from a browser that's not Safari</a>, as of 2019-09-30 this won't be respected
+from a browser that's not Safari</a>, as of 2019-10-02 this won't be respected
 in other browsers.</p>
 </div>
 <h3 id="setting-the-share-link">Setting the Share Link</h3>
@@ -199,7 +199,7 @@ can send people to a more useful URL. In the example below I've set <code>#canon
 <pre class="language-html"><code class="language-html"><span class="highlight-line">#allowsContentScaling=0&amp;canonicalWebPageURL=https://example.com</span></code></pre>
 <div class="notice">
 <p>As with <code>allowsContentScaling</code>, the <code>canonicalWebPageURL</code>
-fragment only seems to work in Safari as of 2019-09-30.</p>
+fragment only seems to work in Safari as of 2019-10-02.</p>
 </div>
 <h2 id="you-need-to-have-the-right-mime-type">You need to have the right MIME type</h2>
 <p>Before iOS 12.2 the MIME type for USDZ's was <s><code>model/vnd.pixar.usd</code></s> or
@@ -229,7 +229,7 @@ want to use <code>model/vnd.usdz+zip</code> for USDZ's &amp; <code>model/vnd.rea
 <li>Works in all of the above</li>
 <li>Now works in in-app browsers! 🎉
 <ul>
-<li>Big exception: as of 2019-09-30 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser &amp; using their own WKWebView ¯_(ツ)_/¯</li>
+<li>Big exception: as of 2019-10-02 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser &amp; using their own WKWebView ¯_(ツ)_/¯</li>
 </ul>
 </li>
 </ul>
@@ -238,4 +238,4 @@ want to use <code>model/vnd.usdz+zip</code> for USDZ's &amp; <code>model/vnd.rea
 <a href="mailto:hi+usdz@cwe.wtf">hi+usdz@cwe.wtf</a> &amp; I'll add it here!</p>
 <h2 id="acknowledgments">Acknowledgments</h2>
 <p>Thanks to <a href="https://twitter.com/0xcda7a">Chris Joel</a>, <a href="https://twitter.com/jsantell">Jordan Santell</a>, &amp; <a href="https://twitter.com/joshcarpenter">Josh Carpenter</a> for chatting with me about USDZ's on the web &amp; reviewing the first couple drafts of this post!</p>
-<span><span class="date">◼️ September 30, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>
+<span><span class="date">◼️ October 2, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>

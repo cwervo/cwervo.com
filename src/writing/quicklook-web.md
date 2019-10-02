@@ -1,7 +1,6 @@
 ---
 title: Everything I Know About Launching iOS AR Quick Look From The Web
-date: "2019-09-30"
-draft: true
+date: "2019-10-02"
 includeModelViewer0dot6: true
 syntaxHighlighting: true
 ---
@@ -85,7 +84,7 @@ One thing they don't note in PDF's is that the image tag is **required**. You ca
 
 ### The Image Tag Must Be The First Child
 
-I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-09-30, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the _first_ nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR Quick Look element & instead will link to the USDZ directly. You can see this because the special Quick Look box icon doesn't appear in the top right of any elements after the first:
+I ran a [little test](https://test-ios-quicklook-js.glitch.me#testing-directness-of-image) & as of 2019-10-02, on iOS 13, it appears that it's a strict requirement for the `img` tag to be the _first_ nested child of the `rel=ar` link element. If it's the second element, or even nested in the first child element, Safari fails to recognize it as an AR Quick Look element & instead will link to the USDZ directly. You can see this because the special Quick Look box icon doesn't appear in the top right of any elements after the first:
 
 ![AR Quick Look Preview](/assets/arquicklook-blog-post/directness-test-screenshot.jpg)
 
@@ -146,7 +145,7 @@ bounces back to `100%` to show that it cannot be re-sized:
 
 While you can <a
 href="./#launching-without-a-preview-image-using-javascript">launch Quick Look
-from a browser that's not Safari</a>, as of 2019-09-30 this won't be respected
+from a browser that's not Safari</a>, as of 2019-10-02 this won't be respected
 in other browsers.
 
 </div>
@@ -180,7 +179,7 @@ If you'd like to set both the scaling option & the canonical share URL you can u
 <div class="notice">
 
 As with <code>allowsContentScaling</code>, the <code>canonicalWebPageURL</code>
-fragment only seems to work in Safari as of 2019-09-30.
+fragment only seems to work in Safari as of 2019-10-02.
 
 </div>
 
@@ -248,7 +247,7 @@ Yep! There's no API for it — all we can do for now is create offscreen HTML el
 
 - Works in all of the above
 - Now works in in-app browsers! 🎉
-    - Big exception: as of 2019-09-30 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser & using their own WKWebView ¯\_(ツ)_/¯
+    - Big exception: as of 2019-10-02 this still doesn't work in Facebook's in-app web browser. It looks like they're not using the standard in-app browser & using their own WKWebView ¯\_(ツ)_/¯
 
 ## Did I miss anything?
 
