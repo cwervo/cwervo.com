@@ -84,7 +84,7 @@ The next easiest piece was pulling the other off-the-shelf dependency,
 [`qrcode-terminal`](https://github.com/gtanner/qrcode-terminal), off the
 proverbial shelf like so:
 
-```
+```javascript
 #!/usr/bin/env node
 // require the module as normal
 let bs = require("browser-sync").create();
@@ -122,13 +122,52 @@ work 😬.
 There's [a note on the docs page](https://www.browsersync.io/docs#external-url)
 about using "a tool _like_ [`dev-ip`](https://github.com/shakyshane/dev-ip)" (italics mine) to
 find the correct IP address, which I thought was interesting but I ignored when
-I read it. The 
+I first read it.
 
+The first thing I did to figure out where `external` was coming from was to go
+clone the Browser Sync repo & do a local
+[ripgrep](https://github.com/BurntSushi/ripgrep) of the codebase of the
+[`browser-sync` lib
+directory](https://github.com/BrowserSync/browser-sync/tree/92bf7d84894e9171ed8e313909d473bbd6c7368d/packages/browser-sync/lib).
 
-Finally, it turned out to be [this
+Running `rg external` in that directory looked like this:
+
+![Output of running rg external in the browser-sync
+lib](../../assets/images/making-bsqr/rg-external.png)
+
+& that lead me to look at `utils.js`. This lead me on a brief detour into
+[`xip`](http://xip.io/) but once I got past the magic[^1] of that I noticed [the
+line above references
+`getHostIp`](https://github.com/BrowserSync/browser-sync/blob/master/packages/browser-sync/lib/utils.ts#L48).  Finally, it turned out to be [this
 line](https://github.com/BrowserSync/browser-sync/blob/master/packages/browser-sync/lib/utils.ts#L29)
-that shows you
+that shows you where the external IP comes from: the first member of the array
+that [`dev-ip`](https://github.com/shakyShane/dev-ip) returns. Giants standing
+on the shoulders of giants! If we add that in to our little script we get:
 
-<!-- Here is a footnote reference,[^1] and another.[^longnote] -->
-<!--  -->
-<!-- [^1]: Here is the footnote. -->
+```js
+#!/usr/bin/env node
+let qrcode = require('qrcode-terminal');
+let bs = require("browser-sync").create();
+let devIp = require('dev-ip');
+
+// .init starts the server
+bs.init({
+    server: "."
+});
+
+/*
+ * NOTE: We're assuming the port is 3000, this isn't a safe assumption though
+ */
+qrcode.generate(`http://${devIp()[0]}:3000`, {small: true});
+
+
+// Now call methods on bs instead of the
+// main browserSync module export
+bs.reload("*"); // NOTE: Here I chose to reload everything`
+```
+
+Indeed, this is the bones of what `bsqr` is right now. There's a little more
+sugar to flags, error checking & such, but it was a relatively straight forward
+process to get from this script to [the first published version](https://github.com/cwervo/bsqr/blob/86235f9fd9e5accbe92f1e8f1014c9aa4b5526fb/index.js).
+
+[^1]: it's really just a suffix that acts as a [very clever DNS resolver](https://github.com/basecamp/xip-pdns/blob/master/bin/xip-pdns)
