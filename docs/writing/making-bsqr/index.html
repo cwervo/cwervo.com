@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Making bsqr -  cwervo.com</title><meta name="Description" content="Andrés Cuervo's corner of the word wide web!"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@acwervo"><meta name="twitter:title" content="Making bsqr"><meta name="twitter:description" content="Andrés Cuervo's slice of the web."><meta name="twitter:image" content="http://cwervo.com/assets/images/favicon.png"><link rel="icon" type="image/png" href="/assets/images/favicon.png"><meta name="viewport" content="initial-scale=1.0"><style>body {padding: 0 3%;}</style><link rel="stylesheet" href="/assets/prism-duotone-light.css"><style>/*Include auto-wrapping 2019-09-23
+* from this tutorial: https://www.tutorialspoint.com/How-do-I-wrap-text-in-a-pre-tag-in-HTML
+* */
+pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+</style><style>body { font-size: 1rem; }
+
+nav > ul > li:not(:last-child) {
+    margin-right: 1em;
+}
+
+a {
+    box-shadow: inset 0 -0.3rem 0 0 #2EAFAC;
+    transition: box-shadow 0.2s;
+    color: #0074D9;
+    text-decoration: none;
+}
+a:visited {
+    color: #B10DC9;
+}
+a:hover {
+    box-shadow: inset 0 -2.5rem 0 0 #2EAFAC;
+}
+nav a {
+    color: black;
+}
+nav a:visited {
+    color: #333;
+}
+
+nav > ul > li:not(:last-child) {
+    float: left;
+}
+
+.navItem {
+    margin-right: 10px;
+}
+
+#logoImg {
+    display: inline-block;
+    height: 3em;
+    margin-top: -0.5em;
+    width: auto;
+}
+.notice {
+    background-color: papayawhip;
+    border: 1px solid yellow;
+    padding: 0 1%;
+}
+
+@media (max-width: 450px) {
+    .navItem {
+        font-size: 1.75rem;
+        float: initial;
+    }
+    nav {
+        width: 100%;
+        display: block;
+    }
+    #navList {
+        columns: 2;
+    }
+    #logoImg {
+        margin-top: initial;
+        height: 6em;
+    }
+}
+
+.caption {
+    width: 100%;
+    text-align: center;
+    color: #444;
+    margin-bottom: 15px;
+}
+.caption:not(.credit)::before {
+    content: '↳';
+    display: inline-block;
+    margin-right: 1em;
+}
+.caption.credit {
+    font-size: 0.5em;
+    font-color: gray;
+}
+::selection {
+    background: #2EAFAC;
+}
+</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><style>img:not(#logoImg), video {
+    max-width: 85%;
+    height: auto;
+    display:block;
+    margin:auto;
+}
+figcaption {
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.blog-post { padding: 0 0%; }
+@media (min-width: 600px) {
+    .blog-post {
+        padding: 0 5%;
+    }
+}
+@media (min-width: 900px) {
+    .blog-post {
+        padding: 0 10%;
+    }
+}
+@media (min-width: 1000px) {
+    .blog-post {
+        padding: 0 25%;
+    }
+}
+</style><main class="blog-post"><h1 id="blog-title">Making bsqr</h1><div>October 26, 2019</div><p>Sometimes I have the thought <em>&quot;Damn, someone should make this into an
+<a href="https://www.npmjs.com/package/npx">npx</a> script&quot;</em> ... well, today I listened to that
+voice in my head! In the rest of this post I'll go over what this little utility is &amp; the thought
+process that went into creating it.</p>
+<h1 id="first%2C-bsqr%3A">First, <code>bsqr</code>:</h1>
+<p>It's a little script that combines <a href="https://browsersync.io/">BrowserSync</a> with
+<a href="https://github.com/gtanner/qrcode-terminal"><code>qrcode-terminal</code></a> — I'm definitely
+<a href="https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants">standing on the shoulders of
+giants</a> here,
+not reinventing the wheel. Still, I think it's a nifty utility because it solves
+one nagging issue I have with BrowserSync: the external URL should be a QR code!
+I almost always want to use the external URL on my phone and while <a href="https://support.apple.com/en-us/HT209460">Universal
+Clipboard</a> is nice when I'm working on
+my personal machines that won't cut it on my work machine!</p>
+<p>So, with that though in mind, I decided to make a utility that would:</p>
+<ol>
+<li>Get the same external URL BrowserSync is using</li>
+<li>Display the URL as a QR code</li>
+<li>Call BrowserSync like normal</li>
+</ol>
+<p>Here's a GIF of <a href="https://github.com/cwervo/bsqr"><code>bsqr</code></a> doing exactly that on
+my latop:</p>
+<p><img src="../../assets/images/making-bsqr/bsqr-documentaton-recording.gif" alt="Screen recording of bsqr in action"></p>
+<div class="caption">GIF of <code>bsqr</code> on desktop</div>
+<p>&amp; then on my phone:</p>
+<img src="../../assets/images/making-bsqr/bsqr-iphone.gif" alt="Screen recording of bsqr being scanned" style="max-width: 50%">
+<div class="caption">GIF of <code>bsqr</code> being scanned on an iPhone</div>
+<p>So what did it take to create?</p>
+<h1 id="how-i-got-the-idea">How I got the idea</h1>
+<p>I've known about BrowserSync for a long time but I didn't really appreciate
+how great it is until I started using <a href="https://www.11ty.io/">11ty</a> a lot!
+Whenever I'm working <a href="http://github.com/cwervo/cwervo.com">on this very
+website</a> I would see this:</p>
+<p><img src="../../assets/images/making-bsqr/cwervo-bs-recording.gif" alt="GIF recording of the terminal output showing BrowserSync URLs"></p>
+<div class="caption">See the BrowserSync output at the end? That's what inspired me!</div>
+<p>So my first thought was to go to the <a href="https://browsersync.io/docs/api">BrowserSync API
+docs</a> — sure enough, it's designed to be
+scripted as well as run from the command line 🎉!</p>
+<h2 id="writing-the-actual-script">Writing the actual script</h2>
+<h3 id="writing-step-1.">Writing step 1.</h3>
+<p>Here all I really did was paste &amp; modify a version of <a href="https://browsersync.io/docs/api">the docs API sample</a>:</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="highlight-line">#<span class="token operator">!</span><span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>env node</span><br><span class="highlight-line"><span class="token comment">// require the module as normal</span></span><br><span class="highlight-line"><span class="token keyword">let</span> bs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"browser-sync"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// .init starts the server</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span><br><span class="highlight-line">    server<span class="token punctuation">:</span> <span class="token string">"."</span> <span class="token comment">// NOTE: I use the current working directory instead of './app'</span></span><br><span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// Now call methods on bs instead of the</span></span><br><span class="highlight-line"><span class="token comment">// main browserSync module export</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// NOTE: Here I chose to reload everything</span></span></code></pre>
+<p>This got the basic BrowserSync features running, so yay!</p>
+<h3 id="next%2C-step-2.">Next, step 2.</h3>
+<p>The next easiest piece was pulling the other off-the-shelf dependency,
+<a href="https://github.com/gtanner/qrcode-terminal"><code>qrcode-terminal</code></a>, off the
+proverbial shelf like so:</p>
+<pre><code>#!/usr/bin/env node
+// require the module as normal
+let bs = require(&quot;browser-sync&quot;).create();
+let qrcode = require('qrcode-terminal');
+
+// .init starts the server
+bs.init({
+    server: &quot;.&quot;
+});
+
+/*
+ * NOTE: Here we're just adding a text QR code to prove it's possible
+ */
+qrcode.generate('lorem ipsum', {small: true});
+
+
+// Now call methods on bs instead of the
+// main browserSync module export
+bs.reload(&quot;*&quot;); // NOTE: Here I chose to reload everything`
+</code></pre>
+<p>This little script sure enough starts a <code>bs</code> server right after outputting the
+QR code for <code>lorem ipsum</code>:</p>
+<p><img src="../../assets/images/making-bsqr/lorem-ipsum-qr.png" alt="A screenshot of the lorem ipsum QR code in the terminal"></p>
+<div class="caption">This QR code is generated by the script above & encodes the
+words 'lorem ipsum'</div>
+<h3 id="last%2C-but-not-least%2C-step-3.">Last, but not least, step 3.</h3>
+<p>Finally, I knew I needed to fill in the QR code text with the actual external
+URL. I saved it for last because I was pretty sure this would take the most
+work 😬.</p>
+<p>There's <a href="https://www.browsersync.io/docs#external-url">a note on the docs page</a>
+about using &quot;a tool <em>like</em> <a href="https://github.com/shakyshane/dev-ip"><code>dev-ip</code></a>&quot; (italics mine) to
+find the correct IP address, which I thought was interesting but I ignored when
+I read it. The</p>
+<p>Finally, it turned out to be <a href="https://github.com/BrowserSync/browser-sync/blob/master/packages/browser-sync/lib/utils.ts#L29">this
+line</a>
+that shows you</p>
+<!-- Here is a footnote reference,[^1] and another.[^longnote] -->
+<!--  -->
+<!-- [^1]: Here is the footnote. -->
+<span><span class="date">◼️ October 26, 2019 </span><a href="https://twitter.com/acwervo">@acwervo</a></span></main><p><a href="/">← Home</a></p></body></html>
