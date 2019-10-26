@@ -121,17 +121,19 @@ figcaption {
 <a href="https://www.npmjs.com/package/npx">npx</a> script&quot;</em> ... well, today I listened to that
 voice in my head! In the rest of this post I'll go over what this little utility is &amp; the thought
 process that went into creating it.</p>
-<h1 id="first%2C-bsqr%3A">First, <code>bsqr</code>:</h1>
+<h2 id="first%2C-bsqr%3A">First, <code>bsqr</code>:</h2>
 <p>It's a little script that combines <a href="https://browsersync.io/">BrowserSync</a> with
 <a href="https://github.com/gtanner/qrcode-terminal"><code>qrcode-terminal</code></a> — I'm definitely
 <a href="https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants">standing on the shoulders of
 giants</a> here,
 not reinventing the wheel. Still, I think it's a nifty utility because it solves
-one nagging issue I have with BrowserSync: the external URL should be a QR code!
-I almost always want to use the external URL on my phone and while <a href="https://support.apple.com/en-us/HT209460">Universal
+one nagging issue I have with BrowserSync: the external URL should be
+represented a QR code!
+I almost always want to use the external URL on my phone as well. <a href="https://support.apple.com/en-us/HT209460">Universal
 Clipboard</a> is nice when I'm working on
-my personal machines that won't cut it on my work machine!</p>
-<p>So, with that though in mind, I decided to make a utility that would:</p>
+my personal machines but that won't cut it on my work machine where I'm not signed
+into iCloud.</p>
+<p>So, with that thought in mind, I decided to make a utility that would:</p>
 <ol>
 <li>Get the same external URL BrowserSync is using</li>
 <li>Display the URL as a QR code</li>
@@ -145,7 +147,7 @@ my latop:</p>
 <img src="../../assets/images/making-bsqr/bsqr-iphone.gif" alt="Screen recording of bsqr being scanned" style="max-width: 50%">
 <div class="caption">GIF of <code>bsqr</code> being scanned on an iPhone</div>
 <p>So what did it take to create?</p>
-<h1 id="how-i-got-the-idea">How I got the idea</h1>
+<h2 id="how-i-got-the-idea">How I got the idea</h2>
 <p>I've known about BrowserSync for a long time but I didn't really appreciate
 how great it is until I started using <a href="https://www.11ty.io/">11ty</a> a lot!
 Whenever I'm working <a href="http://github.com/cwervo/cwervo.com">on this very
@@ -161,11 +163,11 @@ scripted as well as run from the command line 🎉!</p>
 <pre class="language-javascript"><code class="language-javascript"><span class="highlight-line">#<span class="token operator">!</span><span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>env node</span><br><span class="highlight-line"><span class="token comment">// require the module as normal</span></span><br><span class="highlight-line"><span class="token keyword">let</span> bs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"browser-sync"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// .init starts the server</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span><br><span class="highlight-line">    server<span class="token punctuation">:</span> <span class="token string">"."</span> <span class="token comment">// NOTE: I use the current working directory instead of './app'</span></span><br><span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// Now call methods on bs instead of the</span></span><br><span class="highlight-line"><span class="token comment">// main browserSync module export</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// NOTE: Here I chose to reload everything</span></span></code></pre>
 <p>This got the basic BrowserSync features running, so yay!</p>
 <h3 id="next%2C-step-2.">Next, step 2.</h3>
-<p>The next easiest piece was pulling the other off-the-shelf dependency,
-<a href="https://github.com/gtanner/qrcode-terminal"><code>qrcode-terminal</code></a>, off the
+<p>The next easiest piece was taking the other off-the-shelf dependency —
+<a href="https://github.com/gtanner/qrcode-terminal"><code>qrcode-terminal</code></a> — off the
 proverbial shelf like so:</p>
 <pre class="language-javascript"><code class="language-javascript"><span class="highlight-line">#<span class="token operator">!</span><span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>env node</span><br><span class="highlight-line"><span class="token comment">// require the module as normal</span></span><br><span class="highlight-line"><span class="token keyword">let</span> bs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"browser-sync"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"><span class="token keyword">let</span> qrcode <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'qrcode-terminal'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// .init starts the server</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span><br><span class="highlight-line">    server<span class="token punctuation">:</span> <span class="token string">"."</span></span><br><span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="token comment">/*<br><span class="highlight-line"> * NOTE: Here we're just adding a text QR code to prove it's possible</span><br> */</span><br><span class="highlight-line">qrcode<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span><span class="token string">'lorem ipsum'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>small<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// Now call methods on bs instead of the</span></span><br><span class="highlight-line"><span class="token comment">// main browserSync module export</span></span><br><span class="highlight-line">bs<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// NOTE: Here I chose to reload everything`</span></span></code></pre>
-<p>This little script sure enough starts a <code>bs</code> server right after outputting the
+<p>This little script indeed starts a BrowserSync server right after outputting the
 QR code for <code>lorem ipsum</code>:</p>
 <p><img src="../../assets/images/making-bsqr/lorem-ipsum-qr.png" alt="A screenshot of the lorem ipsum QR code in the terminal"></p>
 <div class="caption">This QR code is generated by the script above & encodes the
@@ -178,8 +180,8 @@ work 😬.</p>
 about using &quot;a tool <em>like</em> <a href="https://github.com/shakyshane/dev-ip"><code>dev-ip</code></a>&quot; (italics mine) to
 find the correct IP address, which I thought was interesting but I ignored when
 I first read it.</p>
-<p>The first thing I did to figure out where <code>external</code> was coming from was to go
-clone the Browser Sync repo &amp; do a local
+<p>The first thing I actually did was try to figure out where <code>external</code> was coming
+from. I went clone the Browser Sync repo &amp; do a local
 <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> of the codebase of the
 <a href="https://github.com/BrowserSync/browser-sync/tree/92bf7d84894e9171ed8e313909d473bbd6c7368d/packages/browser-sync/lib"><code>browser-sync</code> lib
 directory</a>.</p>

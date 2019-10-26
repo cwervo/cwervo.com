@@ -2,7 +2,6 @@
 title: Making bsqr
 date: "2019-10-26"
 syntaxHighlighting: true
-draft: true
 ---
 
 Sometimes I have the thought _"Damn, someone should make this into an
@@ -10,19 +9,21 @@ Sometimes I have the thought _"Damn, someone should make this into an
 voice in my head! In the rest of this post I'll go over what this little utility is & the thought
 process that went into creating it.
 
-# First, `bsqr`:
+## First, `bsqr`:
 
 It's a little script that combines [BrowserSync](https://browsersync.io/) with
 [`qrcode-terminal`](https://github.com/gtanner/qrcode-terminal) — I'm definitely
 [standing on the shoulders of
 giants](https://en.wikipedia.org/wiki/Standing_on_the_shoulders_of_giants) here,
 not reinventing the wheel. Still, I think it's a nifty utility because it solves
-one nagging issue I have with BrowserSync: the external URL should be a QR code!
-I almost always want to use the external URL on my phone and while [Universal
+one nagging issue I have with BrowserSync: the external URL should be
+represented a QR code!
+I almost always want to use the external URL on my phone as well. [Universal
 Clipboard](https://support.apple.com/en-us/HT209460) is nice when I'm working on
-my personal machines that won't cut it on my work machine!
+my personal machines but that won't cut it on my work machine where I'm not signed
+into iCloud.
 
-So, with that though in mind, I decided to make a utility that would:
+So, with that thought in mind, I decided to make a utility that would:
 
 1. Get the same external URL BrowserSync is using
 2. Display the URL as a QR code
@@ -41,7 +42,7 @@ my latop:
 
 So what did it take to create?
 
-# How I got the idea
+## How I got the idea
 
 I've known about BrowserSync for a long time but I didn't really appreciate
 how great it is until I started using [11ty](https://www.11ty.io/) a lot!
@@ -80,8 +81,8 @@ This got the basic BrowserSync features running, so yay!
 
 ### Next, step 2.
 
-The next easiest piece was pulling the other off-the-shelf dependency,
-[`qrcode-terminal`](https://github.com/gtanner/qrcode-terminal), off the
+The next easiest piece was taking the other off-the-shelf dependency —
+[`qrcode-terminal`](https://github.com/gtanner/qrcode-terminal) — off the
 proverbial shelf like so:
 
 ```javascript
@@ -106,7 +107,7 @@ qrcode.generate('lorem ipsum', {small: true});
 bs.reload("*"); // NOTE: Here I chose to reload everything`
 ```
 
-This little script sure enough starts a `bs` server right after outputting the
+This little script indeed starts a BrowserSync server right after outputting the
 QR code for `lorem ipsum`:
 
 ![A screenshot of the lorem ipsum QR code in the terminal](../../assets/images/making-bsqr/lorem-ipsum-qr.png)
@@ -124,8 +125,8 @@ about using "a tool _like_ [`dev-ip`](https://github.com/shakyshane/dev-ip)" (it
 find the correct IP address, which I thought was interesting but I ignored when
 I first read it.
 
-The first thing I did to figure out where `external` was coming from was to go
-clone the Browser Sync repo & do a local
+The first thing I actually did was try to figure out where `external` was coming
+from. I went clone the Browser Sync repo & do a local
 [ripgrep](https://github.com/BurntSushi/ripgrep) of the codebase of the
 [`browser-sync` lib
 directory](https://github.com/BrowserSync/browser-sync/tree/92bf7d84894e9171ed8e313909d473bbd6c7368d/packages/browser-sync/lib).
