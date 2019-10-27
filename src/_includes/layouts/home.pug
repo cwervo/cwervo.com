@@ -2,4 +2,36 @@
 layout: layouts/base.pug
 ---
 
+script.
+    function askDeviceMotion(funcArg) {
+    try {
+        if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function'){
+            DeviceMotionEvent.requestPermission().then(
+            response => {
+                alert(`Response: ${response}`)
+                if (response == 'granted') {
+                    grantedDeviceMotion(funcArg)
+                } else {
+                    alert('Device Motion permission not granted.')
+                }
+            })
+            .catch(console.error)
+        } else {
+            grantedDeviceMotion(funcArg)
+        }
+        } catch (oops) {
+            alert('Your device and application combination do not support device motion events.')
+        }
+    }
+
+    function grantedDeviceMotion(funcArg) {
+        window.addEventListener(
+            'devicemotion',
+            funcArg,
+            false
+        );
+    }
+
 main !{content}
+
+a(href='#' style="color: white; border-radius: 4px; border: 1px solid black; margin-top: 1vh;" onclick='askDeviceMotion(() => console.log("hello"))') Click me to turn on DeviceOrientation

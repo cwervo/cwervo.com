@@ -79,13 +79,41 @@ nav > ul > li:not(:last-child) {
 ::selection {
     background: #2EAFAC;
 }
-</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><main><div id="container" style="position: fixed; top: 0; left: 0; height: 100%; width: 100%; z-index: -1;"></div><style>#hello {
+</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><script>function askDeviceMotion(funcArg) {
+try {
+    if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function'){
+        DeviceMotionEvent.requestPermission().then(
+        response => {
+            alert(`Response: ${response}`)
+            if (response == 'granted') {
+                grantedDeviceMotion(funcArg)
+            } else {
+                alert('Device Motion permission not granted.')
+            }
+        })
+        .catch(console.error)
+    } else {
+        grantedDeviceMotion(funcArg)
+    }
+    } catch (oops) {
+        alert('Your device and application combination do not support device motion events.')
+    }
+}
+
+function grantedDeviceMotion(funcArg) {
+    window.addEventListener(
+        'devicemotion',
+        funcArg,
+        false
+    );
+}
+</script><main><div id="container" style="position: fixed; top: 0; left: 0; height: 100%; width: 100%; z-index: -1;"></div><style>#hello {
     font-size: 2rem;
 }
 
 @media (min-width: 600px) { #hello { font-size: 4rem; } }
 @media (min-width: 1000px) { #hello { font-size: 5rem; } }
-</style><div id="hello">👋🏼 I'm Andrés Cuervo. I work in augmented reality, computational art, and human computer interaction. I like games, short form science fiction, speculative design, watercolor painting, and a million other things.</div><script src="/assets/js/three-r107.min.js"></script><script>console.log("👋🏼")
+</style><div id="hello">👋🏼 I'm Andrés Cuervo. I work in augmented reality, computational art, and human computer interaction. I like games, short form science fiction, speculative design, watercolor painting, and a million other things.</div><script src="/assets/js/three-r107.min.js"></script><script>console.log("👋🏼");
 var container;
 var camera, scene, renderer;
 var uniforms, material, mesh;
@@ -180,4 +208,4 @@ window.addEventListener("deviceorientation", handleOrientation, true);
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     setContainerSize();
-}</script></main></body></html>
+}</script></main><a href="#" style="color: white; border-radius: 4px; border: 1px solid black; margin-top: 1vh;" onclick="askDeviceMotion(() =&gt; console.log(&quot;hello&quot;))">Click me to turn on DeviceOrientation</a></body></html>
