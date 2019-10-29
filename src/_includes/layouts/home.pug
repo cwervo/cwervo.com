@@ -3,16 +3,28 @@ layout: layouts/base.pug
 ---
 
 script.
+    /*
+    ?debug = flip debugging variable on
+    ?silent = if debugging IS on (e.g. ?debug,silent), silence the first alert
+    */
+    var urlParams = new URLSearchParams(window.location.search);
+    var debug = debug || urlParams.get('debug') != null;
+    if (debug && !urlParams.get('silent')) {
+        alert(`You're debugging :)`)
+    }
+    let hasDeviceMotion = !!(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function')
+    if (debug) alert(`hasDeviceMotion : ${hasDeviceMotion}`,)
+
     function askDeviceMotion(funcArg) {
     try {
         if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function'){
             DeviceMotionEvent.requestPermission().then(
             response => {
-                alert(`Response: ${response}`)
+                if (debug) alert(`Response: ${response}`)
                 if (response == 'granted') {
                     grantedDeviceMotion(funcArg)
                 } else {
-                    alert('Device Motion permission not granted.')
+                    if (debug) alert('Device Motion permission not granted.')
                 }
             })
             .catch(console.error)
@@ -31,7 +43,18 @@ script.
             false
         );
     }
+    if (debug) alert(`checking ${hasDeviceMotion}`);
 
 main !{content}
 
-a(href='#' style="color: white; border-radius: 4px; border: 1px solid black; margin-top: 1vh;" onclick='askDeviceMotion(() => console.log("hello"))') Click me to turn on DeviceOrientation
+script.
+    if (hasDeviceMotion) {
+        if (debug) alert('appending?')
+        let orientationButton = document.createElement('button')
+        orientationButton.setAttribute("href", "#")
+        orientationButton.setAttribute("style", "background-image: linear-gradient(to bottom, rgba(0,0,0,0), #2EAFACA0); border-radius: 6px; margin-top: 1vh; font-size: 1.25rem;")
+        orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('hello'))")
+        orientationButton.innerHTML = "Click me to use your device's rotation & change the background colors\!"
+        document.querySelector('main').appendChild(orientationButton)
+        if (debug) alert('appended')
+    }

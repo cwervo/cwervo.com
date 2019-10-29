@@ -79,16 +79,28 @@ nav > ul > li:not(:last-child) {
 ::selection {
     background: #2EAFAC;
 }
-</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><script>function askDeviceMotion(funcArg) {
+</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: #FFFFFF;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="https://meet.cwervo.com/">Coffee☕️</a></li></ul></nav><br><script>/*
+?debug = flip debugging variable on
+?silent = if debugging IS on (e.g. ?debug,silent), silence the first alert
+*/
+var urlParams = new URLSearchParams(window.location.search);
+var debug = debug || urlParams.get('debug') != null;
+if (debug && !urlParams.get('silent')) {
+    alert(`You're debugging :)`)
+}
+let hasDeviceMotion = !!(DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function')
+if (debug) alert(`hasDeviceMotion : ${hasDeviceMotion}`,)
+
+function askDeviceMotion(funcArg) {
 try {
     if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function'){
         DeviceMotionEvent.requestPermission().then(
         response => {
-            alert(`Response: ${response}`)
+            if (debug) alert(`Response: ${response}`)
             if (response == 'granted') {
                 grantedDeviceMotion(funcArg)
             } else {
-                alert('Device Motion permission not granted.')
+                if (debug) alert('Device Motion permission not granted.')
             }
         })
         .catch(console.error)
@@ -107,6 +119,7 @@ function grantedDeviceMotion(funcArg) {
         false
     );
 }
+if (debug) alert(`checking ${hasDeviceMotion}`);
 </script><main><div id="container" style="position: fixed; top: 0; left: 0; height: 100%; width: 100%; z-index: -1;"></div><style>#hello {
     font-size: 2rem;
 }
@@ -208,4 +221,13 @@ window.addEventListener("deviceorientation", handleOrientation, true);
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     setContainerSize();
-}</script></main><a href="#" style="color: white; border-radius: 4px; border: 1px solid black; margin-top: 1vh;" onclick="askDeviceMotion(() =&gt; console.log(&quot;hello&quot;))">Click me to turn on DeviceOrientation</a></body></html>
+}</script></main><script>if (hasDeviceMotion) {
+    if (debug) alert('appending?')
+    let orientationButton = document.createElement('button')
+    orientationButton.setAttribute("href", "#")
+    orientationButton.setAttribute("style", "background-image: linear-gradient(to bottom, rgba(0,0,0,0), #2EAFACA0); border-radius: 6px; margin-top: 1vh; font-size: 1.25rem;")
+    orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('hello'))")
+    orientationButton.innerHTML = "Click me to use your device's rotation & change the background colors\!"
+    document.querySelector('main').appendChild(orientationButton)
+    if (debug) alert('appended')
+}</script></body></html>
