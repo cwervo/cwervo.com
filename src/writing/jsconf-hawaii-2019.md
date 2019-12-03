@@ -1,7 +1,6 @@
 ---
 title: Reflections on JSConf Hawai'i 2019
-date: "2019-12-02"
-draft: true
+date: "2019-12-04"
 ---
 
 [[toc]]
@@ -31,6 +30,13 @@ that solidified my passion for Web XR (more on that later).
 
 ## Miscellaneous good things
 
+The badges were dope:
+
+![Picture of me holding up a badge](/assets/images/reflections-on-jsconf-HI-2019/badge.jpg)
+<div class="caption">
+Me holding up the badge
+</div>
+
 Oh, and also, there was this:
 
 ![Picture of a person holding ice cream but everything is made out of particles
@@ -44,13 +50,6 @@ an indoor tree.
 
 </div>
 
-& the badges were dope:
-
-![Picture of me holding up a badge](/assets/images/reflections-on-jsconf-HI-2019/badge.jpg)
-<div class="caption">
-Me holding up the badge
-</div>
-
 There were these wild albino pigeons (I think that's what they were? If not let me know!):
 
 ![](/assets/images/reflections-on-jsconf-HI-2019/albino-pigeon.png)
@@ -58,13 +57,28 @@ There were these wild albino pigeons (I think that's what they were? If not let 
 
 ---
 
+# My talk at JSConf Hawai'i
+
 The talk I went to Hawai'i to give was "The Immersive Web in 2019":
 
 <iframe style="height: 300px; width: 100%; display: block; margin: auto; " src="https://www.youtube.com/embed/i8iylI6JDmc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The talk stressed me out for months because I gave it such a grandiose name but in the end 
+The talk stressed me out for months because I gave it such a grandiose name but
+in the end I'm happy with how it came out! People came up to me afterward & said
+they actually learned some new things & a couple people even said they'd give
+WebVR a try in their free time! So much has changed in the 10 months since I
+gave that talk that it's not worth summarizing here, but if you're interested
+in a high level overview of all the ways to use WebXR in 2019 do give the talk
+above a watch & feel free to [email or DM me](https://cwervo.com/contact/) if
+you have questions!
 
 ---
+
+I'll be at JSConf 2020 as an attendee & I'm (surprisingly!) relieved my talk proposal
+didn't get accepted because I'm excited to experience Hawai'i & JSConf HI
+without the stress of giving a talk. If you're going next year too let me know!
+
+⚡️🌺⚡️
 
 ![A grid featuring photos of flamingos in a reflective blue-green pool
 surrounded by nature and me and Thais Laney eating frozen
