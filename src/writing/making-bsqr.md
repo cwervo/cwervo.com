@@ -2,6 +2,7 @@
 title: Making bsqr
 date: "2019-10-26"
 syntaxHighlighting: true
+draft: true
 ---
 
 Sometimes I have the thought _"Damn, someone should make this into an
