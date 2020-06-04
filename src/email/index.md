@@ -5,14 +5,15 @@ layout: layouts/base.pug
 
 # 👋🏼
 
-Sign up for my email newsletter **Crow Party** for occasional* updates about:
+Sign up for my email newsletter **Corvidae** for occasional* updates about:
 
-- web XR things
-- my weird art stuff
-- my open source work
-- random musings
+- random musings, mostly
+- maybe:
+    - Web XR things
+    - my weird art stuff
+    - my open source work
 
-*: How occassional? Monthly, optimisitically! Definitely no more than twice a week though.
+*: How occassional? Monthly, optimisitically! _Definitely no more weekly though._
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
