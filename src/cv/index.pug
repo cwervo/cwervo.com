@@ -19,19 +19,17 @@ h2.header Experience
 each key in Object.keys(workData)
     - var data = workData[key]
     h3.jobHeader #{key}
-    div.jobTitle #{data.jobTitle} (#{getDayAndMonth(data.startDate)}—#{getDayAndMonth(data.endDate)})
-    ul.description
+    div.jobTitle.pad-above #{data.jobTitle} (#{getDayAndMonth(data.startDate)}—#{getDayAndMonth(data.endDate)})
+    ul.description.margin-above
         each sentence in data.description
-            li #{sentence}
+            li!= sentence
 
 h2.header Skills
 div
     span.bold Programming languages & frameworks: 
     | C++ (OpenFrameworks), Javascript (ES6, React, Three.js, A-FrameVR, ReactVR), Clojure & ClojureScript (Om, Om.Next, Reagent, Rum), Rust (nannou), C# (Unity), Python, Ruby, C, Java
 
-.page-break
-
-div.after-page-break
+div
     span.bold Teaching: 
     | Have taught middle & high school math & programming. Led & created curriculum for workshops teaching programmers, interface designers, & new media artists.
 

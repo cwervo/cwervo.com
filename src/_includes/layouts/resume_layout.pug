@@ -22,12 +22,12 @@ html(lang="en")
                 margin-bottom: 0;
             }
             .jobHeader {
-                margin-top: 0.5em;
-                margin-bottom: 0;
+                margin-top: 0.1in;
+                margin-bottom: -0.1in;
             }
             .jobTitle {
-                margin-top: 0.25%;
-                margin-bottom: 0.5%;
+                margin-top: 0in;
+                margin-bottom: -0.1in;
             }
             ul {
                 list-style-type: circle;
@@ -40,9 +40,8 @@ html(lang="en")
             @media print {
                 @page {
                     size: auto;
-                    margin: 0;
+                    margin: 0.1in;
                 }
-                .page-break { display: block; page-break-before: always; }
                 html {
                     background-color: #FFFFFF;
                     /*
@@ -53,6 +52,8 @@ html(lang="en")
                 }
             }
             .bold { font-weight: bold; }
-            .after-page-break { padding-top: 1in; }
+            .debug-style { outline: 1px dashed red; }
+            .margin-above { margin-top: 0.1in; }
+            .pad-above { margin-top: 0.1in; }
     body
         | !{content}
