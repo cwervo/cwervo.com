@@ -80,7 +80,7 @@ nav > ul > li:not(:last-child) {
 ::selection {
     background: #2EAFAC;
 }
-</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="font-family: sans-serif; color: black; background-color: aliceblue;"><nav style="display: block; width: 100%; font-size: 1.25rem;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="/email">Email 💌</a></li></ul></nav><br><script>/*
+</style></head><link rel="stylesheet" href="/main.css"><!-- Colors from: http://clrs.cc/a11y/--><body style="color: black; background-color: aliceblue;"><nav style="display: block; width: 100%; font-size: 2em;"><ul id="navList" style="list-style-type: none; padding-left: 0;"><li class="navItem" id="logo"><a href="/"><img id="logoImg" src="/assets/images/favicon.png" alt="small-logo"></a></li><li class="navItem"><a href="/">Home</a></li><li class="navItem"><a href="/writing">Writing</a></li><li class="navItem"><a href="/projects">Projects</a></li><li class="navItem"><a href="/speaking">Speaking</a></li><li class="navItem"><a href="/contact">Contact</a></li><li class="navItem"><a href="/email">Email 💌</a></li></ul></nav><br><script>/*
 ?debug = flip debugging variable on
 ?silent = if debugging IS on (e.g. ?debug,silent), silence the first alert
 */
@@ -229,9 +229,9 @@ function onWindowResize(){
     if (debug) alert('appending?')
     let orientationButton = document.createElement('button')
     orientationButton.setAttribute("href", "#")
-    orientationButton.setAttribute("style", "background-image: linear-gradient(to bottom, rgba(0,0,0,0), #2EAFACA0); border-radius: 6px; margin-top: 1vh; font-size: 1.25rem;")
-    orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('hello'))")
-    orientationButton.innerHTML = "Click me to use your device's rotation & change the background colors\!"
+    orientationButton.setAttribute("style", "color: white; background-color: midnightblue; outline: 3px groove midnightblue; margin: 20px;  border-radius: 12px; font-size: 1.25rem;")
+    orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('yay, motion'))")
+    orientationButton.innerHTML = "Click me to let the website use your phone's orientation to change the background colors"
     document.querySelector('main').appendChild(orientationButton)
     if (debug) alert('appended')
 }</script></body></html>

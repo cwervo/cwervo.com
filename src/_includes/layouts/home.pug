@@ -52,9 +52,9 @@ script.
         if (debug) alert('appending?')
         let orientationButton = document.createElement('button')
         orientationButton.setAttribute("href", "#")
-        orientationButton.setAttribute("style", "background-image: linear-gradient(to bottom, rgba(0,0,0,0), #2EAFACA0); border-radius: 6px; margin-top: 1vh; font-size: 1.25rem;")
-        orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('hello'))")
-        orientationButton.innerHTML = "Click me to use your device's rotation & change the background colors\!"
+        orientationButton.setAttribute("style", "color: white; background-color: midnightblue; outline: 3px groove midnightblue; margin: 20px;  border-radius: 12px; font-size: 1.25rem;")
+        orientationButton.setAttribute("onclick", "askDeviceMotion(() => console.log('yay, motion'))")
+        orientationButton.innerHTML = "Click me to let the website use your phone's orientation to change the background colors"
         document.querySelector('main').appendChild(orientationButton)
         if (debug) alert('appended')
     }
