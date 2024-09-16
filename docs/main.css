@@ -10,6 +10,17 @@ blockquote {
     padding-left: 1em;
     font-style: italic;
 }
+
+a {
+    border-radius: 6px;
+    padding: 0.25%;
+}
+
+img, model-viewer {
+    border-radius: 6px;
+    box-shadow: 4pt 4pt 20px 5px; 
+}
+
 /* blockquote p::before { */
 /*     content: '“'; */
 /*     font-size: 2em; */
