@@ -2,8 +2,12 @@
 set -Eeuo pipefail
 
 script_name="$0"
-script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-script_repo_dir="$(cd -- "$script_dir/.." && pwd)"
+script_path="${BASH_SOURCE[0]-}"
+script_repo_dir="$(pwd -P)"
+if [[ -n "$script_path" && -f "$script_path" ]]; then
+  script_dir="$(cd -- "$(dirname -- "$script_path")" && pwd)"
+  script_repo_dir="$(cd -- "$script_dir/.." && pwd)"
+fi
 
 folk_user="folk"
 repo_dir=""
@@ -924,4 +928,3 @@ fi
 if [[ "$install_printer" -eq 1 ]]; then
   log "CUPS web UI is available locally on the tabletop at http://localhost:631"
 fi
-
