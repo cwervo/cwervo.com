@@ -16,7 +16,7 @@ a {
     padding: 0.25%;
 }
 
-img, model-viewer {
+img:not(#logoImg), model-viewer {
     border-radius: 6px;
     box-shadow: 4pt 4pt 20px 5px; 
 }

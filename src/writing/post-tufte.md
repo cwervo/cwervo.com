@@ -1,6 +1,7 @@
 ---
 title: Post-Tufte Data Visualization
 date: "2025-05-02"
+draft: true
 ---
 
 
