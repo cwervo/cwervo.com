@@ -1,0 +1,144 @@
+---
+title: How to Use Your Custom Domain for Your Bluesky Handle
+date: "2024-02-22"
+---
+
+script(src="https://cdn.tailwindcss.com")
+link(rel="preconnect", href="https://fonts.googleapis.com")
+link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap", rel="stylesheet")
+style.
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .domain-placeholder {
+        transition: background-color 0.2s ease-in-out;
+    }
+
+div.container.mx-auto.max-w-3xl.p-4.sm:p-6.md:p-8
+    header.text-center.mb-8
+        h1.text-3xl.sm:text-4xl.font-bold.text-white.mb-2 Use Your Domain as a Bluesky Handle
+        p.text-blue-400 An interactive guide to setting up your personal domain.
+
+    section.mb-10
+        label.block.text-lg.font-medium.text-white.mb-2(for="domainInput") Enter Your Domain
+        input#domainInput.w-full.px-4.py-3.bg-gray-800.border.border-gray-700.rounded-lg.text-white.placeholder-gray-500.focus:outline-none.focus:ring-2.focus:ring-blue-500.focus:border-blue-500.transition(type="text", placeholder="e.g., cwervo.com")
+        p.text-sm.text-gray-500.mt-2 Start typing to see the tutorial update in real-time.
+
+    div.space-y-8
+        div.bg-gray-800/50.p-6.rounded-xl.border.border-gray-700/50
+            h2.text-2xl.font-bold.text-white.mb-4.flex.items-center
+                span.bg-blue-600.text-white.w-8.h-8.rounded-full.flex.items-center.justify-center.font-bold.mr-4 1
+                | Change Your Handle in Bluesky
+            p.mb-4 Go to your Bluesky settings, click "Change Handle", and choose the "I have my own domain" option. Enter your domain name there:
+            div.bg-gray-900.p-3.rounded-lg.text-center.font-mono.text-lg.text-blue-300.break-all
+                span.domain-placeholder cwervo.com
+            p.mt-4.text-sm.text-gray-400 Bluesky will then provide you with the specific values you need for the next step. For this guide, we'll use the standard values.
+
+        div.bg-gray-800/50.p-6.rounded-xl.border.border-gray-700/50
+            h2.text-2xl.font-bold.text-white.mb-4.flex.items-center
+                span.bg-blue-600.text-white.w-8.h-8.rounded-full.flex.items-center.justify-center.font-bold.mr-4 2
+                | Configure Your DNS Records
+            p.mb-6 Log in to your domain provider (e.g., GoDaddy, Namecheap, Cloudflare) and find the DNS settings. You need to create a new
+                code.bg-gray-700.text-gray-200.px-1.5.py-0.5.rounded-md TXT
+                |  record with the following details:
+
+            div.space-y-4
+                div
+                    label.block.text-sm.font-medium.text-gray-400.mb-1 Host / Name
+                    div.flex.items-center.bg-gray-900.p-3.rounded-lg.font-mono.text-green-400
+                        span#hostValue.flex-grow.break-all _atproto.
+                            span.domain-placeholder cwervo.com
+                        button.copy-btn.ml-4.px-3.py-1.bg-gray-700.text-white.text-xs.font-semibold.rounded-md.hover:bg-gray-600.transition Copy
+                div
+                    label.block.text-sm.font-medium.text-gray-400.mb-1 Value / Content
+                    div.flex.items-center.bg-gray-900.p-3.rounded-lg.font-mono.text-green-400
+                        span#didValue.flex-grow.break-all did=did:plc:***
+                        button.copy-btn.ml-4.px-3.py-1.bg-gray-700.text-white.text-xs.font-semibold.rounded-md.hover:bg-gray-600.transition Copy
+                    p.text-xs.text-gray-500.mt-2 Note: Replace
+                        code.text-gray-400 did:plc:***
+                        |  with the actual "did" value provided to you by Bluesky in your settings.
+
+        div.bg-gray-800/50.p-6.rounded-xl.border.border-gray-700/50
+            h2.text-2xl.font-bold.text-white.mb-4.flex.items-center
+                span.bg-blue-600.text-white.w-8.h-8.rounded-full.flex.items-center.justify-center.font-bold.mr-4 3
+                | Verify and Wait
+            p.mb-4 After saving the DNS record, go back to Bluesky and click the "Verify DNS Record" button. It can sometimes take a few minutes (or longer, in rare cases) for DNS changes to propagate across the internet.
+            p Once verified, your handle will be
+                code.bg-gray-700.text-gray-200.px-1.5.py-0.5.rounded-md.font-mono @
+                    span.domain-placeholder cwervo.com
+                | !
+
+    footer.text-center.mt-12.text-gray-600.text-sm
+        p This is an unofficial guide. Always follow the specific instructions provided within the Bluesky app.
+
+script.
+    document.addEventListener('DOMContentLoaded', () => {
+        const domainInput = document.getElementById('domainInput');
+        const domainPlaceholders = document.querySelectorAll('.domain-placeholder');
+        const hostValueSpan = document.getElementById('hostValue');
+        const copyButtons = document.querySelectorAll('.copy-btn');
+
+        const defaultDomain = 'cwervo.com';
+
+        const updateDomainText = (domain) => {
+            const displayDomain = domain.trim() === '' ? defaultDomain : domain;
+
+            // Update all simple placeholders
+            domainPlaceholders.forEach(span => {
+                span.textContent = displayDomain;
+            });
+
+            // Specifically update the complex host value
+            hostValueSpan.innerHTML = `_atproto.<span class="domain-placeholder">${displayDomain}</span>`;
+
+            // Re-highlight the placeholders briefly on change
+            document.querySelectorAll('.domain-placeholder').forEach(el => {
+                el.classList.add('bg-blue-500', 'text-white');
+                setTimeout(() => {
+                    el.classList.remove('bg-blue-500', 'text-white');
+                }, 500);
+            });
+        };
+
+        // Initial setup
+        updateDomainText(defaultDomain);
+
+        // Event listener for input changes
+        domainInput.addEventListener('input', () => {
+            updateDomainText(domainInput.value);
+        });
+
+        // Copy functionality
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const textToCopy = button.previousElementSibling.textContent;
+
+                // A fallback for document.execCommand for older browsers or restricted environments
+                const unsecuredCopyToClipboard = (text) => {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                    } catch (err) {
+                        console.error('Unable to copy to clipboard', err);
+                    }
+                    document.body.removeChild(textArea);
+                };
+
+                unsecuredCopyToClipboard(textToCopy);
+
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('bg-green-600');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-600');
+                }, 2000);
+            });
+        });
+    });
