@@ -24,19 +24,21 @@ script(src="/assets/js/three-r107.min.js")
 
 script.
     console.log("👋🏼");
-    var container;
-    var camera, scene, renderer;
-    var uniforms, material, mesh;
-    var mouseX = 0, mouseY = 0,
-    lat = 0, lon = 0, phy = 0, theta = 0;
-    var windowHalfX = window.innerWidth / 2;
-    var windowHalfY = window.innerHeight / 2;
-    init();
-    var startTime = Date.now();
-    animate();
-    function init() {
-        container = document.getElementById( 'container' );
-        camera = new THREE.Camera();
+
+    function startThreeJSAnimation() {
+        var container;
+        var camera, scene, renderer;
+        var uniforms, material, mesh;
+        var mouseX = 0, mouseY = 0,
+        lat = 0, lon = 0, phy = 0, theta = 0;
+        var windowHalfX = window.innerWidth / 2;
+        var windowHalfY = window.innerHeight / 2;
+        init();
+        var startTime = Date.now();
+        animate();
+        function init() {
+            container = document.getElementById( 'container' );
+            camera = new THREE.Camera();
         camera.position.z = 1;
         scene = new THREE.Scene();
         uniforms = {
@@ -97,25 +99,28 @@ script.
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
-    window.addEventListener( 'resize', onWindowResize, false );
+        window.addEventListener( 'resize', onWindowResize, false );
 
-    let hello = document.querySelector('#hello');
-    function handleOrientation(event) {
-        let {absolute, alpha, beta, gamma} = event;
-        // hello.innerText = `
-        //     abs: ${absolute}\n
-        //     alpha: ${alpha}\n
-        //     beta: ${beta}\n
-        //     gamma: ${gamma}
-        // `
-        // Smoother transitions w/ sin:
-        uniforms.u_mouse.value.x = uniforms.u_resolution.value.x * Math.sin(alpha * 0.025); // 0.00277 ≅ 1 / 360
-        uniforms.u_mouse.value.y = uniforms.u_resolution.value.y * Math.sin(beta * 0.025); // 0.00277 ≅ 1 / 360
+        let hello = document.querySelector('#hello');
+        function handleOrientation(event) {
+            let {absolute, alpha, beta, gamma} = event;
+            // hello.innerText = `
+            //     abs: ${absolute}\n
+            //     alpha: ${alpha}\n
+            //     beta: ${beta}\n
+            //     gamma: ${gamma}
+            // `
+            // Smoother transitions w/ sin:
+            uniforms.u_mouse.value.x = uniforms.u_resolution.value.x * Math.sin(alpha * 0.025); // 0.00277 ≅ 1 / 360
+            uniforms.u_mouse.value.y = uniforms.u_resolution.value.y * Math.sin(beta * 0.025); // 0.00277 ≅ 1 / 360
+        }
+
+        window.addEventListener("deviceorientation", handleOrientation, true);
+
+        function onWindowResize(){
+            camera.aspect = window.innerWidth / window.innerHeight;
+            setContainerSize();
+        }
     }
 
-    window.addEventListener("deviceorientation", handleOrientation, true);
-
-    function onWindowResize(){
-        camera.aspect = window.innerWidth / window.innerHeight;
-        setContainerSize();
-    }
+    window.addEventListener('DOMContentLoaded', startThreeJSAnimation);
