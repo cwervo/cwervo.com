@@ -62,19 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
         }
     }
 
-    $ranked = rr_rank_candidates($allowedCandidates, $profile, [], 12);
+    $ranked = rr_rank_candidates($allowedCandidates, $profile, $clientHints, 12);
     $rankedCandidatesById = [];
     foreach ($ranked as $entry) {
         $rankedCandidatesById[(string) $entry['candidate']['id']] = $entry;
     }
 
+    $topEntry = $ranked[0] ?? null;
     $selectedEntry = $rankedCandidatesById[$selectedId] ?? null;
+    if ($selectedEntry === null || $topEntry === null || (string) $selectedEntry['candidate']['id'] !== (string) $topEntry['candidate']['id']) {
+        $selectedEntry = $topEntry;
+    }
     $selectedCandidate = $selectedEntry['candidate'] ?? null;
     $selectedScores = $selectedEntry['scores'] ?? null;
-    if ($selectedScores !== null) {
-        $selectedScores['client'] = $clientHints[$selectedId] ?? 0.0;
-        $selectedScores['total'] = round(((float) $selectedScores['total']) + ((float) $selectedScores['client']), 3);
-    }
     if ($selectedCandidate === null && $ranked !== []) {
         $selectedCandidate = $ranked[0]['candidate'];
         $selectedScores = $ranked[0]['scores'];
@@ -133,7 +133,21 @@ if ($todayEntry === null && $ranked !== []) {
 
 $selectedCandidate = $todayEntry ? rr_find_candidate_by_id($candidates, (string) $todayEntry['candidate_id']) : null;
 $profileForClient = rr_sanitize_profile_for_client($profile);
-$topCandidates = array_map(static fn(array $entry): array => ['candidate' => $entry['candidate'], 'scores' => $entry['scores']], $ranked);
+$topCandidates = [];
+if ($todayEntry !== null && empty($todayEntry['personalized']) && !empty($todayEntry['top_candidates'])) {
+    foreach ($todayEntry['top_candidates'] as $candidateId) {
+        $candidate = rr_find_candidate_by_id($candidates, (string) $candidateId);
+        if ($candidate === null) {
+            continue;
+        }
+        $topCandidates[] = [
+            'candidate' => $candidate,
+            'scores' => rr_score_candidate($candidate, $profile, []),
+        ];
+    }
+} else {
+    $topCandidates = array_map(static fn(array $entry): array => ['candidate' => $entry['candidate'], 'scores' => $entry['scores']], $ranked);
+}
 
 ob_start();
 ?>

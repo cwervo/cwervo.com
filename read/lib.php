@@ -413,7 +413,7 @@ function rr_csrf_token(): string
             'expires' => time() + 86400 * 30,
             'path' => '/read/',
             'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
-            'httponly' => false,
+            'httponly' => true,
             'samesite' => 'Strict',
         ]);
         $_COOKIE[$cookieName] = $token;
