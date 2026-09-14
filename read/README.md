@@ -21,7 +21,7 @@ This feature is dependency-free PHP and can run on any host with PHP 8.1+ and wr
    - `read/store/devices/`
 3. Visit `/read/` or `/read/index.php`.
 
-> GitHub Pages can store these files, but it **cannot execute PHP**. Use a PHP host for the live recommender.
+> GitHub Pages is not suitable for this feature: it cannot execute PHP and it also cannot persist the runtime JSON/device state under `read/store/`. Use a PHP host with writable local storage for the live recommender.
 
 ## Running the fetch step
 

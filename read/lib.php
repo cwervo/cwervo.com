@@ -71,8 +71,13 @@ function rr_write_json(string $path, mixed $data): bool
         return false;
     }
 
-    $tmpPath = $path . '.tmp';
+    $tmpPath = tempnam($dir, basename($path) . '.tmp-');
+    if ($tmpPath === false) {
+        return false;
+    }
+
     if (@file_put_contents($tmpPath, $encoded . PHP_EOL, LOCK_EX) === false) {
+        @unlink($tmpPath);
         return false;
     }
 

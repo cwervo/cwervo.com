@@ -46,10 +46,11 @@ function fallbackScorer(profile) {
 }
 
 async function loadScorer(profile) {
+  const wasmUrl = new URL('./scorer.wasm', import.meta.url);
   // TODO: Replace this stub with a tiny compiled WASM scorer if/when the hosting
   // target can reliably serve `application/wasm`. The interface is already wired.
   try {
-    const response = await fetch('wasm/scorer.wasm', { cache: 'no-store' });
+    const response = await fetch(wasmUrl, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`WASM unavailable: ${response.status}`);
     }

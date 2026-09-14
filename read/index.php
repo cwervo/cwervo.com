@@ -29,10 +29,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
         exit;
     }
 
-    $clientHintsRaw = json_decode((string) ($_POST['client_scores_json'] ?? '{}'), true);
-    $clientHints = is_array($clientHintsRaw) ? $clientHintsRaw : [];
     $selectedId = (string) ($_POST['selected_id'] ?? '');
-    $ranked = rr_rank_candidates($candidates, $profile, $clientHints, 12);
+    $allowedIds = [];
+    foreach (($existing['top_candidates'] ?? []) as $candidateId) {
+        $allowedIds[(string) $candidateId] = true;
+    }
+    if ($allowedIds === []) {
+        foreach (rr_rank_candidates($candidates, $profile, [], 12) as $entry) {
+            $allowedIds[(string) $entry['candidate']['id']] = true;
+        }
+    }
+
+    $allowedCandidates = array_values(array_filter($candidates, static function (array $candidate) use ($allowedIds): bool {
+        return isset($allowedIds[(string) ($candidate['id'] ?? '')]);
+    }));
+
+    $clientHintsRaw = json_decode((string) ($_POST['client_scores_json'] ?? '{}'), true);
+    $clientHints = [];
+    if (is_array($clientHintsRaw)) {
+        foreach ($clientHintsRaw as $candidateId => $score) {
+            if (!isset($allowedIds[(string) $candidateId]) || !is_numeric($score)) {
+                continue;
+            }
+            $clientHints[(string) $candidateId] = max(-3.0, min(3.0, (float) $score));
+        }
+    }
+
+    $ranked = rr_rank_candidates($allowedCandidates, $profile, $clientHints, 12);
     $rankedCandidatesById = [];
     foreach ($ranked as $entry) {
         $rankedCandidatesById[(string) $entry['candidate']['id']] = $entry;
