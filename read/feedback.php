@@ -19,6 +19,7 @@ $suggestion = $latestEntry ? rr_find_candidate_by_id($candidates, (string) $late
 $message = null;
 $error = null;
 $existingFeedback = rr_feedback_entry_for_date($profile, $today);
+$csrfToken = rr_csrf_token();
 
 if ($suggestion !== null) {
     $question = rr_question_for_today($profile, $suggestion);
@@ -26,22 +27,26 @@ if ($suggestion !== null) {
         $question = rr_question_by_key($suggestion, (string) ($existingFeedback['question_key'] ?? '')) ?? $question;
         $message = 'You already answered today’s follow-up for this device. Come back tomorrow for the next question.';
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $answer = (string) ($_POST['answer'] ?? '');
-        if (!array_key_exists($answer, $question['options'])) {
-            $error = 'Please choose one of the available answers.';
+        if (!rr_verify_csrf_token($_POST['csrf_token'] ?? null)) {
+            $error = 'Your session token is missing or expired. Reload and try again.';
         } else {
-            $profile = rr_apply_feedback($profile, $suggestion, $question['key'], $answer);
-            $profile['feedback'][$today] = [
-                'date' => $today,
-                'candidate_id' => $suggestion['id'],
-                'question_key' => $question['key'],
-                'answer' => $answer,
-                'topics' => $suggestion['topics'],
-                'recorded_at' => rr_now_iso(),
-            ];
-            rr_save_profile($profile);
-            $existingFeedback = $profile['feedback'][$today];
-            $message = 'Saved. Tomorrow’s ranking will reflect this answer.';
+        $answer = (string) ($_POST['answer'] ?? '');
+            if (!array_key_exists($answer, $question['options'])) {
+                $error = 'Please choose one of the available answers.';
+            } else {
+                $profile = rr_apply_feedback($profile, $suggestion, $question['key'], $answer);
+                $profile['feedback'][$today] = [
+                    'date' => $today,
+                    'candidate_id' => $suggestion['id'],
+                    'question_key' => $question['key'],
+                    'answer' => $answer,
+                    'topics' => $suggestion['topics'],
+                    'recorded_at' => rr_now_iso(),
+                ];
+                rr_save_profile($profile);
+                $existingFeedback = $profile['feedback'][$today];
+                $message = 'Saved. Tomorrow’s ranking will reflect this answer.';
+            }
         }
     }
 } else {
@@ -65,6 +70,7 @@ ob_start();
         <?php endif; ?>
         <?php if ($existingFeedback === null): ?>
             <form method="post">
+                <input type="hidden" name="csrf_token" value="<?= rr_h($csrfToken) ?>">
                 <fieldset>
                     <legend><?= rr_h($question['prompt']) ?></legend>
                     <?php foreach ($question['options'] as $value => $label): ?>

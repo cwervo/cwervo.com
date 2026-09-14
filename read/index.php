@@ -15,9 +15,16 @@ $profile = rr_load_profile($deviceHash);
 $candidatesPayload = rr_candidates_payload();
 $candidates = rr_dedupe_candidates($candidatesPayload['candidates']);
 $today = rr_today();
+$csrfToken = rr_csrf_token();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'finalize')) {
     header('Content-Type: application/json; charset=utf-8');
+
+    if (!rr_verify_csrf_token($_POST['csrf_token'] ?? null)) {
+        http_response_code(403);
+        echo json_encode(['ok' => false, 'error' => 'Invalid CSRF token.'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        exit;
+    }
 
     $existing = rr_history_entry_for_date($profile, $today);
     if (($existing['personalized'] ?? false) === true) {
@@ -172,7 +179,8 @@ window.READ_BOOTSTRAP = {
     todayEntry: <?= json_encode($todayEntry, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
     selectedCandidate: <?= json_encode($selectedCandidate, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
     topCandidates: <?= json_encode($topCandidates, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
-    profile: <?= json_encode($profileForClient, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+    profile: <?= json_encode($profileForClient, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
+    csrfToken: <?= json_encode($csrfToken, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 };
 </script>
 <script type="module" src="wasm/scorer-loader.js"></script>

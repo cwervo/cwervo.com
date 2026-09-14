@@ -62,7 +62,8 @@ async function loadScorer(profile) {
           const topicCount = Array.isArray(candidate.topics) ? candidate.topics.length : 0;
           const year = Number(candidate.year || 0);
           const base = Number(candidate.score_base || 0);
-          return Number(wasm.instance.exports.score_candidate(base, topicCount, year).toFixed(3));
+          const wasmScore = Number(wasm.instance.exports.score_candidate(base, topicCount, year));
+          return Number(wasmScore.toFixed(3));
         }
       };
     }
@@ -98,6 +99,7 @@ async function personalizeSelection() {
   formData.set('selected_id', selected.candidate.id);
   formData.set('client_scores_json', JSON.stringify(clientScores));
   formData.set('device_token', ensureDeviceToken());
+  formData.set('csrf_token', String(bootstrap.csrfToken || ''));
 
   try {
     const response = await fetch('index.php?action=finalize', {

@@ -399,6 +399,35 @@ function rr_device_profile_path(string $deviceHash): string
     return READ_DEVICE_DIR . '/' . $deviceHash . '.json';
 }
 
+function rr_csrf_token(): string
+{
+    $cookieName = 'cw_read_csrf';
+    $token = $_COOKIE[$cookieName] ?? '';
+    if (!is_string($token) || !preg_match('/^[a-f0-9]{64}$/', $token)) {
+        $token = bin2hex(random_bytes(32));
+        setcookie($cookieName, $token, [
+            'expires' => time() + 86400 * 30,
+            'path' => '/read/',
+            'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+            'httponly' => false,
+            'samesite' => 'Strict',
+        ]);
+        $_COOKIE[$cookieName] = $token;
+    }
+
+    return $token;
+}
+
+function rr_verify_csrf_token(?string $token): bool
+{
+    $cookieToken = $_COOKIE['cw_read_csrf'] ?? '';
+    return is_string($token)
+        && is_string($cookieToken)
+        && $token !== ''
+        && $cookieToken !== ''
+        && hash_equals($cookieToken, $token);
+}
+
 function rr_default_profile(string $deviceHash): array
 {
     return [
