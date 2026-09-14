@@ -108,13 +108,14 @@ A real `.wasm` module can be dropped into `read/wasm/scorer.wasm` later; the cur
 
 ## Security and privacy notes
 
-- The device identifier is a SHA-256 hash of stable browser signals plus an optional local token.
-- No IP address is used for device hashing.
+- The device identifier is a SHA-256 hash of a first-party local device token stored in `localStorage` and echoed back through a first-party cookie.
+- No IP address or third-party identifier is used for device hashing.
 - No third-party analytics or external personalization service is involved.
 - Template output is HTML-escaped on the PHP side.
 
 ## Limitations
 
-- GitHub Pages cannot execute PHP, so this feature needs a PHP host for live use.
+- GitHub Pages cannot execute PHP or persist writable JSON state, so this feature needs a PHP host with local write access for live use.
 - The current on-device scorer uses a WASM-ready interface with a deterministic JS fallback rather than a compiled production model.
+- Per-device persistence depends on first-party cookies and local storage being available.
 - Title-similarity deduplication is intentionally simple and conservative.

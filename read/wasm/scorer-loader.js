@@ -84,7 +84,7 @@ async function personalizeSelection() {
     const bonus = scorer.scoreCandidate(entry.candidate);
     return {
       candidate: entry.candidate,
-      score: bonus,
+      score: Number((Number(entry.scores.total || 0) + bonus).toFixed(3)),
       total: Number((Number(entry.scores.total || 0) + bonus).toFixed(3))
     };
   }).sort((a, b) => b.total - a.total);
@@ -96,9 +96,7 @@ async function personalizeSelection() {
 
   const clientScores = Object.fromEntries(scored.map((entry) => [entry.candidate.id, entry.score]));
   const formData = new URLSearchParams();
-  formData.set('selected_id', selected.candidate.id);
   formData.set('client_scores_json', JSON.stringify(clientScores));
-  formData.set('device_token', ensureDeviceToken());
   formData.set('csrf_token', String(bootstrap.csrfToken || ''));
 
   try {

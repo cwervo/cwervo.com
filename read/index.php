@@ -10,7 +10,7 @@ if (rr_device_token() === '' && $_SERVER['REQUEST_METHOD'] !== 'POST' && (($_GET
     rr_render_device_bootstrap('index.php?bootstrap=1');
 }
 
-$deviceHash = rr_device_hash();
+$deviceHash = rr_require_device_token();
 $profile = rr_load_profile($deviceHash);
 $candidatesPayload = rr_candidates_payload();
 $candidates = rr_dedupe_candidates($candidatesPayload['candidates']);
@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
         exit;
     }
 
-    $selectedId = (string) ($_POST['selected_id'] ?? '');
     $allowedIds = [];
     foreach (($existing['top_candidates'] ?? []) as $candidateId) {
         $allowedIds[(string) $candidateId] = true;
@@ -51,34 +50,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
         return isset($allowedIds[(string) ($candidate['id'] ?? '')]);
     }));
 
+    $baselineScoresById = [];
+    foreach ($allowedCandidates as $candidate) {
+        $baselineScoresById[(string) $candidate['id']] = rr_score_candidate($candidate, $profile, []);
+    }
+
     $clientHintsRaw = json_decode((string) ($_POST['client_scores_json'] ?? '{}'), true);
-    $clientHints = [];
-    if (is_array($clientHintsRaw)) {
-        foreach ($clientHintsRaw as $candidateId => $score) {
-            if (!isset($allowedIds[(string) $candidateId]) || !is_numeric($score)) {
-                continue;
-            }
-            $clientHints[(string) $candidateId] = max(-3.0, min(3.0, (float) $score));
-        }
+    $ranked = [];
+    foreach ($allowedCandidates as $candidate) {
+        $candidateId = (string) $candidate['id'];
+        $scores = $baselineScoresById[$candidateId];
+        $postedTotal = is_array($clientHintsRaw) && isset($clientHintsRaw[$candidateId]) && is_numeric($clientHintsRaw[$candidateId])
+            ? (float) $clientHintsRaw[$candidateId]
+            : (float) $scores['total'];
+        $clientDelta = max(-3.0, min(3.0, $postedTotal - (float) $scores['total']));
+        $scores['client'] = round($clientDelta, 3);
+        $scores['total'] = round((float) $scores['total'] + $clientDelta, 3);
+        $ranked[] = [
+            'candidate' => $candidate,
+            'scores' => $scores,
+        ];
     }
+    usort($ranked, static function (array $left, array $right): int {
+        return ($right['scores']['total'] ?? 0) <=> ($left['scores']['total'] ?? 0);
+    });
 
-    $ranked = rr_rank_candidates($allowedCandidates, $profile, $clientHints, 12);
-    $rankedCandidatesById = [];
-    foreach ($ranked as $entry) {
-        $rankedCandidatesById[(string) $entry['candidate']['id']] = $entry;
-    }
-
-    $topEntry = $ranked[0] ?? null;
-    $selectedEntry = $rankedCandidatesById[$selectedId] ?? null;
-    if ($selectedEntry === null || $topEntry === null || (string) $selectedEntry['candidate']['id'] !== (string) $topEntry['candidate']['id']) {
-        $selectedEntry = $topEntry;
-    }
+    $selectedEntry = $ranked[0] ?? null;
     $selectedCandidate = $selectedEntry['candidate'] ?? null;
     $selectedScores = $selectedEntry['scores'] ?? null;
-    if ($selectedCandidate === null && $ranked !== []) {
-        $selectedCandidate = $ranked[0]['candidate'];
-        $selectedScores = $ranked[0]['scores'];
-    }
 
     if ($selectedCandidate === null || $selectedScores === null) {
         http_response_code(422);

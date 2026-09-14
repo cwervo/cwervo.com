@@ -10,7 +10,7 @@ if (rr_device_token() === '' && $_SERVER['REQUEST_METHOD'] !== 'POST' && (($_GET
     rr_render_device_bootstrap('feedback.php?bootstrap=1');
 }
 
-$deviceHash = rr_device_hash();
+$deviceHash = rr_require_device_token();
 $profile = rr_load_profile($deviceHash);
 $candidates = rr_load_candidates();
 $today = rr_today();

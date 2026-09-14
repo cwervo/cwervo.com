@@ -93,14 +93,22 @@ function rr_http_get(string $url, int $timeout = 10, array $headers = []): array
 
     if (function_exists('curl_init')) {
         $ch = curl_init($url);
-        curl_setopt_array($ch, [
+        $curlOptions = [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => $timeout,
             CURLOPT_CONNECTTIMEOUT => max(3, min($timeout, 6)),
             CURLOPT_HTTPHEADER => array_merge($defaultHeaders, $headers),
             CURLOPT_USERAGENT => READ_HTTP_USER_AGENT,
-        ]);
+        ];
+        if (defined('CURLOPT_PROTOCOLS_STR') && defined('CURLOPT_REDIR_PROTOCOLS_STR')) {
+            $curlOptions[CURLOPT_PROTOCOLS_STR] = 'http,https';
+            $curlOptions[CURLOPT_REDIR_PROTOCOLS_STR] = 'http,https';
+        } elseif (defined('CURLOPT_PROTOCOLS') && defined('CURLOPT_REDIR_PROTOCOLS')) {
+            $curlOptions[CURLOPT_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
+            $curlOptions[CURLOPT_REDIR_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
+        }
+        curl_setopt_array($ch, $curlOptions);
         $body = curl_exec($ch);
         $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $error = curl_errno($ch) ? curl_error($ch) : null;
@@ -346,7 +354,7 @@ function rr_load_candidates(): array
 
 function rr_device_token(): string
 {
-    $token = $_COOKIE['cw_read_device'] ?? $_POST['device_token'] ?? $_GET['device_token'] ?? '';
+    $token = $_COOKIE['cw_read_device'] ?? '';
     $token = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $token) ?? '';
     return substr($token, 0, 128);
 }
@@ -354,16 +362,31 @@ function rr_device_token(): string
 function rr_device_hash(): string
 {
     $token = rr_device_token();
-    if ($token !== '') {
-        return hash('sha256', $token);
+    return $token !== '' ? hash('sha256', $token) : '';
+}
+
+function rr_render_device_unavailable(): never
+{
+    ob_start();
+    ?>
+    <section class="card">
+        <h1>Device setup required</h1>
+        <p class="muted">This reader needs first-party cookies and local storage so it can keep one recommendation per device per day.</p>
+        <p>Please enable local storage/cookies for this site and reload.</p>
+    </section>
+    <?php
+    rr_render_layout('Reader setup required', (string) ob_get_clean());
+    exit;
+}
+
+function rr_require_device_token(): string
+{
+    $deviceHash = rr_device_hash();
+    if ($deviceHash === '') {
+        rr_render_device_unavailable();
     }
 
-    $stableSignals = [
-        $_SERVER['HTTP_USER_AGENT'] ?? '',
-        $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '',
-    ];
-
-    return hash('sha256', implode('|', $stableSignals));
+    return $deviceHash;
 }
 
 function rr_render_device_bootstrap(string $returnPath = 'index.php'): never
