@@ -1,0 +1,31 @@
+{
+    "generated_at": "2026-09-14T03:02:29+00:00",
+    "sources": {
+        "openalex": {
+            "ok": false,
+            "status": 0,
+            "count": 0,
+            "url": "https://api.openalex.org/works?search=Eric%20Betzig%20microscopy%20optics%20imaging&per-page=12&sort=cited_by_count:desc"
+        },
+        "crossref": {
+            "ok": false,
+            "status": 0,
+            "count": 0,
+            "url": "https://api.crossref.org/works?query=Eric+Betzig+microscopy+optics&rows=12&filter=from-pub-date%3A2000-01-01&select=DOI%2Ctitle%2Cauthor%2Cpublished-print%2Cpublished-online%2Cissued%2Cabstract%2CURL%2Ctype%2Csubject%2Cis-referenced-by-count"
+        },
+        "arxiv": {
+            "ok": false,
+            "status": 0,
+            "count": 0,
+            "url": "https://export.arxiv.org/api/query?search_query=%28all%3A%22Eric%20Betzig%22%20OR%20all%3Amicroscopy%20OR%20all%3Aoptics%20OR%20all%3Aimaging%29&start=0&max_results=12&sortBy=lastUpdatedDate&sortOrder=descending"
+        },
+        "internet_archive": {
+            "ok": false,
+            "status": 0,
+            "count": 0,
+            "url": "https://archive.org/advancedsearch.php?q=%28title%3A%28%22Eric+Betzig%22%29+OR+subject%3A%28microscopy%29+OR+subject%3A%28optics%29+OR+description%3A%28imaging%29%29&rows=12&page=1&output=json&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=year&fl[]=mediatype&fl[]=description&fl[]=subject&fl[]=downloads&sort[]=downloads%20desc"
+        }
+    },
+    "candidates": [],
+    "retained_previous_candidates": false
+}
