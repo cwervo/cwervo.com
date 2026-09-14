@@ -353,8 +353,12 @@ function rr_device_token(): string
 
 function rr_device_hash(): string
 {
+    $token = rr_device_token();
+    if ($token !== '') {
+        return hash('sha256', $token);
+    }
+
     $stableSignals = [
-        rr_device_token(),
         $_SERVER['HTTP_USER_AGENT'] ?? '',
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '',
     ];

@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
         }
     }
 
-    $ranked = rr_rank_candidates($allowedCandidates, $profile, $clientHints, 12);
+    $ranked = rr_rank_candidates($allowedCandidates, $profile, [], 12);
     $rankedCandidatesById = [];
     foreach ($ranked as $entry) {
         $rankedCandidatesById[(string) $entry['candidate']['id']] = $entry;
@@ -71,6 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
     $selectedEntry = $rankedCandidatesById[$selectedId] ?? null;
     $selectedCandidate = $selectedEntry['candidate'] ?? null;
     $selectedScores = $selectedEntry['scores'] ?? null;
+    if ($selectedScores !== null) {
+        $selectedScores['client'] = $clientHints[$selectedId] ?? 0.0;
+        $selectedScores['total'] = round(((float) $selectedScores['total']) + ((float) $selectedScores['client']), 3);
+    }
     if ($selectedCandidate === null && $ranked !== []) {
         $selectedCandidate = $ranked[0]['candidate'];
         $selectedScores = $ranked[0]['scores'];
