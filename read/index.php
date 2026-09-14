@@ -21,7 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
 
     $existing = rr_history_entry_for_date($profile, $today);
     if (($existing['personalized'] ?? false) === true) {
-        echo json_encode(['ok' => true, 'selection' => $existing], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        echo json_encode([
+            'ok' => true,
+            'selection' => $existing,
+            'candidate' => rr_find_candidate_by_id($candidates, (string) ($existing['candidate_id'] ?? '')),
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         exit;
     }
 
@@ -29,9 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (($_GET['action'] ?? '') === 'final
     $clientHints = is_array($clientHintsRaw) ? $clientHintsRaw : [];
     $selectedId = (string) ($_POST['selected_id'] ?? '');
     $ranked = rr_rank_candidates($candidates, $profile, $clientHints, 12);
+    $rankedCandidatesById = [];
+    foreach ($ranked as $entry) {
+        $rankedCandidatesById[(string) $entry['candidate']['id']] = $entry;
+    }
 
-    $selectedCandidate = rr_find_candidate_by_id($candidates, $selectedId);
-    $selectedScores = $selectedCandidate ? rr_score_candidate($selectedCandidate, $profile, $clientHints) : null;
+    $selectedEntry = $rankedCandidatesById[$selectedId] ?? null;
+    $selectedCandidate = $selectedEntry['candidate'] ?? null;
+    $selectedScores = $selectedEntry['scores'] ?? null;
     if ($selectedCandidate === null && $ranked !== []) {
         $selectedCandidate = $ranked[0]['candidate'];
         $selectedScores = $ranked[0]['scores'];

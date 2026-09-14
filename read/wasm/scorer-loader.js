@@ -1,5 +1,10 @@
 const bootstrap = window.READ_BOOTSTRAP || {};
 
+function summarizeCandidate(candidate) {
+  const abstract = String(candidate.abstract || '').trim();
+  return abstract ? `${abstract.slice(0, 520)}${abstract.length > 520 ? '…' : ''}` : 'No summary was available from the source; use the original link for details.';
+}
+
 function ensureDeviceToken() {
   const storageKey = 'cw_read_device_token';
   let token = '';
@@ -10,11 +15,6 @@ function ensureDeviceToken() {
         .replace(/[^a-zA-Z0-9_-]/g, '')
         .slice(0, 64);
       window.localStorage.setItem(storageKey, token);
-    }
-
-    function summarizeCandidate(candidate) {
-      const abstract = String(candidate.abstract || '').trim();
-      return abstract ? `${abstract.slice(0, 520)}${abstract.length > 520 ? '…' : ''}` : 'No summary was available from the source; use the original link for details.';
     }
   } catch (error) {
     token = `fallback-${Date.now()}`;
